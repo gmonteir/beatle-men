@@ -1,7 +1,7 @@
 # group-formation-beatle-men
 **Name**: Beatle Men
 
-**Members**: Waitlister, Ilya Minarov, Joey Johnson, Andrew Khov, Garrett Monteiro
+**Members**: Sarthak Khillon, Ilya Minarov, Joey Johnson, Andrew Khov, Garrett Monteiro
 
 **Motto**: Git it Done!
 
@@ -9,7 +9,7 @@
 
 ## Roles: 
 
-**Team Lead**: Waitlister
+**Team Lead**: Sarthak Khillon
 
 **QA Lead**: Ilya Minarov
 
