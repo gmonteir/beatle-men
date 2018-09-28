@@ -9,12 +9,12 @@
 
 ## Roles: 
 
-**Team Lead**: Waitlister
+**Team Lead**: Sarthak Khillon
 
 **QA Lead**: Ilya Minarov
 
 **Architect**: Joey Johnson
 
-**UI Lead**: Andrew Khov
+**UI Lead**: Andy Khov
 
 **API Lead**: Garrett Monteiro
