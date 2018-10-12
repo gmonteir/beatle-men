@@ -1,1 +1,0 @@
-Sarthak Khillon - Team Lead
