@@ -1,7 +1,7 @@
 # group-formation-beatle-men
 **Name**: Beatle Men
 
-**Members**: Sarthak Khillon, Ilya Minarov, Joey Johnson, Andrew Khov, Garrett Monteiro
+**Members**: Derek Kelley, Ilya Minarov, Joey Johnson, Andrew Khov, Garrett Monteiro
 
 **Motto**: Git it Done!
 
@@ -9,7 +9,7 @@
 
 ## Roles: 
 
-**Team Lead**: Sarthak Khillon
+**Team Lead**: Derek Kelley
 
 **QA Lead**: Ilya Minarov
 
