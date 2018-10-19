@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Item.associate = function(models) {
     // associations can be defined here
+    Item.belongsToMany(models.Order, {through: models.OrderItem})
   };
   return Item;
 };
