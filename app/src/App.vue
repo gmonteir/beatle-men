@@ -1,49 +1,43 @@
 <template>
-  <div id="app">
-    <div id="header">
-        <img id="logo" alt="store logo" src="./assets/store-logo.png"/>
+<div>
+  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <img src="./assets/foxcycle.png" display="blocked"/>
+        <!-- <img id="logo" alt="store logo" src="./assets/bulma-logo.png"/> -->
+      </div>
     </div>
-    <div id="nav">
-      <router-link to="/home">HOME</router-link>
-      <router-link to="/shop">SHOP</router-link>
-      <router-link to="/services">SERVICES</router-link>
-      <router-link to="/about">ABOUT</router-link>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <router-link class="navbar-item" to="/home">HOME</router-link>
+        <router-link class="navbar-item" to="/shop">SHOP</router-link>
+        <router-link class="navbar-item" to="/services">SERVICES</router-link>
+        <router-link class="navbar-item" to="/about">ABOUT</router-link>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary">
+              <strong>Sign up</strong>
+            </a>
+            <a class="button is-light">
+              Log in
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <router-view/>
-  </div>
+  </nav>
+  <router-view id="home"></router-view>
+</div>
 </template>
 
 <style lang="scss">
-#app {
+#home {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#header {
-  background-color: #1B2222;
-  display: flex; /* enable flex box style */
-  flex-direction: row;
-  justify-content: flex start;
-  #logo {
-    height: 30%;
-    width: 30%;
-    margin-left: 5px;
-  }
-}
-#nav {
-  padding-bottom: 10px;
-  background-color: #1B2222;
-  a {
-    font-weight: bold;
-    margin-left: 15px;
-    margin-right: 15px;
-    color: white;
-    text-decoration: none; /* removes underline from address link */
-    &.router-link-exact-active {
-      color: #FCC215;
-    }
-  }
 }
 </style>
