@@ -62,7 +62,7 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 export default class Home extends Vue {}
 </script>
 
-<style>
+<style scoped>
   #location-hours {
     border: 1px solid #1B2222;
     text-align: left;
@@ -75,7 +75,7 @@ export default class Home extends Vue {}
   }
 
   tr:nth-child(odd)  {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
   }
 </style>
 

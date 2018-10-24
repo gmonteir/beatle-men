@@ -59,7 +59,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .banner {
     width: 100%;
     height: 350px;

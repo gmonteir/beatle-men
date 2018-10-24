@@ -48,7 +48,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
   .about {
     padding: 20px;
   }
@@ -65,6 +65,6 @@
   }
 
   tr:nth-child(odd)  {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
   }
 </style>
