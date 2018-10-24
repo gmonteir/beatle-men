@@ -1,7 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <div id="location-hours">
       <div id="hours-header">
         <h1>Foxcycle San Luis Obispo</h1>
@@ -50,19 +48,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-@Component({
-  components: {
-  HelloWorld,
-  },
-  })
-export default class Home extends Vue {}
-</script>
-
-<style>
+<style scoped>
   #location-hours {
     border: 1px solid #1B2222;
     text-align: left;
@@ -75,7 +61,7 @@ export default class Home extends Vue {}
   }
 
   tr:nth-child(odd)  {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
   }
 </style>
 

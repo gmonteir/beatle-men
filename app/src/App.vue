@@ -16,14 +16,14 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <button class="button is-warning">
-              <router-link to="/signup">
-                <strong id="button-text">Sign Up</strong>
+            <button class="button is-primary">
+              <router-link id="button-signup" to="/signup">
+                Sign Up
               </router-link>
             </button>
             <button class="button is-light">
-              <router-link to="/login">
-                <strong id="button-text">Log In</strong>
+              <router-link id="button-login" to="/login">
+                Log In
               </router-link>
             </button>
           </div>
@@ -38,7 +38,10 @@
 <style lang="scss">
 $navbar-item-img-max-height: 2.50rem;
 @import "./../node_modules/bulma/bulma.sass";
-#button-text {
+#button-signup {
+  color: white;
+}
+#button-login {
   color: black,
 }
 </style>

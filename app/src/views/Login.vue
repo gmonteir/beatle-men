@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 @import "./../../node_modules/bulma/bulma.sass";
 #modal-container {
   background-color: white;
