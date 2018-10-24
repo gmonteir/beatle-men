@@ -4,9 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
-    username: DataTypes.STRING,
     password: DataTypes.STRING,
-    address: DataTypes.STRING,
     accountType: DataTypes.STRING
   }, {});
   UserAccount.associate = function(models) {
