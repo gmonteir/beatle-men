@@ -1,43 +1,44 @@
 <template>
-<div>
+<div id="app">
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <img src="./assets/foxcycle.png" display="blocked"/>
-        <!-- <img id="logo" alt="store logo" src="./assets/bulma-logo.png"/> -->
+        <img src="./assets/foxcycle.png"/>
       </div>
     </div>
     <div class="navbar-menu">
       <div class="navbar-start">
-        <router-link class="navbar-item" to="/home">HOME</router-link>
-        <router-link class="navbar-item" to="/shop">SHOP</router-link>
-        <router-link class="navbar-item" to="/services">SERVICES</router-link>
-        <router-link class="navbar-item" to="/about">ABOUT</router-link>
+        <router-link class="navbar-item" to="/home">Home</router-link>
+        <router-link class="navbar-item" to="/shop">Shop</router-link>
+        <router-link class="navbar-item" to="/services">Services</router-link>
+        <router-link class="navbar-item" to="/about">About</router-link>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary">
-              <strong>Sign up</strong>
-            </a>
-            <a class="button is-light">
-              Log in
-            </a>
+            <button class="button is-warning">
+              <router-link to="/signup">
+                <strong id="button-text">Sign Up</strong>
+              </router-link>
+            </button>
+            <button class="button is-light">
+              <router-link to="/login">
+                <strong id="button-text">Log In</strong>
+              </router-link>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </nav>
-  <router-view id="home"></router-view>
+  <router-view></router-view>
 </div>
 </template>
 
 <style lang="scss">
-#home {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+$navbar-item-img-max-height: 2.50rem;
+@import "./../node_modules/bulma/bulma.sass";
+#button-text {
+  color: black,
 }
 </style>
