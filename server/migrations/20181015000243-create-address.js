@@ -11,9 +11,6 @@ module.exports = {
       street: {
         type: Sequelize.STRING
       },
-      city: {
-        type: Sequelize.STRING
-      },
       state: {
         type: Sequelize.STRING
       },
@@ -27,13 +24,6 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'UserAccounts',
-          key: 'id'
-        }
       }
     });
   },

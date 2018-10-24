@@ -1,49 +1,44 @@
 <template>
-  <div id="app">
-    <div id="header">
-        <img id="logo" alt="store logo" src="./assets/store-logo.png"/>
+<div id="app">
+  <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <div class="navbar-item">
+        <img src="./assets/foxcycle.png"/>
+      </div>
     </div>
-    <div id="nav">
-      <router-link to="/home">HOME</router-link>
-      <router-link to="/shop">SHOP</router-link>
-      <router-link to="/services">SERVICES</router-link>
-      <router-link to="/about">ABOUT</router-link>
+    <div class="navbar-menu">
+      <div class="navbar-start">
+        <router-link class="navbar-item" to="/home">Home</router-link>
+        <router-link class="navbar-item" to="/shop">Shop</router-link>
+        <router-link class="navbar-item" to="/services">Services</router-link>
+        <router-link class="navbar-item" to="/about">About</router-link>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <button class="button is-warning">
+              <router-link to="/signup">
+                <strong id="button-text">Sign Up</strong>
+              </router-link>
+            </button>
+            <button class="button is-light">
+              <router-link to="/login">
+                <strong id="button-text">Log In</strong>
+              </router-link>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-    <router-view/>
-  </div>
+  </nav>
+  <router-view></router-view>
+</div>
 </template>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#header {
-  background-color: #1B2222;
-  display: flex; /* enable flex box style */
-  flex-direction: row;
-  justify-content: flex start;
-  #logo {
-    height: 30%;
-    width: 30%;
-    margin-left: 5px;
-  }
-}
-#nav {
-  padding-bottom: 10px;
-  background-color: #1B2222;
-  a {
-    font-weight: bold;
-    margin-left: 15px;
-    margin-right: 15px;
-    color: white;
-    text-decoration: none; /* removes underline from address link */
-    &.router-link-exact-active {
-      color: #FCC215;
-    }
-  }
+$navbar-item-img-max-height: 2.50rem;
+@import "./../node_modules/bulma/bulma.sass";
+#button-text {
+  color: black,
 }
 </style>
