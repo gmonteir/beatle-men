@@ -3,4 +3,11 @@ Week 1 Goals:
   - Joey:    "A user needs to create an account" and "A user needs to login"
   - Andy:    "A user needs to navigate to each page"
   - Derek:   "A user should be able to see store hours and information" and "A user should be able to see services offered"
-  - Garrett: "A user should be prompted to login when accessing the cart and not logged in", "A user should be able to logout", and "A user can save their personal information (addresses, credit cards)"
+  - Garrett: "A user should be able to logout"
+
+Week 2 Goals:
+  - Ilya:    Debug database, look testing for back end and front end, database diagram
+  - Joey:    "A user needs to create an account (backend)" and "A user needs to login (backend)"
+  - Andy:    "A user needs to create an account (frontend)" and "A user needs to login (front)"
+  - Derek:   "A user should be able to see store hours and information" and "A user should be able to see services offered"
+  - Garrett: "A user should be able to logout", "A user needs to edit login info"
