@@ -3,12 +3,12 @@
     <div class="banner">
       <img src="../assets/services-banner.jpg" width="100%">
     </div>
-    <h1>Foxcycle Services</h1>
+    <h1 class="title is-2" id="title">Foxcycle Services</h1>
     <div class="services-row">
       <div class="services-col">
         <div class="services-card">
-          <h3>Basic Tune</h3>
-          <h4>$100</h4>
+          <h3 class="title is-4" id="card-title" style="background-color:burlywood">Basic Tune</h3>
+          <h4 class="subtitle is-5" id="card-price">$100</h4>
           <ul>
             <li>Adjust brakes</li>
             <li>Adjust shifting</li>
@@ -16,13 +16,15 @@
             <li>Adjust hubs</li>
             <li>Install brake pads</li>
           </ul>
-          <button>Call Now</button>
+           <router-link to="/about">
+             <button class="button is-success">Call Now</button>
+          </router-link>
         </div>
       </div>
       <div class="services-col">
         <div class="services-card">
-          <h3>Gold Tune</h3>
-          <h4>$150</h4>
+          <h3 class="title is-4" id="card-title" style="background-color:goldenrod">Gold Tune</h3>
+          <h4 class="subtitle is-5" id="card-price">$150</h4>
           <ul>
             <li>Full drivetrain replacement</li>
             <li>Inject new grease</li>
@@ -32,13 +34,15 @@
             <li>Adjust hubs</li>
             <li>Install brake pads</li>
           </ul>
-          <button>Call Now</button>
+           <router-link to="/about">
+             <button class="button is-success">Call Now</button>
+          </router-link>
         </div>
       </div>
       <div class="services-col">
         <div class="services-card">
-          <h3>Platinum Tune</h3>
-          <h4>$200</h4>
+          <h3 class="title is-4" id="card-title" style="background-color: silver">Platinum Tune</h3>
+          <h4 class="subtitle is-5" id="card-price">$200</h4>
           <ul>
             <li>Hydraulic brake bleed</li>
             <li>Overhaul bottom bracket, headset, hubs</li>
@@ -52,14 +56,29 @@
             <li>Adjust hubs</li>
             <li>Install brake pads</li>
           </ul>
-          <button>Call Now</button>
+          <router-link to="/about">
+             <button class="button is-success">Call Now</button>
+           </router-link>
         </div>
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+  @import "./../../node_modules/bulma/bulma.sass";
+
+  #title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  #card-title {
+    margin-top: 10px;
+    padding: 5px;
+  }
+
   .banner {
     width: 100%;
     height: 350px;
