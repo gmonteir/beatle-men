@@ -1,5 +1,5 @@
 Week 1 Goals:
-  - Ilya:    Complete Database
+  - Ilya:    Complete Database (for user account)
   - Joey:    "A user needs to create an account" and "A user needs to login"
   - Andy:    "A user needs to navigate to each page"
   - Derek:   "A user should be able to see store hours and information" and "A user should be able to see services offered"
@@ -11,3 +11,10 @@ Week 2 Goals:
   - Andy:    "A user needs to create an account (frontend)" and "A user needs to login (front)"
   - Derek:   "A user should be able to see store hours and information" and "A user should be able to see services offered"
   - Garrett: "A user should be able to logout", "A user needs to edit login info"
+  
+Week 3 Goals:
+  - Ilya:    "A user needs to create an account (backend)" and "A user needs to login (backend)"
+  - Joey:    "A user needs to create an account (backend)" and "A user needs to login (backend)"
+  - Andy:    "A user needs to see the About Page", "A user needs to edit items in the cart"
+  - Derek:   "A user needs to see the Home Page", "A user should be able to see all items in the store"
+  - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
