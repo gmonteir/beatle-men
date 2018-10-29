@@ -69,7 +69,7 @@
   </div>
 </div>
 </template>
-/*
+
 <script>
 /* true if invalid, false if valid */
 function validateName(name) {
@@ -96,6 +96,7 @@ function validatePassword(password) {
   }
   return password.length < 6;
 }
+import axios from 'axios';
 export default {
   name: 'signup',
   data() {
@@ -139,41 +140,23 @@ export default {
         this.$store.commit('modifyEmail', {
           email: this.email,
         });
+        /* create a user account */
+        axios.post('/api/useraccounts', {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          accountType: "customer",
+        }).then((res) => {
+          this.firstName = '';
+          this.lastName = '';
+          this.email = '';
+          this.password = '';
+        });
       }
     },
   },
 };
-</script>
-*/
-
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import axios from 'axios';
-@Component()
-export default class SignUp extends Vue {
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
-  accountType: string = 'customer';
-
-  submit() {
-    /*debugger*/
-    axios.post('/api/useraccounts', {
-      firstName: this.firstName,
-      lastName: this.lastName,
-      email: this.email,
-      password: this.password,
-      accountType: this.accountType,
-    }).then((res) => {
-      this.firstName = '';
-      this.lastName = '';
-      this.email = '';
-      this.password = '';
-      this.accountType = '';
-    });
-  } 
-}
 </script>
 
 <style scoped lang="scss">
