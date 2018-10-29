@@ -3,7 +3,7 @@
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
       <div class="navbar-item">
-        <img src="./assets/foxcycle.png"/>
+        <img src="assets/foxcycle.png"/>
       </div>
     </div>
     <div class="navbar-menu">
