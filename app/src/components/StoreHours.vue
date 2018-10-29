@@ -2,7 +2,10 @@
   <div id="location-hours">
     <div id="hours-header">
       <h1 class="title is-3">Foxcycle San Luis Obispo</h1>
-      <p class="subtitle is-5">123 Higuera St <br> San Luis Obispo, CA 93405</p>
+      <p class="subtitle is-5">
+        123 Higuera St<br>San Luis Obispo, CA 93405<br>(805) 123-4567<br>
+        customers@foxcycle.com
+      </p>
       <h3 class="title is-4" id="store-hours-text">Store Hours</h3>
     </div>
     <table id="hours">
