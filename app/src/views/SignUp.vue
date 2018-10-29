@@ -80,7 +80,6 @@ function validateName(name) {
   const regex = /^[a-zA-Z ]+$/;
   return !regex.test(String(name));
 }
-
 /* true if invalid, false if valid */
 function validateEmail(email) {
   if (email === null) {
@@ -90,7 +89,6 @@ function validateEmail(email) {
   const regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return !regex.test(String(email).toLowerCase());
 }
-
 /* true if invalid, false if valid */
 function validatePassword(password) {
   if (password === null) {
@@ -98,7 +96,7 @@ function validatePassword(password) {
   }
   return password.length < 6;
 }
-
+import axios from 'axios';
 export default {
   name: 'signup',
   data() {
@@ -141,6 +139,19 @@ export default {
         });
         this.$store.commit('modifyEmail', {
           email: this.email,
+        });
+        /* create a user account */
+        axios.post('/api/useraccounts', {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          accountType: "customer",
+        }).then((res) => {
+          this.firstName = '';
+          this.lastName = '';
+          this.email = '';
+          this.password = '';
         });
       }
     },
