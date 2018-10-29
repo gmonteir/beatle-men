@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Session.associate = function(models) {
     // associations can be defined here
-    Session.belongsTo(models.User);
+    Session.belongsTo(models.UserAccount);
   };
   return Session;
 };
