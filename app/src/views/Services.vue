@@ -1,7 +1,7 @@
 <template>
   <div class="services">
     <div class="banner">
-      <img src="../assets/services-banner.jpg" width="100%">
+      <img src="assets/services-banner.jpg" width="100%">
     </div>
     <h1 class="title is-2" id="title">Foxcycle Services</h1>
     <div class="services-row">
