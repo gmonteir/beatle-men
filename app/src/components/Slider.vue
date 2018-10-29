@@ -1,6 +1,12 @@
 <template>
   <div class="slideshow">
-    <img :src="images[currentNumber % images.length]" class="img"/>
+    <transition-group name='fade' tag='div'>
+      <div v-for="number in [currentNumber]" :key='number'>
+        <img :src="images[Math.abs(currentNumber) % images.length]" class="img"/>
+      </div>
+    </transition-group>
+    <a class="prev" @click="prev">&#10094;</a>
+    <a class="next" @click="next">&#10095;</a>
   </div>
 </template>
 
@@ -23,7 +29,7 @@ export default class Home extends Vue {
   }
 
   startRotation() {
-    this.timer = setInterval(this.next, 7000);
+    this.timer = setInterval(this.next, 10000);
   }
 
   stopRotation() {
@@ -33,6 +39,14 @@ export default class Home extends Vue {
 
   next() {
     this.currentNumber += 1;
+    this.stopRotation();
+    this.startRotation();
+  }
+
+  prev() {
+    this.currentNumber -= 1;
+    this.stopRotation();
+    this.startRotation();
   }
 }
 </script>
@@ -49,4 +63,38 @@ export default class Home extends Vue {
     width: 100%;
     height: auto;
   }
+
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 225px;
+    width: auto;
+    padding: 0 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 30px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: all 1s ease;
+    overflow: hidden;
+    visibility: visible;
+    opacity: 1;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+    visibility: hidden;
+  }
+
 </style>

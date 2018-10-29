@@ -105,6 +105,7 @@
     text-align: center;
     height: 450px;
     border: 1px solid #1B2222;
+    background-color: white;
   }
 
   ul {
