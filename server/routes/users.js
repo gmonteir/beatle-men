@@ -1,9 +1,28 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const authenticated = require('./authenticated');
+const { UserAccount } = require('../models');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const router = express.Router();
+
+router
+  .route('/')
+  .all(authenticated)
+
+  // create  todo
+  .post((req, res) => {
+    const { firstName, lastName, email, password, address, accountType } = req.body;
+    const newUserAccount = UserAccount.build({
+      firstName,
+      lastName,
+      email,
+      password,
+      address,
+      accountType
+    });
+    newUserAccount.setUserAccount(req.authenticatedUser);
+    newUserAccount.save().then(() => {
+      res.json(newUserAccount);
+    });
+  });
 
 module.exports = router;
