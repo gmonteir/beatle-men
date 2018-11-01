@@ -82,18 +82,30 @@ export default {
     },
     /* function is called when the 'submit' button is clicked */
     submit() {
+      document.body.style.cursor='wait';
+      if (this.isFormValid()) {
+        axios.post('/api/login', {
+          email: this.email,
+          password: this.password,
+        }).then((successRes) => {
+          console.log(successRes);
+          this.isLoginSuccess = true;
+          this.$store.commit('changeAccount', {...successRes.data, isLoggedIn: true})
+          document.body.style.cursor = 'default';
+        }, (failRes) => {
+          console.error(failRes);
+          this.isLoginSuccess = false;
+          document.body.style.cursor = 'default';
+        });
+      }
+    },
+    isFormValid() {
       this.isEmailInvalid = validateEmail(this.email);
       this.isPasswordInvalid = validatePassword(this.password);
-      this.isLoginSuccess = !this.isEmailInvalid &&
+      return !this.isEmailInvalid &&
         !this.isPasswordInvalid &&
         (this.email != null) &&
         (this.password != null);
-      /* change vuex store state with mutations */
-      if (this.isLoginSuccess) {
-        this.$store.commit('modifyEmail', {
-          email: this.email,
-        });
-      }
     },
   },
 };
