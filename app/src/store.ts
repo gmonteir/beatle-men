@@ -1,24 +1,25 @@
+/* eslint-disable */
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLoggedIn: false,
     firstName: null,
     lastName: null,
     email: null,
+    accountType: 'customer',
   },
   mutations: {
-    modifyName(state, payload) {
-      // eslint-disable-next-line
+    changeAccount(state, payload) {
+      state.isLoggedIn = payload.isLoggedIn;
       state.firstName = payload.firstName;
-      // eslint-disable-next-line
       state.lastName = payload.lastName;
-    },
-    modifyEmail(state, payload) {
-      // eslint-disable-next-line
       state.email = payload.email;
+      state.accountType = payload.accountType;
     },
   },
   actions: {
