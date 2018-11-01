@@ -12,7 +12,7 @@
           type="text"
           placeholder="Jane"
           v-model="firstName"
-          v-bind:class="{'is-danger': isFirstNameInvalid}"
+          v-bind:class="{'is-danger': isFirstNameInvalid, 'is-success': isSignupSuccess}"
         />
       </div>
       <div id="name" class="control">
@@ -20,7 +20,7 @@
           type="text"
           placeholder="Smith"
           v-model="lastName"
-          v-bind:class="{'is-danger': isLastNameInvalid}"
+          v-bind:class="{'is-danger': isLastNameInvalid, 'is-success': isSignupSuccess}"
         />
       </div>
       <p class="help is-danger" v-if="isFirstNameInvalid || isLastNameInvalid">Invalid Name</p>
@@ -32,7 +32,7 @@
           type="text"
           placeholder="name@domain"
           v-model="email"
-          v-bind:class="{'is-danger': isEmailInvalid}"
+          v-bind:class="{'is-danger': isEmailInvalid, 'is-success': isSignupSuccess}"
         />
       </div>
       <p class="help is-danger"
@@ -47,7 +47,7 @@
           type="password"
           placeholder="******"
           v-model="password"
-          v-bind:class="{'is-danger': isPasswordInvalid}"
+          v-bind:class="{'is-danger': isPasswordInvalid, 'is-success': isSignupSuccess}"
         />
       </div>
       <p class="help is-danger"
@@ -60,6 +60,9 @@
         <div class="content has-text-success is-pulled-left"
           v-if="isSignupSuccess">Registration Successful!
         </div>
+        <div class="content has-text-danger is-pulled-left"
+          v-if="isSignupFail">Registration Fail (Network Error)
+        </div>
         <div class="buttons is-right">
           <button class="button" v-on:click="close">Close</button>
           <button class="button is-link" v-on:click="submit">Submit</button>
@@ -71,6 +74,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 /* true if invalid, false if valid */
 function validateName(name) {
   if (name === null) {
@@ -96,7 +100,6 @@ function validatePassword(password) {
   }
   return password.length < 6;
 }
-import axios from 'axios';
 export default {
   name: 'signup',
   data() {
@@ -110,6 +113,7 @@ export default {
       isFirstNameInvalid: null,
       isLastNameInvalid: null,
       isSignupSuccess: null,
+      isSignupFail: null,
     };
   },
   methods: {
@@ -119,11 +123,31 @@ export default {
     },
     /* function is called when the 'submit' button is clicked */
     submit() {
+      this.isSignupSuccess = false;
+      this.isSignupFail = false;
+      document.body.style.cursor='wait';
+      if (this.isFormValid()) {
+        axios.post('/api/useraccounts', {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          accountType: 'customer',
+        }).then((successRes) => {
+          this.isSignupSuccess = true;
+          document.body.style.cursor = 'default';
+        }, (failRes) => {
+          this.isSignupFail = true;
+          document.body.style.cursor = 'default';
+        });
+      }
+    },
+    isFormValid() {
       this.isEmailInvalid = validateEmail(this.email);
       this.isPasswordInvalid = validatePassword(this.password);
       this.isFirstNameInvalid = validateName(this.firstName);
       this.isLastNameInvalid = validateName(this.lastName);
-      this.isSignupSuccess = !this.isFirstNameInvalid &&
+      return !this.isFirstNameInvalid &&
         !this.isLastNameInvalid &&
         !this.isEmailInvalid &&
         !this.isPasswordInvalid &&
@@ -131,29 +155,6 @@ export default {
         (this.lastName != null) &&
         (this.email != null) &&
         (this.password != null);
-      /* change vuex store state with mutations */
-      if (this.isSignupSuccess) {
-        this.$store.commit('modifyName', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-        });
-        this.$store.commit('modifyEmail', {
-          email: this.email,
-        });
-        /* create a user account */
-        axios.post('/api/useraccounts', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          accountType: "customer",
-        }).then((res) => {
-          this.firstName = '';
-          this.lastName = '';
-          this.email = '';
-          this.password = '';
-        });
-      }
     },
   },
 };
