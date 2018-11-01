@@ -10,7 +10,7 @@
           type="email"
           placeholder="name@domain"
           v-model="email"
-          v-bind:class="{'is-danger': isEmailInvalid}"
+          v-bind:class="{'is-danger': isEmailInvalid, 'is-success': isLoginSuccess}"
         />
         <p class="help is-danger" v-if="isEmailInvalid">Invalid Email</p>
       </div>
@@ -22,7 +22,7 @@
           type="password"
           placeholder="******"
           v-model="password"
-          v-bind:class="{'is-danger': isPasswordInvalid}"
+          v-bind:class="{'is-danger': isPasswordInvalid, 'is-success': isLoginSuccess}"
         />
         <p class="help is-danger"
           v-if="isPasswordInvalid">
@@ -35,6 +35,9 @@
         <div class="content has-text-success is-pulled-left"
           v-if="isLoginSuccess">Login Successful!
         </div>
+        <div class="content has-text-danger is-pulled-left"
+          v-if="isLoginFail">Login Fail (Network Error)
+        </div>
         <div class="buttons is-right">
           <button class="button" v-on:click="close">Close</button>
           <button class="button is-link" v-on:click="submit">Submit</button>
@@ -46,6 +49,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 /* true if invalid, false if valid */
 function validateEmail(email) {
   if (email === null) {
@@ -73,6 +77,7 @@ export default {
       isEmailInvalid: null,
       isPasswordInvalid: null,
       isLoginSuccess: null,
+      isLoginFail: null,
     };
   },
   methods: {
@@ -82,19 +87,19 @@ export default {
     },
     /* function is called when the 'submit' button is clicked */
     submit() {
+      this.isLoginSuccess = false;
+      this.isLoginFail = false;
       document.body.style.cursor='wait';
       if (this.isFormValid()) {
         axios.post('/api/login', {
           email: this.email,
           password: this.password,
         }).then((successRes) => {
-          console.log(successRes);
           this.isLoginSuccess = true;
-          this.$store.commit('changeAccount', {...successRes.data, isLoggedIn: true})
+          this.$store.commit('changeAccount', { ...successRes.data, isLoggedIn: true });
           document.body.style.cursor = 'default';
         }, (failRes) => {
-          console.error(failRes);
-          this.isLoginSuccess = false;
+          this.isLoginFail = true;
           document.body.style.cursor = 'default';
         });
       }
