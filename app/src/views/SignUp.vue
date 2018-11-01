@@ -60,6 +60,9 @@
         <div class="content has-text-success is-pulled-left"
           v-if="isSignupSuccess">Registration Successful!
         </div>
+        <div class="content has-text-danger is-pulled-left"
+          v-if="isSignupFail">Registration Fail (Network Error)
+        </div>
         <div class="buttons is-right">
           <button class="button" v-on:click="close">Close</button>
           <button class="button is-link" v-on:click="submit">Submit</button>
@@ -110,6 +113,7 @@ export default {
       isFirstNameInvalid: null,
       isLastNameInvalid: null,
       isSignupSuccess: null,
+      isSignupFail: null,
     };
   },
   methods: {
@@ -119,6 +123,8 @@ export default {
     },
     /* function is called when the 'submit' button is clicked */
     submit() {
+      this.isSignupSuccess = false;
+      this.isSignupFail = false;
       document.body.style.cursor='wait';
       if (this.isFormValid()) {
         axios.post('/api/useraccounts', {
@@ -128,12 +134,10 @@ export default {
           password: this.password,
           accountType: 'customer',
         }).then((successRes) => {
-          console.log(successRes);
           this.isSignupSuccess = true;
           document.body.style.cursor = 'default';
         }, (failRes) => {
-          console.error(failRes);
-          this.isSignupSuccess = false;
+          this.isSignupFail = true;
           document.body.style.cursor = 'default';
         });
       }
