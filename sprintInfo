@@ -16,5 +16,5 @@ Week 3 Goals:
   - Ilya:    "A user needs to create an account (backend)" and "A user needs to login (backend)"
   - Joey:    "A user needs to create an account (backend)" and "A user needs to login (backend)"
   - Andy:    "A user needs to see the About Page", "A user needs to edit items in the cart"
-  - Derek:   "A user needs to see the Home Page", "A user should be able to see all items in the store"
+  - Derek:   "A user needs to see the Home Page", "A user should be able to browse items in the store"
   - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
