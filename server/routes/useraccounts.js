@@ -7,9 +7,9 @@ router
   .route('/')
   .post((req, res) => {
     const { firstName,lastName,email,username,password,address,accountType } = req.body;
-    const user = UserAccount.findOne({where: { email } }).then(user => {
+    UserAccount.findOne({where: { email } }).then(user => {
       if(user){
-        res.status(201).json({error: "account already exists"})
+        res.status(401).json({error: 'email in use'});
       }
       else{
         const newUserAccount = UserAccount.build({

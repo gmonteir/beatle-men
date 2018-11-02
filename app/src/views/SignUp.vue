@@ -125,8 +125,8 @@ export default {
     submit() {
       this.isSignupSuccess = false;
       this.isSignupFail = false;
-      document.body.style.cursor='wait';
       if (this.isFormValid()) {
+        document.body.style.cursor='wait';
         axios.post('/api/useraccounts', {
           firstName: this.firstName,
           lastName: this.lastName,
