@@ -3,8 +3,8 @@ const Auth = require('./authenticator');
 
 const router = express.Router();
 router.route('/').post((req, res) => {
-  const { username, password } = req.body;
-  Auth.login(username, password).then(
+  const { email, password } = req.body;
+  Auth.login(email, password).then(
     session => {
       if (session) {
         session.getUser().then(user => {
@@ -15,7 +15,7 @@ router.route('/').post((req, res) => {
       }
     },
     error => {
-      res.json({ error: error.message });
+      res.status(400).json({ error: error.message });
     }
   );
 });
