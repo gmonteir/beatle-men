@@ -23,6 +23,36 @@ export default new Router({
       component: () => import('@/views/Shop.vue'),
     },
     {
+      path: '/shop/bikes',
+      name: 'bikes',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
+      path: '/shop/bikes/road',
+      name: 'road-bikes',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
+      path: '/shop/bikes/mountain',
+      name: 'mountain-bikes',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
+      path: '/shop/bikes/electric',
+      name: 'electric-bikes',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
+      path: '/shop/parts',
+      name: 'parts',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
+      path: '/shop/accessories',
+      name: 'accessories',
+      component: () => import('@/views/Shop.vue'),
+    },
+    {
       path: '/services',
       name: 'services',
       component: () => import('@/views/Services.vue'),
