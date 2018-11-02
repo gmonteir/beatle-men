@@ -1,9 +1,9 @@
 const { Session, UserAccount } = require('../models');
 
 const Auth = {
-  login: (username, password) =>
-    UserAccount.findOne({ where: { username } }).then(user => {
-      if (user && user.username === username && user.password === password) {
+  login: (email, password) =>
+    UserAccount.findOne({ where: { email } }).then(user => {
+      if (user && user.email === email && user.password === password) {
         return user.getSession().then(session => {
           let foundSession = session;
           if (!foundSession) {
