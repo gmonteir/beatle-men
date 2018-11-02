@@ -18,3 +18,10 @@ Week 3 Goals:
   - Andy:    "A user needs to see the About Page", "A user needs to edit items in the cart"
   - Derek:   "A user needs to see the Home Page", "A user should be able to browse items in the store"
   - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
+
+Weedk 4 Goals:
+  - Ilya:    Merge database, "A user needs to edit items in the cart"
+  - Joey:    "A user needs to login (backend)", "A user needs to be able to view an item (backend)"
+  - Andy:    "A user needs to edit items in the cart", "A user needs to checkout and pay"
+  - Derek:   "A user should be able to browse items in the store", "A user needs to be able to view an item"
+  - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
