@@ -1,0 +1,42 @@
+<template>
+  <div class="column">
+    <div class="card">
+      <div class="card-image">
+        <figure class="image is-3by3">
+            <img src="./../assets/default-contact.png">
+        </figure>
+      </div>
+      <div class="card-content">
+        <div class="content">
+            <p class="title is-4">{{employee.name}}</p>
+            <p class="subtitle is-6">{{employee.role}}<br>{{employee.email}}</p>
+        </div>
+        <div class="content">{{employee.blurb}}</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    employee: {
+      type: Object,
+      required: true,
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@import "../../node_modules/bulma/bulma.sass";
+
+#employees-header {
+  text-align: center;
+}
+#employees-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+</style>
