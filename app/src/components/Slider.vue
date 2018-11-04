@@ -16,10 +16,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component
 export default class Home extends Vue {
   images: string[] = [
-    "assets/home-slideshow-1.jpg",
-    "assets/home-slideshow-2.jpg",
-    "assets/home-slideshow-3.jpg",
-    "assets/home-slideshow-4.jpg"
+    'assets/home-slideshow-1.jpg',
+    'assets/home-slideshow-2.jpg',
+    'assets/home-slideshow-3.jpg',
+    'assets/home-slideshow-4.jpg',
   ];
   currentNumber: number = 0;
   timer: number = 0;
