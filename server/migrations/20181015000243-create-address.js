@@ -8,7 +8,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      street: {
+      street1: {
+        type: Sequelize.STRING
+      },
+      street2: {
         type: Sequelize.STRING
       },
       state: {
