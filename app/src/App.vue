@@ -46,6 +46,16 @@
         <div class="navbar-item">
           <div class="field is-grouped">
             <p class="control">
+              <router-link to="/cart">
+                <button class="button is-light is-outlined">
+                  <span class="icon">
+                    <i class="fas fa-shopping-cart"></i>
+                  </span>
+                  <span>Cart</span>
+                </button>
+              </router-link>
+            </p>
+            <p class="control">
               <router-link to="/signup">
                 <button class="button is-primary">Sign Up</button>
               </router-link>
@@ -67,4 +77,5 @@
 <style lang="scss">
 $navbar-item-img-max-height: 2.50rem;
 @import "./../node_modules/bulma/bulma.sass";
+@import "./../node_modules/@fortawesome/fontawesome-free/css/all.css"
 </style>

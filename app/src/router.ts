@@ -72,5 +72,10 @@ export default new Router({
       name: 'signup',
       component: () => import('@/views/SignUp.vue'),
     },
+    {
+      path: '/cart',
+      name: 'cart',
+      component: () => import('@/views/Cart.vue'),
+    },
   ],
 });
