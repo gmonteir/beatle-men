@@ -8,6 +8,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        unique: true,
+        references: {
+          model: 'UserAccounts',
+          key: 'id',
+        },
+      },
       street1: {
         type: Sequelize.STRING
       },
