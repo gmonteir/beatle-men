@@ -19,7 +19,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      userId: {
+      UserAccountId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'UserAccounts',
