@@ -7,7 +7,7 @@ router.route('/').post((req, res) => {
   Auth.login(email, password).then(
     session => {
       if (session) {
-        session.getUser().then(user => {
+        session.getUserAccount().then(user => {
           res.json({ user_id: user.id });
         });
       } else {
