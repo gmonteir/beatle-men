@@ -33,6 +33,7 @@
           v-on:click="removeItem">
           Remove
         </button>
+        <p class="help is-danger" v-if="isAtMaxQuantity">At Quantity Limit</p>
       </div>
       <div class="column is-2" id="price-column">
         <h1 class="title is-5">${{item.total}}</h1>
@@ -48,6 +49,11 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      isAtMaxQuantity: false,
+    };
+  },
   methods: {
     removeItem() {
       this.$store.commit('removeItem', { itemId: this.item.id });
@@ -55,6 +61,8 @@ export default {
     addQuantity() {
       if (this.item.userQuantity < this.item.quantity) {
         this.$store.commit('addItemQuantity', { itemId: this.item.id });
+      } else {
+        this.isAtMaxQuantity = true;
       }
     },
     removeQuantity() {
