@@ -10,7 +10,7 @@
       <div class="navbar-start">
         <router-link class="navbar-item" to="/home">Home</router-link>
         <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link is-arrowless">Shop</a>
+          <router-link class="navbar-item navbar-link is-arrowless" to="/shop">Shop</router-link>
           <div class="navbar-dropdown is-boxed">
             <router-link class="navbar-item is-size-6 has-text-weight-semibold" to="/shop/bikes">Bikes</router-link>
             <ul class="menu-list">
