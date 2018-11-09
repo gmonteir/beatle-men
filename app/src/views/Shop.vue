@@ -11,14 +11,14 @@
           <h1 class="title is-3">Filter By:</h1>
           <p class="menu-label">Bikes</p>
           <ul class="menu-list">
-            <li><a>Road</a></li>
-            <li><a>Mountain</a></li>
-            <li><a>Electric</a></li>
+            <li><router-link to="/shop/bikes/road">Road</router-link></li>
+            <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
+            <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
           </ul>
           <p class="menu-label">Parts & Accessories</p>
           <ul class="menu-list">
-            <li><a>Parts</a></li>
-            <li><a>Accessories</a></li>
+            <li><router-link to="/shop/parts">Parts</router-link></li>
+            <li><router-link to="/shop/accessories">Accessories</router-link></li>
           </ul>
         </aside>
       </div>
@@ -54,13 +54,13 @@ export default {
     },
     getShopTitle() {
       return this.$route.name;
-    }
+    },
   },
   watch: {
-    '$route' (to, from) {
+    '$route'(to, from) {
       getShopTitle();
-    }
-  }
+    },
+  },
 };
 </script>
 
