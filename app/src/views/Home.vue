@@ -34,8 +34,8 @@ export default class Home extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
 
+<style lang="scss" scoped>
   .home-columns {
     justify-content: center;
     text-align: center;
@@ -55,5 +55,4 @@ export default class Home extends Vue {
     width: 50%;
     margin: auto;
   }
-
 </style>
