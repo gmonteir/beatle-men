@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .post((req, res) => {
-    const { firstName,lastName,email,username,password,address,accountType } = req.body;
+    const { firstName,lastName,email,password,accountType } = req.body;
     UserAccount.findOne({where: { email } }).then(user => {
       if(user){
         res.status(401).json({error: 'email in use'});
@@ -16,9 +16,7 @@ router
           firstName,
           lastName,
           email,
-          username,
           password,
-          address,
           accountType
         });
         newUserAccount.save().then(() => {
