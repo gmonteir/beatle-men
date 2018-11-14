@@ -9,17 +9,45 @@
       <div class="column is-one-quarter">
         <aside class="menu">
           <h1 class="title is-3">Filter By:</h1>
-          <p class="menu-label">Bikes</p>
-          <ul class="menu-list">
-            <li><router-link to="/shop/bikes/road">Road</router-link></li>
-            <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
-            <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
-          </ul>
-          <p class="menu-label">Parts & Accessories</p>
-          <ul class="menu-list">
-            <li><router-link to="/shop/parts">Parts</router-link></li>
-            <li><router-link to="/shop/accessories">Accessories</router-link></li>
-          </ul>
+          <div v-show="getShopTitle() === 'Store'">
+            <p class="menu-label">Bikes</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/bikes/road">Road</router-link></li>
+              <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
+              <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
+            </ul>
+            <p class="menu-label">Parts & Accessories</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/parts">Parts</router-link></li>
+              <li><router-link to="/shop/accessories">Accessories</router-link></li>
+            </ul>
+          </div>
+          <div v-show="getShopTitle() === 'Bikes'">
+            <p class="menu-label">Bikes</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/bikes/road">Road</router-link></li>
+              <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
+              <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
+            </ul>
+          </div>
+          <div v-show="getShopTitle() !== 'Store'">
+            <p class="menu-label">Brands</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/parts">Parts</router-link></li>
+            </ul>
+            <p class="menu-label">Price</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/parts">Parts</router-link></li>
+            </ul>
+            <p class="menu-label">Size</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/parts">Parts</router-link></li>
+            </ul>
+            <p class="menu-label">Gender</p>
+            <ul class="menu-list">
+              <li><router-link to="/shop/parts">Parts</router-link></li>
+            </ul>
+          </div>
         </aside>
       </div>
       <div class="column">
@@ -33,18 +61,28 @@
             <li class="subtitle is-4 bread-crumb" v-show="isInPath('parts')">> <router-link to="/shop/bikes/parts">Parts</router-link></li>
             <li class="subtitle is-4 bread-crumb" v-show="isInPath('accessories')">> <router-link to="/shop/bikes/accessories">Accessories</router-link></li>
           </ul>
+          <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
         </div>
-        <div>
-          <h1 class="title is-3">{{getShopTitle()}}</h1>
-        </div>
+        <ul class="item-grid">
+          <ShopItem class="item"
+            v-for="item in this.$store.state.cart.items"
+            v-bind:key="item.id"
+            v-bind:item="item"
+          />
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ShopItem from './../components/ShopItem.vue';
+
 export default {
   name: 'shop',
+  components: {
+    ShopItem,
+  },
   methods: {
     isInPath(str) {
       if (this.$route.path.includes(str)) {
@@ -57,7 +95,7 @@ export default {
     },
   },
   watch: {
-    '$route'(to, from) {
+    $route: (to, from) => {
       getShopTitle();
     },
   },
@@ -82,6 +120,19 @@ export default {
   .bread-crumb {
     display: inline-block;
     margin-left: 5px;
+  }
+
+  .shop-title {
+    padding-bottom: 20px;
+    border-bottom: 1px solid gainsboro;
+    margin-right: 20px;
+  }
+
+  .item {
+    width: 30%;
+    display: inline-block;
+    padding-right: 20px;
+    padding-top: 50px;
   }
 
 </style>
