@@ -25,3 +25,10 @@ Weedk 4 Goals:
   - Andy:    "A user needs to edit items in the cart", "A user needs to checkout and pay"
   - Derek:   "A user should be able to browse items in the store", "A user needs to be able to view an item"
   - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
+
+Weedk 5 Goals:
+  - Ilya:    "A user needs to view an item"
+  - Joey:    "A user needs to be able to view an item (backend)", "A user needs to add an item to cart (backend)"
+  - Andy:    "A user needs to view their account", "A user needs to view management page"
+  - Derek:   "A user should be able to browse items in the store", "A user needs to be able to view an item"
+  - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
