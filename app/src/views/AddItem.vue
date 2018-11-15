@@ -10,8 +10,10 @@
         <label class="label">Name</label>
         <div id="name" class="control">
           <input class="input"
+            id="input"
             type="text"
             v-model="name"
+            v-bind:class="{'is-danger': nameInvalid === true, 'is-normal': nameInvalid === false}"
           />
         </div>
       </div>
@@ -19,8 +21,10 @@
         <label class="label">Brand</label>
         <div id="brand" class="control">
           <input class="input"
+            id="input"
             type="text"
             v-model="brand"
+            v-bind:class="{'is-danger': brandInvalid === true, 'is-normal': brandInvalid === false}"
           />
         </div>
       </div>
@@ -28,8 +32,10 @@
         <label class="label">Price</label>
         <div id="price" class="control">
           <input class="input"
+            id="input"
             type="number"
             v-model="price"
+            v-bind:class="{'is-danger': priceInvalid === true, 'is-normal': priceInvalid === false}"
           />
         </div>
       </div>
@@ -37,8 +43,10 @@
         <label class="label">Quantity</label>
         <div id="quantity" class="control">
           <input class="input"
+            id="input"
             type="number"
             v-model="quantity"
+            v-bind:class="{'is-danger': quantityInvalid === true, 'is-normal': quantityInvalid === false}"
           />
         </div>
       </div>
@@ -46,16 +54,22 @@
         <label class="label">Category</label>
         <div id="quantity" class="control">
           <input class="input"
+            id="input"
             type="text"
             v-model="categories"
+            v-bind:class="{'is-danger': categoriesInvalid === true, 'is-normal': categoriesInvalid === false}"
           />
         </div>
       </div>
       <div class="field">
         <label class="label">Image</label>
-        <div class="file">
+        <div class="file" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
           <label class="file-label">
-            <input class="file-input" type="file" @change="onFileChange">
+            <input class="file-input"
+              id="input"
+              type="file"
+              @change="onFileChange"
+            />
             <span class="file-cta">
               <span class="file-icon">
                 <i class="fas fa-upload"></i>
@@ -74,8 +88,10 @@
         <label class="label">Description</label>
         <div id="description" class="control">
           <textarea class="textarea"
+            id = "input"
             type="text"
             v-model="description"
+            v-bind:class="{'is-danger': descriptionInvalid === true, 'is-normal': descriptionInvalid === false}"
           />
         </div>
       </div>
@@ -100,6 +116,14 @@ export default {
       categories: null,
       image: null,
       description: null,
+
+      nameInvalid: null,
+      brandInvalid: null,
+      priceInvalid: null,
+      quantityInvalid: null,
+      categoriesInvalid: null,
+      imageInvalid: null,
+      descriptionInvalid: null,
     };
   },
   methods: {
@@ -112,24 +136,71 @@ export default {
     },
     submit() {
       if (this.isFormValid()) {
-        axios.post('/api/item', {
+        axios.post('/api/items', {
           name: this.name,
           price: this.price,
           quantity: this.quantity,
           description: this.description,
           image: this.image,
+        }).then((successRes) => {
+          this.name = null;
+          this.brand = null;
+          this.price = null;
+          this.quantity = null;
+          this.categories = null;
+          this.image = null;
+          this.description = null;
+        }, (failRes) => {
         });
-
+      } else {
+        this.findInvalidField();
       }
     },
     isFormValid() {
-      return (this.name != null) &&
-        (this.brand != null) &&
-        (this.price != null) &&
-        (this.quantity != null) &&
-        (this.categories != null) &&
-        (this.image != null) &&
-        (this.description != null);
+      return (this.name != null && this.name !== '') &&
+        (this.brand != null && this.brand !== '') &&
+        (this.price != null && this.price !== '') &&
+        (this.quantity != null && this.quantity !== '') &&
+        (this.categories != null && this.categories !== '') &&
+        (this.image != null && this.image !== '') &&
+        (this.description != null && this.description !== '');
+    },
+    findInvalidField() {
+      if (this.name == null || this.name === '') {
+        this.nameInvalid = true;
+      } else {
+        this.nameInvalid = false;
+      }
+      if (this.brand == null || this.brand === '') {
+        this.brandInvalid = true;
+      } else {
+        this.brandInvalid = false;
+      }
+      if (this.price == null || this.price === '') {
+        this.priceInvalid = true;
+      } else {
+        this.priceInvalid = false;
+      }
+      if (this.quantity == null || this.quantity === '') {
+        this.quantityInvalid = true;
+      } else {
+        this.quantityInvalid = false;
+      }
+      if (this.categories == null || this.categories === '') {
+        this.categoriesInvalid = true;
+      } else {
+        this.categoriesInvalid = false;
+      }
+      if (this.image == null || this.image === '') {
+        this.imageInvalid = true;
+      } else {
+        this.imageInvalid = false;
+      }
+      if (this.description == null || this.description === '') {
+        this.descriptionInvalid = true;
+      } else {
+        this.descriptionInvalid = false;
+      }
     },
   },
 };
