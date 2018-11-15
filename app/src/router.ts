@@ -77,5 +77,10 @@ export default new Router({
       name: 'cart',
       component: () => import('@/views/Cart.vue'),
     },
+    {
+      path: '/add-item',
+      name: 'add-item',
+      component: () => import('@/views/AddItem.vue'),
+    },
   ],
 });
