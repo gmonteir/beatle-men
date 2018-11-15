@@ -44,6 +44,16 @@ export default new Vuex.Store({
           userQuantity: 4,
           quantity: 5,
         },
+        {
+          id: 4,
+          name: 'Product Name 4',
+          image: 'https://bulma.io/images/placeholders/128x128.png',
+          description: 'Lorem ipsum dolor sit amet, consectetur',
+          price: 10.00,
+          total: 20.00,
+          userQuantity: 2,
+          quantity: 3,
+        },
       ],
       subtotal: 190.00,
       totalQuantity: 7
