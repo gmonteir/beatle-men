@@ -7,11 +7,29 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: false,
-    firstName: null,
-    lastName: null,
-    email: null,
+    isLoggedIn: true,
+    firstName: 'Andy',
+    lastName: 'Khov',
+    email: 'hello@gmail.com',
     accountType: 'customer',
+    addresses: [
+      {
+        id: 1,
+        street1: '123 easy street',
+        street2: 'Apt. #12345',
+        city: 'San Luis Obispo',
+        state: 'California',
+        zip: '93405',
+      },
+      {
+        id: 2,
+        street1: '143 hello world',
+        street2: 'Apt. #Mars',
+        city: 'Lemon Twigs',
+        state: 'Astroworld',
+        zip: '11345',
+      }
+    ],
     cart: {
       items: [
         {
@@ -66,6 +84,22 @@ export default new Vuex.Store({
       state.lastName = payload.lastName;
       state.email = payload.email;
       state.accountType = payload.accountType;
+    },
+    changeName(state, payload) {
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
+    },
+    changeEmail(state, payload) {
+      state.email = payload.email;
+    },
+    addAddress(state, payload) {
+      state.addresses.push(payload);
+    },
+    removeAddress(state, payload) {
+      let newAddresses = state.addresses.filter((address) => {
+        return address.id != payload.id;
+      });
+      state.addresses = newAddresses;
     },
     removeItem(state, payload) {
       let quantity = 0;

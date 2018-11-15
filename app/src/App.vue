@@ -56,12 +56,21 @@
               </router-link>
             </p>
             <p class="control">
-              <router-link to="/signup">
+              <router-link to="/account" v-if="isLoggedIn">
+                <button class="button is-primary">
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span>Account</span>
+                </button>
+              </router-link>
+              <router-link to="/signup" v-else>
                 <button class="button is-primary">Sign Up</button>
               </router-link>
             </p>
             <p class="control">
-              <router-link to="/login">
+              <button class="button is-light" v-if="isLoggedIn">Logout</button>
+              <router-link to="/login" v-else>
                 <button class="button is-light">Log In</button>
               </router-link>
             </p>
@@ -74,8 +83,19 @@
 </div>
 </template>
 
+<script>
+export default {
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+  },
+};
+</script>
+
+
 <style lang="scss">
 $navbar-item-img-max-height: 2.50rem;
 @import "./../node_modules/bulma/bulma.sass";
-@import "./../node_modules/@fortawesome/fontawesome-free/css/all.css"
+@import "./../node_modules/@fortawesome/fontawesome-free/css/all.css";
 </style>
