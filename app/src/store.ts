@@ -7,10 +7,10 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    isLoggedIn: true,
-    firstName: 'Andy',
-    lastName: 'Khov',
-    email: 'hello@gmail.com',
+    isLoggedIn: false,
+    firstName: null,
+    lastName: null,
+    email: null,
     accountType: 'customer',
     addresses: [
       {
