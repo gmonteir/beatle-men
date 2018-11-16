@@ -89,7 +89,6 @@
         <div id="description" class="control">
           <textarea class="textarea"
             id = "input"
-            type="text"
             v-model="description"
             v-bind:class="{'is-danger': descriptionInvalid === true, 'is-normal': descriptionInvalid === false}"
           />
@@ -142,6 +141,7 @@ export default {
           quantity: this.quantity,
           description: this.description,
           image: this.image,
+          labels: this.categories,
         }).then((res) => {
           this.name = null;
           this.brand = null;
@@ -199,6 +199,18 @@ export default {
         this.descriptionInvalid = true;
       } else {
         this.descriptionInvalid = false;
+      }
+    },
+    clearForm() {
+      const inputs = document.getElementsById('input');
+      for (let i = 0; i < inputs.length; i += 1) {
+        switch (inputs[i].type) {
+          case 'text':
+            inputs[i].value = '';
+            break;
+          default:
+            break;
+        }
       }
     },
   },
