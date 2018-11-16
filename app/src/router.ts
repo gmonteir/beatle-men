@@ -82,5 +82,10 @@ export default new Router({
       name: 'add-item',
       component: () => import('@/views/AddItem.vue'),
     },
+    {
+      path: '/account',
+      name: 'account',
+      component: () => import('@/views/Account.vue'),
+    },
   ],
 });
