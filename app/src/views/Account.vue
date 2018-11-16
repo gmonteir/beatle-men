@@ -16,6 +16,10 @@
       v-if="isAddAddressModalOpen"
       v-on:close="isAddAddressModalOpen = false"
     />
+    <add-credit-card-modal
+      v-if="isAddCreditCardModalOpen"
+      v-on:close="isAddCreditCardModalOpen = false"
+    />
     <section class="hero is-info is-bold">
       <div class="hero-body">
         <h1 class="title is-1">Account</h1>
@@ -90,6 +94,33 @@
         />
       </div>
     </section>
+    <section class="section">
+      <div id="address-info">
+        <div id = "address-header">
+          <span id="left-heading">
+            <h2 class="title is-4">Credit Cards</h2>
+            <button
+              class="button is-outlined"
+              id="edit-btn"
+              v-on:click="toggleCreditCardsShown">
+              View
+            </button>
+          </span>
+          <button
+            class="button is-outlined"
+            id="edit-btn"
+            v-on:click="openAddCreditCardModal">
+            Add a Credit Card
+          </button>
+        </div>
+        <credit-card-item
+          v-if="isCreditCardsShown"
+          v-for="card in this.$store.state.creditcards"
+          v-bind:key="card.id"
+          v-bind:card="card"
+        />
+      </div>
+    </section>
   </body>
 </template>
 
@@ -99,6 +130,8 @@ import ChangeEmailModal from './../components/ChangeEmailModal.vue';
 import ChangePasswordModal from './../components/ChangePasswordModal.vue';
 import AddressItem from './../components/AddressItem.vue';
 import AddAddressModal from './../components/AddAddressModal.vue';
+import CreditCardItem from './../components/CreditCardItem.vue';
+import AddCreditCardModal from './../components/AddCreditCardModal.vue';
 
 export default {
   name: 'account',
@@ -108,6 +141,8 @@ export default {
     ChangePasswordModal,
     AddressItem,
     AddAddressModal,
+    CreditCardItem,
+    AddCreditCardModal,
   },
   data() {
     return {
@@ -116,6 +151,8 @@ export default {
       isChangePasswordModalOpen: null,
       isAddAddressModalOpen: null,
       isAddressesShown: null,
+      isAddCreditCardModalOpen: null,
+      isCreditCardsShown: null,
     };
   },
   methods: {
@@ -131,8 +168,14 @@ export default {
     openAddAddressModal() {
       this.isAddAddressModalOpen = true;
     },
+    openAddCreditCardModal() {
+      this.isAddCreditCardModalOpen = true;
+    },
     toggleAddressesShown() {
       this.isAddressesShown = !this.isAddressesShown;
+    },
+    toggleCreditCardsShown() {
+      this.isCreditCardsShown = !this.isCreditCardsShown;
     },
   },
   computed: {
