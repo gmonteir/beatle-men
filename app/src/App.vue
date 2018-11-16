@@ -70,7 +70,7 @@
               </router-link>
             </p>
             <p class="control">
-              <button class="button is-light" v-if="isLoggedIn">Logout</button>
+              <button class="button is-light" v-if="isLoggedIn" v-on:click="logout">Logout</button>
               <router-link to="/login" v-else>
                 <button class="button is-light">Log In</button>
               </router-link>
@@ -86,6 +86,24 @@
 
 <script>
 export default {
+  methods: {
+    logout() {
+      /* axios api call here
+        axios.post('/api/logout', {
+          email: this.$store.state.email,
+        }).then((successRes) => {
+          this.$store.commit('changeAccount', {
+            isLoggedIn: false,
+            firstName: null,
+            lastName: null,
+            email: null,
+            accountType: 'customer' });
+        }, (failRes) => {
+          console.log('fail to logout');
+        });
+      */
+    },
+  },
   computed: {
     isLoggedIn() {
       return this.$store.state.isLoggedIn;
