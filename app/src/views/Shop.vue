@@ -77,11 +77,23 @@
 
 <script>
 import ShopItem from './../components/ShopItem.vue';
+import axios from 'axios';
 
 export default {
   name: 'shop',
   components: {
     ShopItem,
+  },
+  data() {
+    return {
+      // ***
+    }
+  },
+  mounted() {
+    axios.get('/api/items')
+      .then((response) => {
+        // ***
+      });
   },
   methods: {
     isInPath(str) {

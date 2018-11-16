@@ -142,7 +142,7 @@ export default {
           quantity: this.quantity,
           description: this.description,
           image: this.image,
-        }).then((successRes) => {
+        }).then((res) => {
           this.name = null;
           this.brand = null;
           this.price = null;
@@ -150,7 +150,6 @@ export default {
           this.categories = null;
           this.image = null;
           this.description = null;
-        }, (failRes) => {
         });
       } else {
         this.findInvalidField();
