@@ -1,7 +1,7 @@
 <template>
   <div class="shop-item">
     <div class="image">
-      <img src="assets/home-slideshow-4.jpg"/>
+      <router-link to="#"><img src="assets/home-slideshow-4.jpg"/></router-link>
     </div>
     <div class="title is-4">
       <p><router-link to="#">{{item.name}}</router-link></p>
