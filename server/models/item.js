@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DOUBLE,
     quantity: DataTypes.INTEGER,
     description: DataTypes.STRING,
+    specifications: DataTypes.STRING,
     image: DataTypes.BLOB('long')
   }, {});
   Item.associate = function(models) {
