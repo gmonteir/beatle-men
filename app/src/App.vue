@@ -41,6 +41,7 @@
         </div>
         <router-link class="navbar-item" to="/services">Services</router-link>
         <router-link class="navbar-item" to="/about">About</router-link>
+        <router-link class="navbar-item" to="/add-item">Add Item</router-link>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
@@ -56,12 +57,21 @@
               </router-link>
             </p>
             <p class="control">
-              <router-link to="/signup">
+              <router-link to="/account" v-if="isLoggedIn">
+                <button class="button is-primary">
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span>Account</span>
+                </button>
+              </router-link>
+              <router-link to="/signup" v-else>
                 <button class="button is-primary">Sign Up</button>
               </router-link>
             </p>
             <p class="control">
-              <router-link to="/login">
+              <button class="button is-light" v-if="isLoggedIn" v-on:click="logout">Logout</button>
+              <router-link to="/login" v-else>
                 <button class="button is-light">Log In</button>
               </router-link>
             </p>
@@ -74,8 +84,37 @@
 </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    logout() {
+      /* axios api call here
+        axios.post('/api/logout', {
+          email: this.$store.state.email,
+        }).then((successRes) => {
+          this.$store.commit('changeAccount', {
+            isLoggedIn: false,
+            firstName: null,
+            lastName: null,
+            email: null,
+            accountType: 'customer' });
+        }, (failRes) => {
+          console.log('fail to logout');
+        });
+      */
+    },
+  },
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+  },
+};
+</script>
+
+
 <style lang="scss">
 $navbar-item-img-max-height: 2.50rem;
 @import "./../node_modules/bulma/bulma.sass";
-@import "./../node_modules/@fortawesome/fontawesome-free/css/all.css"
+@import "./../node_modules/@fortawesome/fontawesome-free/css/all.css";
 </style>

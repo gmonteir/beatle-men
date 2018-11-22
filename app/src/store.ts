@@ -12,6 +12,35 @@ export default new Vuex.Store({
     lastName: null,
     email: null,
     accountType: 'customer',
+    addresses: [
+      {
+        id: 1,
+        street1: '123 easy street',
+        street2: 'Apt. #12345',
+        city: 'San Luis Obispo',
+        state: 'California',
+        zip: '93405',
+      },
+      {
+        id: 2,
+        street1: '143 hello world',
+        street2: 'Apt. #Mars',
+        city: 'Lemon Twigs',
+        state: 'Astroworld',
+        zip: '11345',
+      }
+    ],
+    creditcards: [
+      {
+        id: 1,
+        firstName: 'Andy',
+        lastName: 'Khov',
+        number: '123456789',
+        month: '07',
+        year: '2018',
+        cvv: '12345'
+      }
+    ],
     cart: {
       items: [
         {
@@ -66,6 +95,31 @@ export default new Vuex.Store({
       state.lastName = payload.lastName;
       state.email = payload.email;
       state.accountType = payload.accountType;
+    },
+    changeName(state, payload) {
+      state.firstName = payload.firstName;
+      state.lastName = payload.lastName;
+    },
+    changeEmail(state, payload) {
+      state.email = payload.email;
+    },
+    addAddress(state, payload) {
+      state.addresses.push(payload);
+    },
+    removeAddress(state, payload) {
+      let newAddresses = state.addresses.filter((address) => {
+        return address.id != payload.id;
+      });
+      state.addresses = newAddresses;
+    },
+    addCreditCard(state, payload) {
+      state.creditcards.push(payload);
+    },
+    removeCreditCard(state, payload) {
+      let newCreditCards = state.creditcards.filter((card) => {
+        return card.id != payload.id;
+      });
+      state.creditcards = newCreditCards;
     },
     removeItem(state, payload) {
       let quantity = 0;

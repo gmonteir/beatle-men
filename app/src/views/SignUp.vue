@@ -52,7 +52,7 @@
       </div>
       <p class="help is-danger"
         v-if="isPasswordInvalid">
-        Password length must be greater than 6 characters
+        Password length must be greater than 5 characters
       </p>
     </div>
     <div class="field">
