@@ -20,8 +20,11 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      specifications: {
+        type: Sequelize.STRING
+      },
       image: {
-        type: Sequelize.BLOB('long')
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

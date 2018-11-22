@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DOUBLE,
     quantity: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    image: DataTypes.BLOB('long')
+    specifications: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {});
   Item.associate = function(models) {
     // associations can be defined here
