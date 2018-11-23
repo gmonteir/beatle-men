@@ -30,6 +30,17 @@ export default new Vuex.Store({
         zip: '11345',
       }
     ],
+    creditcards: [
+      {
+        id: 1,
+        firstName: 'Andy',
+        lastName: 'Khov',
+        number: '123456789',
+        month: '07',
+        year: '2018',
+        cvv: '12345'
+      }
+    ],
     cart: {
       items: [
         {
@@ -100,6 +111,15 @@ export default new Vuex.Store({
         return address.id != payload.id;
       });
       state.addresses = newAddresses;
+    },
+    addCreditCard(state, payload) {
+      state.creditcards.push(payload);
+    },
+    removeCreditCard(state, payload) {
+      let newCreditCards = state.creditcards.filter((card) => {
+        return card.id != payload.id;
+      });
+      state.creditcards = newCreditCards;
     },
     removeItem(state, payload) {
       let quantity = 0;
