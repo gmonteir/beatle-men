@@ -64,11 +64,12 @@
           <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
         </div>
         <ul class="item-grid">
-          <ShopItem class="item"
-            v-for="item in this.$store.state.cart.items"
+          <!-- <ShopItem class="item"
+            v-for="item in items"
             v-bind:key="item.id"
             v-bind:item="item"
-          />
+          /> -->
+          <img v-if="items" :src="items.image"/>
         </ul>
       </div>
     </div>
@@ -76,8 +77,8 @@
 </template>
 
 <script>
-import ShopItem from './../components/ShopItem.vue';
 import axios from 'axios';
+import ShopItem from './../components/ShopItem.vue';
 
 export default {
   name: 'shop',
@@ -86,13 +87,14 @@ export default {
   },
   data() {
     return {
-      // ***
-    }
+      items: null,
+    };
   },
   mounted() {
     axios.get('/api/items')
       .then((response) => {
-        // ***
+        this.items = response.data.items;
+        console.log(response.data);
       });
   },
   methods: {

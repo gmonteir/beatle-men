@@ -63,7 +63,7 @@
       </div>
       <div class="field">
         <label class="label">Image</label>
-        <div class="file" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
+        <div class="file is-fullwidth" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
           <label class="file-label">
             <input class="file-input"
               id="input"
@@ -79,7 +79,7 @@
               </span>
             </span>
             <span v-if="image" class="file-name">
-              {{image}}
+              {{image.name}}
             </span>
           </label>
         </div>
@@ -126,12 +126,23 @@ export default {
     };
   },
   methods: {
-    onFileChange(newFile) {
-      const files = newFile.target.files || newFile.dataTransfer.files;
+    onFileChange(event) {
+      const files = event.target.files || event.dataTransfer.files;
       if (!files.length) {
         return;
       }
-      this.image = files[0].name;
+
+      this.image = files[0];
+      /*
+      const reader = new FileReader();
+      reader.onload = function() {
+        this.imageEncode = reader.result.split(',')[1];
+        this.imageEncode = new Blob([reader.result], { type: 'image/*' })
+        console.log(reader.result);
+        console.log(this.imageEncode);
+      };
+      reader.readAsDataURL(files[0]);
+      */
     },
     submit() {
       if (this.isFormValid()) {
@@ -151,9 +162,8 @@ export default {
           this.image = null;
           this.description = null;
         });
-      } else {
-        this.findInvalidField();
       }
+      this.findInvalidField();
     },
     isFormValid() {
       return (this.name != null && this.name !== '') &&
@@ -199,18 +209,6 @@ export default {
         this.descriptionInvalid = true;
       } else {
         this.descriptionInvalid = false;
-      }
-    },
-    clearForm() {
-      const inputs = document.getElementsById('input');
-      for (let i = 0; i < inputs.length; i += 1) {
-        switch (inputs[i].type) {
-          case 'text':
-            inputs[i].value = '';
-            break;
-          default:
-            break;
-        }
       }
     },
   },
