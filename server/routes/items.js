@@ -1,6 +1,30 @@
 const express = require('express');
+const multer = require('multer');
+
 const { Item } = require('../models');
 const { Category } = require('../models');
+
+const stor = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const filter = (req, file, cb) => {
+  if (file.mimetype === 'image/*') {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
+const upload = multer({
+  storage: stor,
+  fileFilter: filter,
+});
 
 const router = express.Router();
 
@@ -21,7 +45,7 @@ router
       price,
       quantity,
       description,
-      image,
+      specifications,
       labels,
     } = req.body;
 
@@ -31,8 +55,10 @@ router
       price,
       quantity,
       description,
-      image,
+      specifications,
+      image: req.file.path,
     });
+
     // after the item is saved, start adding categories
     newItem.save().then(() => {
       // labels are in a comma separated string

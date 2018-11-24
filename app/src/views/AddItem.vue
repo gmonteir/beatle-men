@@ -94,6 +94,16 @@
           />
         </div>
       </div>
+      <div class="field">
+        <label class="label">Specifications</label>
+        <div id="specifications" class="control">
+          <textarea class="textarea"
+            id = "input"
+            v-model="specifications"
+            v-bind:class="{'is-danger': specificationsInvalid === true, 'is-normal': specificationsInvalid === false}"
+          />
+        </div>
+      </div>
       <div class="buttons">
         <button class="button is-success" v-on:click="submit">Submit</button>
       </div>
@@ -114,6 +124,7 @@ export default {
       quantity: null,
       categories: null,
       image: null,
+      specifications: null,
       description: null,
 
       nameInvalid: null,
@@ -122,6 +133,7 @@ export default {
       quantityInvalid: null,
       categoriesInvalid: null,
       imageInvalid: null,
+      specificationsInvalid: null,
       descriptionInvalid: null,
     };
   },
@@ -133,33 +145,33 @@ export default {
       }
 
       this.image = files[0];
-      /*
-      const reader = new FileReader();
-      reader.onload = function() {
-        this.imageEncode = reader.result.split(',')[1];
-        this.imageEncode = new Blob([reader.result], { type: 'image/*' })
-        console.log(reader.result);
-        console.log(this.imageEncode);
-      };
-      reader.readAsDataURL(files[0]);
-      */
+      console.log(this.image);
     },
     submit() {
       if (this.isFormValid()) {
-        axios.post('/api/items', {
-          name: this.name,
-          price: this.price,
-          quantity: this.quantity,
-          description: this.description,
-          image: this.image,
-          labels: this.categories,
-        }).then((res) => {
+        const form = new FormData();
+        form.append('image', this.image, this.image.name);
+        form.append('name', this.name);
+        form.append('price', this.price);
+        form.append('quantity', this.quantity);
+        form.append('description', this.description);
+        form.append('specifications', this.specifications);
+        form.append('labels', this.categories);
+        let config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        }
+        console.log(form);
+        axios.post('/api/items', form, config)
+        .then((res) => {
           this.name = null;
           this.brand = null;
           this.price = null;
           this.quantity = null;
           this.categories = null;
           this.image = null;
+          this.specifications = null;
           this.description = null;
         });
       }
@@ -204,6 +216,11 @@ export default {
         this.imageInvalid = true;
       } else {
         this.imageInvalid = false;
+      }
+      if (this.specifications == null || this.specifications === '') {
+        this.specificationsInvalid = true;
+      } else {
+        this.specificationsInvalid = false;
       }
       if (this.description == null || this.description === '') {
         this.descriptionInvalid = true;

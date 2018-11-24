@@ -64,12 +64,11 @@
           <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
         </div>
         <ul class="item-grid">
-          <!-- <ShopItem class="item"
+          <ShopItem class="item"
             v-for="item in items"
             v-bind:key="item.id"
             v-bind:item="item"
-          /> -->
-          <img v-if="items" :src="items.image"/>
+          />
         </ul>
       </div>
     </div>
@@ -94,7 +93,6 @@ export default {
     axios.get('/api/items')
       .then((response) => {
         this.items = response.data.items;
-        console.log(response.data);
       });
   },
   methods: {
