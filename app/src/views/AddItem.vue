@@ -52,13 +52,21 @@
       </div>
       <div class="field">
         <label class="label">Category</label>
-        <div id="quantity" class="control">
-          <input class="input"
-            id="input"
-            type="text"
-            v-model="categories"
-            v-bind:class="{'is-danger': categoriesInvalid === true, 'is-normal': categoriesInvalid === false}"
-          />
+        <div id="dropdown" class="control">
+          <div class="select" v-bind:class="{'is-danger': categoryInvalid === true, 'is-normal': categoryInvalid === false}">
+            <select v-model="chosenCategory">
+              <option selected disabled>Select</option>
+              <option v-for="category in categoryList" v-bind:key="category.id">{{category.label}}</option>
+            </select>
+          </div>
+        </div>
+        <div id="dropdown" class="control" v-show="subcategoryList && subcategoryList.length > 0">
+          <div class="select" v-bind:class="{'is-danger': subcategoryInvalid === true, 'is-normal': subcategoryInvalid === false}">
+            <select v-model="chosenSubcategory">
+              <option selected disabled>Select</option>
+              <option v-for="subcategory in subcategoryList" v-bind:key="subcategory.id">{{subcategory.label}}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="field">
@@ -122,7 +130,11 @@ export default {
       brand: null,
       price: null,
       quantity: null,
-      categories: null,
+      chosenCategory: null,
+      chosenSubcategory: null,
+      categoryParentID: -1,
+      categoryList: null,
+      subcategoryList: null,
       image: null,
       specifications: null,
       description: null,
@@ -131,13 +143,48 @@ export default {
       brandInvalid: null,
       priceInvalid: null,
       quantityInvalid: null,
-      categoriesInvalid: null,
+      categoryInvalid: null,
+      subcategoryInvalid: null,
       imageInvalid: null,
       specificationsInvalid: null,
       descriptionInvalid: null,
     };
   },
+  mounted() {
+    this.categoryList = this.getCategories(this.categoryParentID);
+  },
+  watch: {
+    chosenCategory: function() {
+      this.categoryParentID = this.getCategoryID(this.chosenCategory);
+    },
+  },
   methods: {
+    getCategoryID(category) {
+      let id = -1;
+      axios.get('/api/categories')
+        .then((res) => {
+          for (let i = 0; i < res.data.categories.length; i += 1) {
+            if (res.data.categories[i].label === category) {
+              id = res.data.categories[i].id;
+              this.subcategoryList = this.getCategories(id);
+              break;
+            }
+          }
+        });
+      return id;
+    },
+    getCategories(id) {
+      const list = [];
+      axios.get('/api/categories')
+        .then((res) => {
+          for (let i = 0; i < res.data.categories.length; i += 1) {
+            if (res.data.categories[i].parentID === id) {
+              list.push(res.data.categories[i]);
+            }
+          }
+        });
+      return list;
+    },
     onFileChange(event) {
       const files = event.target.files || event.dataTransfer.files;
       if (!files.length) {
@@ -145,7 +192,6 @@ export default {
       }
 
       this.image = files[0];
-      console.log(this.image);
     },
     submit() {
       if (this.isFormValid()) {
@@ -156,24 +202,34 @@ export default {
         form.append('quantity', this.quantity);
         form.append('description', this.description);
         form.append('specifications', this.specifications);
-        form.append('labels', this.categories);
-        let config = {
+
+        if (this.subcategoryList != null && this.subcategoryList.length > 0) {
+          const temp = this.chosenCategory + ',' + this.chosenSubcategory;
+          form.append('labels', temp);
+        } else {
+          form.append('labels', this.chosenCategory);
+        }
+
+        const config = {
           headers: {
             'Content-Type': 'multipart/form-data',
-          }
-        }
-        console.log(form);
+          },
+        };
         axios.post('/api/items', form, config)
-        .then((res) => {
-          this.name = null;
-          this.brand = null;
-          this.price = null;
-          this.quantity = null;
-          this.categories = null;
-          this.image = null;
-          this.specifications = null;
-          this.description = null;
-        });
+          .then((res) => {
+            this.name = null;
+            this.brand = null;
+            this.price = null;
+            this.quantity = null;
+            this.chosenCategory = null;
+            this.chosenSubcategory = null;
+            this.categoryParentID = -1;
+            this.categoryList = this.getCategories(this.categoryParentID);
+            this.subcategoryList = null;
+            this.image = null;
+            this.specifications = null;
+            this.description = null;
+          });
       }
       this.findInvalidField();
     },
@@ -182,7 +238,8 @@ export default {
         (this.brand != null && this.brand !== '') &&
         (this.price != null && this.price !== '') &&
         (this.quantity != null && this.quantity !== '') &&
-        (this.categories != null && this.categories !== '') &&
+        (this.chosenCategory != null) &&
+        (this.chosenSubcategory != null || this.subcategoryList == null || this.subcategoryList.length == 0) &&
         (this.image != null && this.image !== '') &&
         (this.description != null && this.description !== '');
     },
@@ -207,10 +264,15 @@ export default {
       } else {
         this.quantityInvalid = false;
       }
-      if (this.categories == null || this.categories === '') {
-        this.categoriesInvalid = true;
+      if (this.chosenCategory == null) {
+        this.categoryInvalid = true;
       } else {
-        this.categoriesInvalid = false;
+        this.categoryInvalid = false;
+      }
+      if (this.chosenSubcategory == null && this.subcategoryList != null && this.subcategoryList.length > 0) {
+        this.subcategoryInvalid = true;
+      } else {
+        this.subcategoryInvalid = false;
       }
       if (this.image == null || this.image === '') {
         this.imageInvalid = true;
@@ -233,6 +295,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../node_modules/bulma/bulma.sass";
 
   .hero {
     margin: 10px 0;
@@ -247,6 +310,11 @@ export default {
     display: flex;
     justify-content: center;
     padding: 10px 0;
+  }
+
+  #dropdown {
+    display: inline-block;
+    margin-right: 20px;
   }
 
 </style>
