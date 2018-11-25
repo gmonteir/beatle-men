@@ -1,7 +1,7 @@
 <template>
   <div class="shop-item">
     <div class="image">
-      <router-link to="#"><img src="assets/home-slideshow-4.jpg"/></router-link>
+      <router-link to="#"><img :src="'api/' + this.item.image"/></router-link>
     </div>
     <div class="title is-4">
       <p><router-link to="#">{{item.name}}</router-link></p>
@@ -28,7 +28,7 @@ export default {
 @import "../../node_modules/bulma/bulma.sass";
 
 .image {
-  width: 300px;
+  //width: 300px;
   margin: 0 auto;
 }
 

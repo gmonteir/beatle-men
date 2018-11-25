@@ -52,18 +52,26 @@
       </div>
       <div class="field">
         <label class="label">Category</label>
-        <div id="quantity" class="control">
-          <input class="input"
-            id="input"
-            type="text"
-            v-model="categories"
-            v-bind:class="{'is-danger': categoriesInvalid === true, 'is-normal': categoriesInvalid === false}"
-          />
+        <div id="dropdown" class="control">
+          <div class="select" v-bind:class="{'is-danger': categoryInvalid === true, 'is-normal': categoryInvalid === false}">
+            <select v-model="chosenCategory">
+              <option selected disabled>Select</option>
+              <option v-for="category in categoryList" v-bind:key="category.id">{{category.label}}</option>
+            </select>
+          </div>
+        </div>
+        <div id="dropdown" class="control" v-show="subcategoryList && subcategoryList.length > 0">
+          <div class="select" v-bind:class="{'is-danger': subcategoryInvalid === true, 'is-normal': subcategoryInvalid === false}">
+            <select v-model="chosenSubcategory">
+              <option selected disabled>Select</option>
+              <option v-for="subcategory in subcategoryList" v-bind:key="subcategory.id">{{subcategory.label}}</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="field">
         <label class="label">Image</label>
-        <div class="file" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
+        <div class="file is-fullwidth" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
           <label class="file-label">
             <input class="file-input"
               id="input"
@@ -79,7 +87,7 @@
               </span>
             </span>
             <span v-if="image" class="file-name">
-              {{image}}
+              {{image.name}}
             </span>
           </label>
         </div>
@@ -89,9 +97,18 @@
         <div id="description" class="control">
           <textarea class="textarea"
             id = "input"
-            type="text"
             v-model="description"
             v-bind:class="{'is-danger': descriptionInvalid === true, 'is-normal': descriptionInvalid === false}"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Specifications</label>
+        <div id="specifications" class="control">
+          <textarea class="textarea"
+            id = "input"
+            v-model="specifications"
+            v-bind:class="{'is-danger': specificationsInvalid === true, 'is-normal': specificationsInvalid === false}"
           />
         </div>
       </div>
@@ -113,54 +130,116 @@ export default {
       brand: null,
       price: null,
       quantity: null,
-      categories: null,
+      chosenCategory: null,
+      chosenSubcategory: null,
+      categoryParentID: -1,
+      categoryList: null,
+      subcategoryList: null,
       image: null,
+      specifications: null,
       description: null,
 
       nameInvalid: null,
       brandInvalid: null,
       priceInvalid: null,
       quantityInvalid: null,
-      categoriesInvalid: null,
+      categoryInvalid: null,
+      subcategoryInvalid: null,
       imageInvalid: null,
+      specificationsInvalid: null,
       descriptionInvalid: null,
     };
   },
+  mounted() {
+    this.categoryList = this.getCategories(this.categoryParentID);
+  },
+  watch: {
+    chosenCategory: function() {
+      this.categoryParentID = this.getCategoryID(this.chosenCategory);
+    },
+  },
   methods: {
-    onFileChange(newFile) {
-      const files = newFile.target.files || newFile.dataTransfer.files;
+    getCategoryID(category) {
+      let id = -1;
+      axios.get('/api/categories')
+        .then((res) => {
+          for (let i = 0; i < res.data.categories.length; i += 1) {
+            if (res.data.categories[i].label === category) {
+              id = res.data.categories[i].id;
+              this.subcategoryList = this.getCategories(id);
+              break;
+            }
+          }
+        });
+      return id;
+    },
+    getCategories(id) {
+      const list = [];
+      axios.get('/api/categories')
+        .then((res) => {
+          for (let i = 0; i < res.data.categories.length; i += 1) {
+            if (res.data.categories[i].parentID === id) {
+              list.push(res.data.categories[i]);
+            }
+          }
+        });
+      return list;
+    },
+    onFileChange(event) {
+      const files = event.target.files || event.dataTransfer.files;
       if (!files.length) {
         return;
       }
-      this.image = files[0].name;
+
+      this.image = files[0];
     },
     submit() {
       if (this.isFormValid()) {
-        axios.post('/api/items', {
-          name: this.name,
-          price: this.price,
-          quantity: this.quantity,
-          description: this.description,
-          image: this.image,
-        }).then((res) => {
-          this.name = null;
-          this.brand = null;
-          this.price = null;
-          this.quantity = null;
-          this.categories = null;
-          this.image = null;
-          this.description = null;
-        });
-      } else {
-        this.findInvalidField();
+        const form = new FormData();
+        form.append('image', this.image, this.image.name);
+        form.append('name', this.name);
+        form.append('price', this.price);
+        form.append('quantity', this.quantity);
+        form.append('description', this.description);
+        form.append('specifications', this.specifications);
+
+        if (this.subcategoryList != null && this.subcategoryList.length > 0) {
+          const temp = this.chosenCategory + ',' + this.chosenSubcategory;
+          form.append('labels', temp);
+        } else {
+          form.append('labels', this.chosenCategory);
+        }
+
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+        axios.post('/api/items', form, config)
+          .then((res) => {
+            this.name = null;
+            this.brand = null;
+            this.price = null;
+            this.quantity = null;
+            this.chosenCategory = null;
+            this.chosenSubcategory = null;
+            this.categoryParentID = -1;
+            this.categoryList = this.getCategories(this.categoryParentID);
+            this.subcategoryList = null;
+            this.image = null;
+            this.specifications = null;
+            this.description = null;
+          });
       }
+      this.findInvalidField();
     },
     isFormValid() {
       return (this.name != null && this.name !== '') &&
         (this.brand != null && this.brand !== '') &&
         (this.price != null && this.price !== '') &&
         (this.quantity != null && this.quantity !== '') &&
-        (this.categories != null && this.categories !== '') &&
+        (this.chosenCategory != null) &&
+        (this.chosenSubcategory != null || this.subcategoryList == null || this.subcategoryList.length == 0) &&
         (this.image != null && this.image !== '') &&
         (this.description != null && this.description !== '');
     },
@@ -185,15 +264,25 @@ export default {
       } else {
         this.quantityInvalid = false;
       }
-      if (this.categories == null || this.categories === '') {
-        this.categoriesInvalid = true;
+      if (this.chosenCategory == null) {
+        this.categoryInvalid = true;
       } else {
-        this.categoriesInvalid = false;
+        this.categoryInvalid = false;
+      }
+      if (this.chosenSubcategory == null && this.subcategoryList != null && this.subcategoryList.length > 0) {
+        this.subcategoryInvalid = true;
+      } else {
+        this.subcategoryInvalid = false;
       }
       if (this.image == null || this.image === '') {
         this.imageInvalid = true;
       } else {
         this.imageInvalid = false;
+      }
+      if (this.specifications == null || this.specifications === '') {
+        this.specificationsInvalid = true;
+      } else {
+        this.specificationsInvalid = false;
       }
       if (this.description == null || this.description === '') {
         this.descriptionInvalid = true;
@@ -206,6 +295,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../node_modules/bulma/bulma.sass";
 
   .hero {
     margin: 10px 0;
@@ -220,6 +310,11 @@ export default {
     display: flex;
     justify-content: center;
     padding: 10px 0;
+  }
+
+  #dropdown {
+    display: inline-block;
+    margin-right: 20px;
   }
 
 </style>

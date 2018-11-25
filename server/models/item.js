@@ -6,12 +6,12 @@ module.exports = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
     description: DataTypes.STRING,
     specifications: DataTypes.STRING,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
   }, {});
-  Item.associate = function(models) {
+  Item.associate = (models) => {
     // associations can be defined here
-    Item.belongsToMany(models.Order, {through: models.OrderItem});
-    Item.belongsToMany(models.Category, {through: models.ProductCategory});
+    Item.belongsToMany(models.Order, { through: models.OrderItem });
+    Item.belongsToMany(models.Category, { through: models.ProductCategory });
   };
   return Item;
 };
