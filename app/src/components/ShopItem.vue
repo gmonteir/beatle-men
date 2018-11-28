@@ -1,10 +1,10 @@
 <template>
   <div class="shop-item">
     <div class="image">
-      <router-link to="#"><img :src="'api/' + this.item.image"/></router-link>
+      <router-link to="/item"><img :src="'api/' + this.item.image"/></router-link>
     </div>
     <div class="title is-4">
-      <p><router-link to="#">{{item.name}}</router-link></p>
+      <p><router-link to="/item">{{item.name}}</router-link></p>
     </div>
     <div class="subtitle is-5">
       <p>${{item.price}}</p>
