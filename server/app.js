@@ -1,16 +1,26 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const multer = require('multer');
 
-var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var userAccountRouter = require('./routes/useraccounts');
-var itemRouter = require('./routes/items')
-var categoriesRouter = require('./routes/categories')
+const indexRouter = require('./routes/index');
+const loginRouter = require('./routes/login');
+const userAccountRouter = require('./routes/useraccounts');
+const itemRouter = require('./routes/items');
+const categoriesRouter = require('./routes/categories');
 
-var app = express();
+const app = express();
+
+const stor = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + file.originalname);
+  },
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,20 +31,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(multer({ storage: stor }).single('image'));
+app.use('/images', express.static('images'));
 
 app.use('/', indexRouter);
 app.use('/login', loginRouter);
-app.use('/useraccounts', userAccountRouter)
-app.use('/items', itemRouter)
-app.use('/categories', categoriesRouter)
+app.use('/useraccounts', userAccountRouter);
+app.use('/items', itemRouter);
+app.use('/categories', categoriesRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

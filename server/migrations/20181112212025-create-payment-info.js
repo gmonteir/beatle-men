@@ -22,10 +22,10 @@ module.exports = {
       number: {
         type: Sequelize.STRING
       },
-      exp1: {
+      expMonth: {
         type: Sequelize.INTEGER
       },
-      exp2: {
+      expYear: {
         type: Sequelize.INTEGER
       },
       ccv: {

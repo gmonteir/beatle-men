@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Addresses', [{
-      userId: 1,
+      userAccountId: 1,
       street1: '1 Foothill Blvd.',
       street2: 'San Luis Obispo',
       state: 'CA',

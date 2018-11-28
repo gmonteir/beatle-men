@@ -65,7 +65,7 @@
         </div>
         <ul class="item-grid">
           <ShopItem class="item"
-            v-for="item in this.$store.state.cart.items"
+            v-for="item in items"
             v-bind:key="item.id"
             v-bind:item="item"
           />
@@ -76,8 +76,8 @@
 </template>
 
 <script>
-import ShopItem from './../components/ShopItem.vue';
 import axios from 'axios';
+import ShopItem from './../components/ShopItem.vue';
 
 export default {
   name: 'shop',
@@ -86,13 +86,13 @@ export default {
   },
   data() {
     return {
-      // ***
-    }
+      items: null,
+    };
   },
   mounted() {
     axios.get('/api/items')
       .then((response) => {
-        // ***
+        this.items = response.data.items;
       });
   },
   methods: {

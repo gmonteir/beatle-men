@@ -5,12 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DOUBLE,
     quantity: DataTypes.INTEGER,
     description: DataTypes.STRING,
-    image: DataTypes.BLOB('long')
+    specifications: DataTypes.STRING,
+    image: DataTypes.STRING,
   }, {});
-  Item.associate = function(models) {
+  Item.associate = (models) => {
     // associations can be defined here
-    Item.belongsToMany(models.Order, {through: models.OrderItem});
-    Item.belongsToMany(models.Category, {through: models.ProductCategory});
+    Item.belongsToMany(models.Order, { through: models.OrderItem });
+    Item.belongsToMany(models.Category, { through: models.ProductCategory });
   };
   return Item;
 };
