@@ -87,5 +87,10 @@ export default new Router({
       name: 'account',
       component: () => import('@/views/Account.vue'),
     },
+    {
+      path: '/item',
+      name: 'item',
+      component: () => import('@/views/Item.vue'),
+    },
   ],
 });

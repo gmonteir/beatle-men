@@ -32,3 +32,10 @@ Weedk 5 Goals:
   - Andy:    "A user needs to view their account", "A user needs to view management page"
   - Derek:   "A user should be able to browse items in the store", "A user needs to be able to view an item"
   - Garrett: "A user should be able to logout (backend)", "A user needs to edit login info (backend)"
+  
+Weedk 7 Goals:
+  - Ilya:    Frontend: Checkout Page and Confirmation Page and See Orders
+  - Joey:    Management API Routing for all 5 pages
+  - Andy:    Frontend: Order Page, See users, Add employees and Add item
+  - Derek:   Routing: Item page, checkout page and confirmed page, change static test. Frontend: Announcement, change static text
+  - Garrett: User docs, API docs, and testing
