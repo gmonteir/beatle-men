@@ -41,7 +41,6 @@
         </div>
         <router-link class="navbar-item" to="/services">Services</router-link>
         <router-link class="navbar-item" to="/about">About</router-link>
-        <router-link class="navbar-item" to="/add-item">Add Item</router-link>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">

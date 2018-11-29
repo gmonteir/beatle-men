@@ -92,5 +92,10 @@ export default new Router({
       name: 'item',
       component: () => import('@/views/Item.vue'),
     },
+    {
+      path: '/users',
+      name: 'users',
+      component: () => import('@/views/Users.vue'),
+    },
   ],
 });
