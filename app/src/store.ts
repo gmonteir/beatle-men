@@ -87,6 +87,29 @@ export default new Vuex.Store({
       subtotal: 190.00,
       totalQuantity: 7
     },
+    users: [
+      {
+        id: 1,
+        firstName: 'Kristofer',
+        lastName: 'Fox',
+        email: 'fox@foxcycle.com',
+        accountType: 'admin',
+      },
+      {
+        id: 2,
+        firstName: 'Hello',
+        lastName: 'World',
+        email: 'hello@foxcycle.com',
+        accountType: 'employee',
+      },
+      {
+        id: 3,
+        firstName: 'Regular',
+        lastName: 'User',
+        email: 'user@gmail.com',
+        accountType: 'customer',
+      },
+    ]
   },
   mutations: {
     changeAccount(state, payload) {

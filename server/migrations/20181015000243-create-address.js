@@ -22,6 +22,9 @@ module.exports = {
       street2: {
         type: Sequelize.STRING
       },
+      city: {
+        type: Sequelize.STRING
+      },
       state: {
         type: Sequelize.STRING
       },

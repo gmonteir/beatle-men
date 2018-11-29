@@ -52,20 +52,42 @@
       </div>
       <div class="field">
         <label class="label">Category</label>
-        <div id="dropdown" class="control">
-          <div class="select" v-bind:class="{'is-danger': categoryInvalid === true, 'is-normal': categoryInvalid === false}">
-            <select v-model="chosenCategory">
-              <option selected disabled>Select</option>
-              <option v-for="category in categoryList" v-bind:key="category.id">{{category.label}}</option>
-            </select>
+        <div class="columns" style="width:50%">
+          <div class="column">
+            <div id="dropdown" class="control">
+              <div class="select" v-bind:class="{'is-danger': categoryInvalid === true, 'is-normal': categoryInvalid === false}">
+                <select v-model="chosenCategory">
+                  <option disabled>Select</option>
+                  <option v-for="category in categoryList" v-bind:key="category.id">{{category.label}}</option>
+                </select>
+              </div>
+            </div>
+            <a id="dropdown" class="button is-small" v-on:click="categoryButton = true">Add a Category</a>
+            <input class="input"
+              id="dropdown"
+              type="text"
+              v-show="categoryButton"
+              v-model="categoryButtonInput"
+            />
+            <a class="button is-small is-success" v-show="categoryButton" v-on:click="submitCategory()">Submit Category</a>
           </div>
-        </div>
-        <div id="dropdown" class="control" v-show="subcategoryList && subcategoryList.length > 0">
-          <div class="select" v-bind:class="{'is-danger': subcategoryInvalid === true, 'is-normal': subcategoryInvalid === false}">
-            <select v-model="chosenSubcategory">
-              <option selected disabled>Select</option>
-              <option v-for="subcategory in subcategoryList" v-bind:key="subcategory.id">{{subcategory.label}}</option>
-            </select>
+          <div class="column">
+            <div id="dropdown" class="control" v-show="subcategoryList && subcategoryList.length > 0">
+              <div class="select" v-bind:class="{'is-danger': subcategoryInvalid === true, 'is-normal': subcategoryInvalid === false}">
+                <select v-model="chosenSubcategory">
+                  <option disabled>Select</option>
+                  <option v-for="subcategory in subcategoryList" v-bind:key="subcategory.id">{{subcategory.label}}</option>
+                </select>
+              </div>
+            </div>
+            <a id="dropdown" class="button is-small" v-show="chosenCategory !== 'Select'" v-on:click="subcategoryButton = true">Add a Subcategory</a>
+            <input class="input"
+              id="dropdown"
+              type="text"
+              v-show="subcategoryButton"
+              v-model="subcategoryButtonInput"
+            />
+            <a class="button is-small is-success" v-show="subcategoryButton" v-on:click="submitSubcategory()">Submit Subcategory</a>
           </div>
         </div>
       </div>
@@ -112,7 +134,7 @@
           />
         </div>
       </div>
-      <div class="buttons">
+      <div class="buttons" id="buttons">
         <button class="button is-success" v-on:click="submit">Submit</button>
       </div>
     </div>
@@ -130,11 +152,15 @@ export default {
       brand: null,
       price: null,
       quantity: null,
-      chosenCategory: null,
-      chosenSubcategory: null,
+      chosenCategory: 'Select',
+      chosenSubcategory: 'Select',
       categoryParentID: -1,
       categoryList: null,
       subcategoryList: null,
+      categoryButton: false,
+      subcategoryButton: false,
+      categoryButtonInput: null,
+      subcategoryButtonInput: null,
       image: null,
       specifications: null,
       description: null,
@@ -154,24 +180,22 @@ export default {
     this.categoryList = this.getCategories(this.categoryParentID);
   },
   watch: {
-    chosenCategory: function() {
-      this.categoryParentID = this.getCategoryID(this.chosenCategory);
+    chosenCategory() {
+      this.getCategoryID(this.chosenCategory);
     },
   },
   methods: {
     getCategoryID(category) {
-      let id = -1;
       axios.get('/api/categories')
         .then((res) => {
           for (let i = 0; i < res.data.categories.length; i += 1) {
             if (res.data.categories[i].label === category) {
-              id = res.data.categories[i].id;
-              this.subcategoryList = this.getCategories(id);
+              this.categoryParentID = res.data.categories[i].id;
+              this.subcategoryList = this.getCategories(this.categoryParentID);
               break;
             }
           }
         });
-      return id;
     },
     getCategories(id) {
       const list = [];
@@ -190,8 +214,30 @@ export default {
       if (!files.length) {
         return;
       }
-
       this.image = files[0];
+    },
+    submitCategory() {
+      if (this.categoryButton) {
+        axios.post('/api/categories', {
+          label: this.categoryButtonInput,
+          parentID: -1,
+        }).then((res) => {
+          const input = this.categoryButtonInput;
+          this.categoryList = this.getCategories(-1);
+          this.categoryButtonInput = null;
+        });
+      }
+    },
+    submitSubcategory() {
+      if (this.subcategoryButton) {
+        axios.post('/api/categories', {
+          label: this.subcategoryButtonInput,
+          parentID: this.categoryParentID,
+        }).then((res) => {
+          this.subcategoryList = this.getCategories(this.categoryParentID);
+          this.subcategoryButtonInput = null;
+        });
+      }
     },
     submit() {
       if (this.isFormValid()) {
@@ -221,11 +267,13 @@ export default {
             this.brand = null;
             this.price = null;
             this.quantity = null;
-            this.chosenCategory = null;
-            this.chosenSubcategory = null;
+            this.chosenCategory = 'Select';
+            this.chosenSubcategory = 'Select';
             this.categoryParentID = -1;
             this.categoryList = this.getCategories(this.categoryParentID);
             this.subcategoryList = null;
+            this.categoryButton = false;
+            this.subcategoryButton = false;
             this.image = null;
             this.specifications = null;
             this.description = null;
@@ -238,8 +286,8 @@ export default {
         (this.brand != null && this.brand !== '') &&
         (this.price != null && this.price !== '') &&
         (this.quantity != null && this.quantity !== '') &&
-        (this.chosenCategory != null) &&
-        (this.chosenSubcategory != null || this.subcategoryList == null || this.subcategoryList.length == 0) &&
+        (this.chosenCategory !== 'Select') &&
+        (this.chosenSubcategory !== 'Select' || this.subcategoryList == null || this.subcategoryList.length === 0) &&
         (this.image != null && this.image !== '') &&
         (this.description != null && this.description !== '');
     },
@@ -264,12 +312,12 @@ export default {
       } else {
         this.quantityInvalid = false;
       }
-      if (this.chosenCategory == null) {
+      if (this.chosenCategory === 'Select') {
         this.categoryInvalid = true;
       } else {
         this.categoryInvalid = false;
       }
-      if (this.chosenSubcategory == null && this.subcategoryList != null && this.subcategoryList.length > 0) {
+      if (this.chosenSubcategory === 'Select' && this.subcategoryList != null && this.subcategoryList.length > 0) {
         this.subcategoryInvalid = true;
       } else {
         this.subcategoryInvalid = false;
@@ -306,15 +354,14 @@ export default {
     padding: 0 20%;
   }
 
-  .buttons {
+  #buttons {
     display: flex;
     justify-content: center;
     padding: 10px 0;
   }
 
   #dropdown {
-    display: inline-block;
-    margin-right: 20px;
+    margin-bottom: 10px;
   }
 
 </style>

@@ -5,7 +5,8 @@ module.exports = {
     return queryInterface.bulkInsert('Addresses', [{
       userAccountId: 1,
       street1: '1 Foothill Blvd.',
-      street2: 'San Luis Obispo',
+      street2: 'Apt #2',
+      city: 'San Luis Obispo',
       state: 'CA',
       zip: 93405,
       createdAt: '2016-08-09 04:05:02',
