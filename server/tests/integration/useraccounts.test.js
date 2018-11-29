@@ -16,7 +16,7 @@ describe('/useraccounts', () => {
   });
 
   describe('POST /', () => {
-    it('should create one todo item', () => {
+    it('should create one useraccount', () => {
       return request(app)
         .post(rootPath)
         .send({
@@ -24,7 +24,7 @@ describe('/useraccounts', () => {
         })
         .expect(200)
     });
-    it('should create one todo item then fail because it has same email', () => {
+    it('should create one useraccount then fail because it has same email', () => {
       return request(app)
         .post(rootPath)
         .send({
@@ -41,13 +41,5 @@ describe('/useraccounts', () => {
         });
     });
 
-    // it('should throw error', () => {
-    //   return request(app)
-    //     .post(rootPath)
-    //     .send({
-    //       email: 'test',
-    //     })
-    //     .expect(404);
-    // });
   });
 });
