@@ -84,23 +84,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   methods: {
     logout() {
-      /* axios api call here
-        axios.post('/api/logout', {
-          email: this.$store.state.email,
-        }).then((successRes) => {
-          this.$store.commit('changeAccount', {
-            isLoggedIn: false,
-            firstName: null,
-            lastName: null,
-            email: null,
-            accountType: 'customer' });
-        }, (failRes) => {
-          console.log('fail to logout');
+      axios.post('/api/login/logout', {
+        email: this.$store.state.email,
+      }).then((successRes) => {
+        this.$store.commit('changeAccount', {
+          isLoggedIn: false,
+          firstName: null,
+          lastName: null,
+          email: null,
+          accountType: 'customer',
         });
-      */
+      }, (failRes) => {
+        console.log('fail to logout');
+      });
     },
   },
   computed: {

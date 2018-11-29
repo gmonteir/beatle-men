@@ -96,7 +96,7 @@ export default {
           password: this.password,
         }).then((successRes) => {
           this.isLoginSuccess = true;
-          this.$store.commit('changeAccount', { ...successRes.data, isLoggedIn: true });
+          this.$store.commit('changeAccount', { isLoggedIn: true, ...successRes.data });
           document.body.style.cursor = 'default';
         }, (failRes) => {
           this.isLoginFail = true;
