@@ -25,8 +25,11 @@
           </div>
         </div>
         <div class="level-item">
-          <button class="button is-primary is-medium">Checkout</button>
+          <router-link to="/checkout">
+            <button class="button is-primary is-medium">Checkout</button>
+          </router-link>
         </div>
+
       </div>
     </div>
   </section>
