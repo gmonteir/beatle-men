@@ -9,7 +9,20 @@
       <div class="column is-one-quarter">
         <aside class="menu">
           <h1 class="title is-3">Filter By:</h1>
-          <div v-show="getShopTitle() === 'Store'">
+          <div v-for="category in categories" v-bind:key="category.id">
+            <div v-for="subcategory in category" v-bind:key="subcategory.id">
+              <div v-if="subcategory.parentID === -1">
+                <p class="title is-4" id="category"><a>{{subcategory.label}}</a></p>
+              </div>
+              <div v-else>
+                <ul class="menu-list">
+                  <li class="subtitle is-5"><a>{{subcategory.label}}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div v-show="getShopTitle() === 'Store'">
             <p class="menu-label">Bikes</p>
             <ul class="menu-list">
               <li><router-link to="/shop/bikes/road">Road</router-link></li>
@@ -47,7 +60,8 @@
             <ul class="menu-list">
               <li><router-link to="/shop/parts">Parts</router-link></li>
             </ul>
-          </div>
+          </div> -->
+
         </aside>
       </div>
       <div class="column">
@@ -87,9 +101,28 @@ export default {
   data() {
     return {
       items: null,
+      categories: null,
     };
   },
   mounted() {
+    axios.get('/api/categories')
+      .then((response) => {
+        const list = [];
+        let k = 0;
+        for (let i = 0; i < response.data.categories.length; i += 1) {
+          if (response.data.categories[i].parentID === -1) {
+            list.push([]);
+            list[k].push(response.data.categories[i]);
+            for (let j = 0; j < response.data.categories.length; j += 1) {
+              if (response.data.categories[j].parentID === response.data.categories[i].id) {
+                list[k].push(response.data.categories[j]);
+              }
+            }
+            k += 1;
+          }
+        }
+        this.categories = list;
+      });
     axios.get('/api/items')
       .then((response) => {
         this.items = response.data.items;
@@ -145,6 +178,10 @@ export default {
     display: inline-block;
     padding-right: 20px;
     padding-top: 50px;
+  }
+
+  #category {
+    margin-top: 30px;
   }
 
 </style>

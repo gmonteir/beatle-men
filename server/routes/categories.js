@@ -16,9 +16,10 @@ router
   })
 
   .post((req, res) => {
-    const { label } = req.body;
+    const { label, parentID } = req.body;
     const newCategory = Category.build({
       label,
+      parentID,
     });
     newCategory.save().then(() => {
       res.json(newCategory);
@@ -51,9 +52,10 @@ router
 
   // update a given category
   .put((req, res) => {
-    const { label } = req.body;
+    const { label, parentID } = req.body;
     const categoryToUpdate = req.categories;
     categoryToUpdate.label = label;
+    categoryToUpdate.parentID = parentID;
     categoryToUpdate.save().then((updatedCategory) => {
       res.json(updatedCategory);
     });
