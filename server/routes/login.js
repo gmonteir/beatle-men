@@ -1,22 +1,31 @@
 const express = require('express');
 const Auth = require('./authenticator');
+const { UserAccount } = require('../models');
 
 const router = express.Router();
 router.route('/').post((req, res) => {
   const { email, password } = req.body;
   Auth.login(email, password).then(
     session => {
-      if (session) {
-        session.getUserAccount().then(user => {
-          res.json({ user_id: user.id });
+      UserAccount.findOne({ where: { email } }).then(user => {
+        res.json({ 
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          accountType: user.accountType
         });
-      } else {
-        res.json({ error: 'you are not logged in' });
-      }
+      });
     },
     error => {
       res.status(400).json({ error: error.message });
     }
+  );
+});
+
+router.route('/logout').post((req, res) => {
+  const { email } = req.body;
+  Auth.logout(email).then(
+    res.json({ email: email })
   );
 });
 
