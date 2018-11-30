@@ -1,30 +1,8 @@
 const express = require('express');
-const multer = require('multer');
+const authenticated = require('./authenticated');
 
 const { Item } = require('../models');
 const { Category } = require('../models');
-
-const stor = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'images/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const filter = (req, file, cb) => {
-  if (file.mimetype === 'image/*') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: stor,
-  fileFilter: filter,
-});
 
 const router = express.Router();
 
@@ -75,7 +53,6 @@ router
     });
   });
 
-
 router
   .route('/:id')
   // get a specific item
@@ -113,7 +90,5 @@ router
       });
     });
   });
-  
-
 
 module.exports = router;
