@@ -6,7 +6,7 @@ const router = express.Router();
 router.route('/').post((req, res) => {
   const { email, password } = req.body;
   Auth.login(email, password).then(
-    session => {
+    (session) => {
       UserAccount.findOne({ where: { email } }).then(user => {
         res.json({ 
           firstName: user.firstName,
@@ -16,7 +16,7 @@ router.route('/').post((req, res) => {
         });
       });
     },
-    error => {
+    (error) => {
       res.status(400).json({ error: error.message });
     }
   );
