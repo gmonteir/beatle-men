@@ -8,6 +8,7 @@
     </div>
     <div class="title is-4">
       <a
+        id="item-name"
         v-on:click="showItemModel">
         {{item.name}}
       </a>

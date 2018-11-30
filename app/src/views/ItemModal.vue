@@ -22,7 +22,7 @@
           <h1 class="title is-8" id="heading">Specifications</h1>
           <h2 class="subtitle">{{item.specifications}}</h2>
           <h1 class="title is-8" id="heading">Price: ${{item.price}}</h1>
-          <a class="button is-primary is-rounded right" v-on:click="addToCart">Add To Cart</a>
+          <a class="button is-primary is-rounded right" id="add-btn" v-on:click="addToCart">Add To Cart</a>
           <p class="help is-success"
             v-if="isAddedToCart">
             Added to Cart Successfully!
