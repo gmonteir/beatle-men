@@ -1,30 +1,8 @@
 const express = require('express');
-const multer = require('multer');
+const authenticated = require('./authenticated');
 
 const { Item } = require('../models');
 const { Category } = require('../models');
-
-const stor = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'images/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const filter = (req, file, cb) => {
-  if (file.mimetype === 'image/*') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: stor,
-  fileFilter: filter,
-});
 
 const router = express.Router();
 
@@ -72,6 +50,35 @@ router
         });
       }
       res.json(newItem);
+    });
+  });
+
+router
+  .route('/:id')
+  .all((req, res, next) => {
+    Item.findOne({
+      where: {
+        id: req.params.id,
+      },
+    }).then((items) => {
+      if (items) {
+        req.items = items;
+        next();
+      } else {
+        res.status(404);
+      }
+    });
+  })
+
+  // get a specific item
+  .get((req, res) => {
+    res.json(req.items);
+  })
+
+  .delete((req, res) => {
+    const { item } = req;
+    item.destroy().then(() => {
+      res.json({ delete: true });
     });
   });
 

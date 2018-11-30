@@ -3,12 +3,12 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Items', [{
-      name: 'electric bike',
-      price: 39.99,
-      quantity: 5,
-      description: 'big bike',
+      name: 'Bronson',
+      price: 3999.99,
+      quantity: 1,
+      description: 'Description',
       specifications: '24 inch wheels',
-      image: 'images\\bullseye-monster-grn-3.jpg',
+      image: 'images\\home-slideshow-3.jpg',
       createdAt: '2016-08-09 04:05:02',
       updatedAt: '2016-08-09 04:05:02',
     }], {});
