@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'credit-card-item',
   props: {
@@ -24,17 +26,15 @@ export default {
   },
   methods: {
     removeCreditCard() {
-      /* axios api call here
-        axios.post('/api/removecreditcard', {
-          email: this.$store.state.email,
-          password: this.password,
-          addressId: this.card.id
-        }).then((successRes) => {
-          this.$store.commit('removeCreditCard', { id: this.card.id });
-        }, (failRes) => {
-          console.log('fail to delete credit card');
-        });
-      */
+      axios.post('/api/useraccounts/removecard', {
+        email: this.$store.state.email,
+        password: this.password,
+        cardId: this.card.id
+      }).then((successRes) => {
+        this.$store.commit('removeCreditCard', { id: this.card.id });
+      }, (failRes) => {
+        console.log('fail to delete credit card');
+      });
     },
   },
 };

@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 /* true if invalid, false if valid */
 function validateEmail(email) {
   if (email === null) {
@@ -69,24 +71,21 @@ export default {
   methods: {
     submit() {
       this.isEmailInvalid = validateEmail(this.email);
-      this.isPasswordMissing = !this.password || this.password.length() < 1;
+      this.isPasswordMissing = !this.password || this.password.length < 1;
       this.isChangeSuccess = false;
       this.isChangeFail = false;
 
       if (!this.isEmailInvalid && !this.isPasswordMissing) {
-        // axios api call here
-        /* axios.post('/api/changeemail', {
+        axios.post('/api/useraccounts/changeemail', {
           currentEmail: this.$store.state.email,
           newEmail: this.email,
-          password: this.password,
+          currentPassword: this.password,
         }).then((successRes) => {
           this.isChangeSuccess = true;
-          successRes.data should contain 'email: theNewEmail@address'
-          this.$store.commit('changeEmail', {successRes.data})
+          this.$store.commit('changeEmail', successRes.data);
         }, (failRes) => {
           this.isChangeFail = true;
         });
-        */
       }
     },
   },
