@@ -26,6 +26,18 @@
       </div>
     </section>
     <section class="section">
+      <router-link to="/users" v-if="this.$store.state.accountType == 'admin'">
+        <button class="button is-outlined" id="edit-btn">
+          <span>Manage Users</span>
+        </button>
+      </router-link>
+      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin' || 'employee'">
+        <button class="button is-outlined" id="edit-btn">
+          <span>Add New Item</span>
+        </button>
+      </router-link>
+    </section>
+    <section class="section">
       <div id="account-info">
         <div id="left-heading">
           <h2 class="title is-4">Name:</h2>

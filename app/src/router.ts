@@ -92,5 +92,20 @@ export default new Router({
       name: 'item',
       component: () => import('@/views/Item.vue'),
     },
+    {
+      path: '/users',
+      name: 'users',
+      component: () => import('@/views/Users.vue'),
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: () => import('@/views/Confirmation.vue'),
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('@/views/Checkout.vue'),
+    },
   ],
 });

@@ -12,7 +12,6 @@
         <router-link class="navbar-item" to="/shop">Shop</router-link>
         <router-link class="navbar-item" to="/services">Services</router-link>
         <router-link class="navbar-item" to="/about">About</router-link>
-        <router-link class="navbar-item" to="/add-item">Add Item</router-link>
       </div>
       <div class="navbar-end">
         <div class="navbar-item">
@@ -56,23 +55,24 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   methods: {
     logout() {
-      /* axios api call here
-        axios.post('/api/logout', {
-          email: this.$store.state.email,
-        }).then((successRes) => {
-          this.$store.commit('changeAccount', {
-            isLoggedIn: false,
-            firstName: null,
-            lastName: null,
-            email: null,
-            accountType: 'customer' });
-        }, (failRes) => {
-          console.log('fail to logout');
+      axios.post('/api/login/logout', {
+        email: this.$store.state.email,
+      }).then((successRes) => {
+        this.$store.commit('changeAccount', {
+          isLoggedIn: false,
+          firstName: null,
+          lastName: null,
+          email: null,
+          accountType: 'customer',
         });
-      */
+      }, (failRes) => {
+        console.log('fail to logout');
+      });
     },
   },
   computed: {

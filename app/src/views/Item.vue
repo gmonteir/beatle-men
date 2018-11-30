@@ -74,15 +74,15 @@ export default {
   width: 600px;
   top: 10px;
   display: block;
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .outline {
-    border-right: 1px gainsboro solid;
-    margin-left: 40px;
-    padding-right: 10px;
-  }
+  border-right: 1px gainsboro solid;
+  margin-left: 40px;
+  padding-right: 10px;
+}
 
 .section {
   text-align: center;
@@ -90,9 +90,9 @@ export default {
 
 .text {
   width: 700px;
-   display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .right {

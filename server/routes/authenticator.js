@@ -15,12 +15,14 @@ const Auth = {
       }
       return Promise.reject(new Error('incorrect username or password'));
     }),
-  logout: user =>
-    user.getSession().then(session => {
-      if (session) {
-        return session.destroy().then(() => true);
-      }
-      return Promise.resolve(true);
+  logout: email =>
+    UserAccount.findOne({ where: { email } }).then(user => {
+      user.getSession().then(session => {
+        if (session) {
+          return session.destroy().then(() => true);
+        }
+        return Promise.resolve(true);
+      });
     }),
   isAuthenticated: user =>
     user.getSession().then(
