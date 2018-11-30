@@ -83,6 +83,18 @@
       <div id="address-info">
         <div id = "address-header">
           <span id="left-heading">
+            <h2 class="title is-4">Orders</h2>
+          </span>
+          <router-link to="/orders">
+            <button class="button is-outlined" id="edit-btn">View</button>
+          </router-link>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div id="address-info">
+        <div id = "address-header">
+          <span id="left-heading">
             <h2 class="title is-4">Addresses</h2>
             <button
               class="button is-outlined"
