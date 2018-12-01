@@ -2,7 +2,7 @@
   <div class="columns">
       <div class="column is-2">
         <figure class="image is-128x128">
-          <img v-bind:src="item.image">
+          <img v-bind:src="'api/' + item.image">
         </figure>
       </div>
       <div class="column is-4" id="product-column">

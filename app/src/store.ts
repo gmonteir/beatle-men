@@ -42,50 +42,9 @@ export default new Vuex.Store({
       }
     ],
     cart: {
-      items: [
-        {
-          id: 1,
-          name: 'Product Name 1',
-          image: 'https://bulma.io/images/placeholders/128x128.png',
-          description: 'Lorem ipsum dolor sit amet, consectetur',
-          price: 50.00,
-          total: 50.00,
-          userQuantity: 1,
-          quantity: 5,
-        },
-        {
-          id: 2,
-          name: 'Product Name 2',
-          image: 'https://bulma.io/images/placeholders/128x128.png',
-          description: 'Lorem ipsum dolor sit amet, consectetur',
-          price: 50.00,
-          total: 100.00,
-          userQuantity: 2,
-          quantity: 5,
-        },
-        {
-          id: 3,
-          name: 'Product Name 3',
-          image: 'https://bulma.io/images/placeholders/128x128.png',
-          description: 'Lorem ipsum dolor sit amet, consectetur',
-          price: 10.00,
-          total: 40.00,
-          userQuantity: 4,
-          quantity: 5,
-        },
-        {
-          id: 4,
-          name: 'Product Name 4',
-          image: 'https://bulma.io/images/placeholders/128x128.png',
-          description: 'Lorem ipsum dolor sit amet, consectetur',
-          price: 10.00,
-          total: 20.00,
-          userQuantity: 2,
-          quantity: 3,
-        },
-      ],
-      subtotal: 190.00,
-      totalQuantity: 7
+      items: [],
+      subtotal: 0,
+      totalQuantity: 0,
     },
     users: [
       {
@@ -174,6 +133,11 @@ export default new Vuex.Store({
       if (state.cart.items[index].userQuantity == 0) {
         state.cart.items.splice(index, 1);
       }
+    },
+    addToCart(state, payload) {
+      state.cart.items.push(payload);
+      state.cart.totalQuantity += 1;
+      state.cart.subtotal += payload.price;
     }
   },
   actions: {
