@@ -9,36 +9,7 @@
     <div class="navbar-menu">
       <div class="navbar-start">
         <router-link class="navbar-item" to="/home">Home</router-link>
-        <div class="navbar-item has-dropdown is-hoverable">
-          <router-link class="navbar-item navbar-link is-arrowless" to="/shop">Shop</router-link>
-          <div class="navbar-dropdown is-boxed">
-            <router-link
-              class="navbar-item is-size-6 has-text-weight-semibold"
-              to="/shop/bikes">Bikes
-            </router-link>
-            <ul class="menu-list">
-              <li>
-                <router-link class="navbar-item" to="/shop/bikes/road">Road</router-link>
-              </li>
-              <li>
-                <router-link class="navbar-item" to="/shop/bikes/mountain">Mountain</router-link>
-              </li>
-              <li>
-                <router-link class="navbar-item" to="/shop/bikes/electric">Electric</router-link>
-              </li>
-            </ul>
-            <hr class="navbar-divider">
-            <router-link
-              class="navbar-item is-size-6 has-text-weight-semibold"
-              to="/shop/parts">Parts
-            </router-link>
-            <hr class="navbar-divider">
-            <router-link
-              class="navbar-item is-size-6 has-text-weight-semibold"
-              to="/shop/accessories">Accessories
-            </router-link>
-          </div>
-        </div>
+        <router-link class="navbar-item" to="/shop">Shop</router-link>
         <router-link class="navbar-item" to="/services">Services</router-link>
         <router-link class="navbar-item" to="/about">About</router-link>
       </div>

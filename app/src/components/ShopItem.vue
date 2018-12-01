@@ -1,10 +1,17 @@
 <template>
   <div class="shop-item">
+    <item-modal v-if="showModal" v-on:close="showModal = false" v-bind:item="this.item"/>
     <div class="image">
-      <router-link to="/item"><img :src="'api/' + this.item.image"/></router-link>
+      <a v-on:click="showItemModel">
+        <img :src="'api/' + this.item.image"/>
+      </a>
     </div>
     <div class="title is-4">
-      <p><router-link to="/item">{{item.name}}</router-link></p>
+      <a
+        id="item-name"
+        v-on:click="showItemModel">
+        {{item.name}}
+      </a>
     </div>
     <div class="subtitle is-5">
       <p>${{item.price}}</p>
@@ -13,11 +20,26 @@
 </template>
 
 <script>
+import ItemModal from './../views/ItemModal.vue';
+
 export default {
+  components: {
+    ItemModal,
+  },
+  data() {
+    return {
+      showModal: false,
+    };
+  },
   props: {
     item: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    showItemModel() {
+      this.showModal = true;
     },
   },
 };

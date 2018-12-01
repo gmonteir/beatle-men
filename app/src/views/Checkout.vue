@@ -170,7 +170,15 @@
     </div>
     <div class="columns">
     <div class="column is-half right topMargin bigFont">
-      Final Total: $119.99
+      <div>
+        Subtotal: ${{this.$store.state.cart.subtotal}}
+      </div>
+      <div>
+        Shipping: ${{shippingCost}}
+      </div>
+      <div>
+        Total: ${{total}}
+      </div>
     </div>
     <div class="column is-half left topMargin bigFont">
       <router-link to="/confirmation">
@@ -181,6 +189,22 @@
   </body>
 </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      shippingCost: 5,
+    };
+  },
+  computed: {
+    total() {
+      return this.$store.state.cart.subtotal + this.shippingCost;
+    },
+  },
+};
+</script>
+
 
 <style lang="scss" scoped>
 @import "../../node_modules/bulma/bulma.sass";
