@@ -109,13 +109,17 @@ describe('Test for login functionality', () => {
     cy.get('button[id="submit-btn"]').click();
     cy.contains('Login Fail');
   });
-  it('Should login with email (troll@demo.com) and password (secure)', () => {
-    cy.visit('localhost:8080/login');
-    cy.url().should('include', '/login');
+  it('Should login with email (troll@demo.com) and password (secure) and visit Account page', () => {
+    cy.visit('localhost:8080/home');
+    cy.url().should('include', '/home');
+    cy.contains('Log In').click({ force: true });
     cy.get('input[type="email"]').type('troll@demo.com');
     cy.get('input[type="password"').type('secure');
     cy.get('button[id="submit-btn"]').click();
     cy.contains('Login Successful!');
+    cy.contains('Close').click();
+    cy.contains('Account').click({ force: true });
+    cy.contains('John Doe');
   });
 });
 
@@ -145,11 +149,14 @@ describe('Test for signup functionality', () => {
 });
 
 describe('Test for add to cart functionality', () => {
-  it('Should successfully add item to cart', () => {
+  it('Should successfully add "electric bike" item to cart', () => {
     cy.visit('localhost:8080/shop');
     cy.url().should('include', '/shop');
     cy.get('a[id="item-name"]').click();
     cy.get('a[id="add-btn"]').click();
     cy.contains('Added to Cart Successfully!');
+    cy.contains('Close').click();
+    cy.contains('Cart').click({ force: true });
+    cy.contains('electric bike');
   });
 });
