@@ -1,5 +1,4 @@
 const express = require('express');
-const app = require('../app');
 const { Order } = require('../models');
 const { Item } = require('../models');
 const { UserAccount } = require('../models');
