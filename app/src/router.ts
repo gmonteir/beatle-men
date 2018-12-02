@@ -112,5 +112,10 @@ export default new Router({
       name: 'add-announcement',
       component: () => import('@/views/AddAnnouncement.vue'),
     },
+    {
+      path: '/orders',
+      name: 'orders',
+      component: () => import('@/views/Orders.vue'),
+    },
   ],
 });

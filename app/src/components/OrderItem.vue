@@ -2,7 +2,7 @@
   <div class="columns">
       <div class="column is-2">
         <figure class="image is-128x128">
-          <img v-bind:src="'api/' + item.image">
+          <img v-bind:src="item.image">
         </figure>
       </div>
       <div class="column is-4" id="product-column">
@@ -15,25 +15,6 @@
       </div>
       <div class="column is-2" id="quantity-column">
         <h3 class="title is-5" id="user-quantity-container">{{item.userQuantity}}</h3>
-        <span>
-          <button class="button is-small" v-on:click="addQuantity">
-            <span class="icon">
-              <i class="fas fa-plus"></i>
-            </span>
-          </button>
-          <button class="button is-small" v-on:click="removeQuantity">
-            <span class="icon">
-              <i class="fas fa-minus"></i>
-            </span>
-          </button>
-        </span>
-        <button
-          class="button is-small is-danger"
-          id="remove-btn"
-          v-on:click="removeItem">
-          Remove
-        </button>
-        <p class="help is-danger" v-if="isAtMaxQuantity">At Quantity Limit</p>
       </div>
       <div class="column is-2" id="price-column">
         <h1 class="title is-5">${{item.total}}</h1>
@@ -53,21 +34,6 @@ export default {
     return {
       isAtMaxQuantity: false,
     };
-  },
-  methods: {
-    removeItem() {
-      this.$store.commit('removeItem', { itemId: this.item.id });
-    },
-    addQuantity() {
-      if (this.item.userQuantity < this.item.quantity) {
-        this.$store.commit('addItemQuantity', { itemId: this.item.id });
-      } else {
-        this.isAtMaxQuantity = true;
-      }
-    },
-    removeQuantity() {
-      this.$store.commit('removeItemQuantity', { itemId: this.item.id });
-    },
   },
 };
 </script>

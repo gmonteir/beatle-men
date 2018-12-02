@@ -11,6 +11,7 @@
         <input class="input"
           type="text"
           placeholder="Jane"
+          id="first-name-input"
           v-model="firstName"
           v-bind:class="{'is-danger': isFirstNameInvalid, 'is-success': isSignupSuccess}"
         />
@@ -19,6 +20,7 @@
         <input class="input"
           type="text"
           placeholder="Smith"
+          id="last-name-input"
           v-model="lastName"
           v-bind:class="{'is-danger': isLastNameInvalid, 'is-success': isSignupSuccess}"
         />
@@ -31,6 +33,7 @@
         <input class="input"
           type="text"
           placeholder="name@domain"
+          id="email-input"
           v-model="email"
           v-bind:class="{'is-danger': isEmailInvalid, 'is-success': isSignupSuccess}"
         />
@@ -46,6 +49,7 @@
         <input class="input"
           type="password"
           placeholder="******"
+          id="password-input"
           v-model="password"
           v-bind:class="{'is-danger': isPasswordInvalid, 'is-success': isSignupSuccess}"
         />
@@ -65,7 +69,7 @@
         </div>
         <div class="buttons is-right">
           <button class="button" v-on:click="close">Close</button>
-          <button class="button is-link" v-on:click="submit">Submit</button>
+          <button class="button is-link" id="submit-btn" v-on:click="submit">Submit</button>
         </div>
       </div>
     </div>
