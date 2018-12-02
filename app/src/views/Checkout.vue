@@ -10,26 +10,14 @@
     <div class="columns">
       <div class="column is-one-third centered">
         <h1 class="topMargin bigFont">Credit Card Information:</h1>
-        <div class="dropdown is-hoverable topMargin">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Choose Credit Card</span>
-              <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="#" class="dropdown-item">
-                Dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-              <a href="#" class="dropdown-item">
-                Other dropdown item
-              </a>
+        <div class="field is-hoverable topMargin centered">
+          <div class="control centered">
+            <div class="select is-primary">
+              <select>
+                <option disabled>Choose Credit Card</option>
+                <option>John Mayor 4598</option>
+                <option>Kobe Bryant 1234</option>
+              </select>
             </div>
           </div>
         </div>
@@ -63,26 +51,14 @@
       </div>
       <div class="column is-one-third centered">
         <h1 class="topMargin bigFont">Shipping Address Information:</h1>
-        <div class="dropdown is-hoverable topMargin">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Choose Shipping Address</span>
-              <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="#" class="dropdown-item">
-                Dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-              <a href="#" class="dropdown-item">
-                Other dropdown item
-              </a>
+        <div class="field is-hoverable topMargin centered">
+          <div class="control centered">
+            <div class="select is-primary">
+              <select>
+                <option disabled>Choose Credit Card</option>
+                <option>John Mayor 4598</option>
+                <option>Kobe Bryant 1234</option>
+              </select>
             </div>
           </div>
         </div>
@@ -116,26 +92,14 @@
       </div>
       <div class="column is-one-third centered">
         <h1 class="topMargin bigFont">Billing Address Information:</h1>
-        <div class="dropdown is-hoverable topMargin">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Choose Billing Address</span>
-              <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a href="#" class="dropdown-item">
-                Dropdown item
-              </a>
-              <a class="dropdown-item">
-                Other dropdown item
-              </a>
-              <a href="#" class="dropdown-item">
-                Other dropdown item
-              </a>
+        <div class="field is-hoverable topMargin centered">
+          <div class="control centered">
+            <div class="select is-primary">
+              <select>
+                <option disabled>Choose Credit Card</option>
+                <option>John Mayor 4598</option>
+                <option>Kobe Bryant 1234</option>
+              </select>
             </div>
           </div>
         </div>
@@ -229,7 +193,7 @@ export default {
 }
 
 .topMargin {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .bigFont {
