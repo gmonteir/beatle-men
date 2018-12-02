@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Item.belongsToMany(models.Order, { through: models.OrderItem });
     Item.belongsToMany(models.Category, { through: models.ProductCategory });
+    Item.hasMany(models.Review);
   };
   return Item;
 };
