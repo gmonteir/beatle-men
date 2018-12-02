@@ -44,9 +44,9 @@
           <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
         </div>
         <ul class="item-grid" v-if="items.length">
-          <li v-for="item in filteredItems" :key="item ? item.id : ''"><ShopItem class="item"
-            v-bind:item="item"
-          /></li>
+          <li v-for="item in filteredItems" :key="item ? item.id : ''" style="display:inline">
+            <ShopItem class="item" v-bind:item="item"/>
+          </li>
         </ul>
       </div>
     </div>
@@ -122,8 +122,8 @@ export default {
       const items = [];
       for (let i = 0; i < itemIds.length; i += 1) {
         for (let j = 0; j < this.items.length; j += 1) {
-          if (this.items[i].id === itemIds[j]) {
-            items.push(this.items[i]);
+          if (itemIds[i] === this.items[j].id) {
+            items.push(this.items[j]);
           }
         }
       }

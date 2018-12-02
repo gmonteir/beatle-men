@@ -108,6 +108,11 @@ export default new Router({
       component: () => import('@/views/Checkout.vue'),
     },
     {
+      path: '/add-announcement',
+      name: 'add-announcement',
+      component: () => import('@/views/AddAnnouncement.vue'),
+    },
+    {
       path: '/orders',
       name: 'orders',
       component: () => import('@/views/Orders.vue'),
