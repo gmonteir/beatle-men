@@ -31,9 +31,16 @@
           <span>Manage Users</span>
         </button>
       </router-link>
-      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin' || 'employee'">
+      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
         <button class="button is-outlined" id="edit-btn">
           <span>Add New Item</span>
+        </button>
+      </router-link>
+      <router-link to="/add-announcement" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
+        <button class="button is-outlined" id="edit-btn">
+          <span>Add New Announcement</span>
         </button>
       </router-link>
     </section>
