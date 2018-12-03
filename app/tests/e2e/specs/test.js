@@ -149,7 +149,7 @@ describe('Test for signup functionality', () => {
 });
 
 describe('Test for add to cart functionality', () => {
-  it('Should successfully add "electric bike" item to cart', () => {
+  it('Should successfully add "Bronson" item to cart', () => {
     cy.visit('localhost:8080/shop');
     cy.url().should('include', '/shop');
     cy.get('a[id="item-name"]').click();
@@ -157,6 +157,6 @@ describe('Test for add to cart functionality', () => {
     cy.contains('Added to Cart Successfully!');
     cy.contains('Close').click();
     cy.contains('Cart').click({ force: true });
-    cy.contains('electric bike');
+    cy.contains('Bronson');
   });
 });
