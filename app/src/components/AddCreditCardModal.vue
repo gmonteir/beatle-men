@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 /* true if invalid, false if valid */
 function validateName(name) {
   if (name === null) {
@@ -134,8 +136,7 @@ export default {
         || !this.month || !this.year || !this.cvv|| !this.password) {
         this.isFormMissing = true;
       } else {
-        // axios api call here
-        /* axios.post('/api/addcreditcard', {
+        axios.post('/api/useraccounts/addcard', {
           email: this.$store.state.email,
           password: this.password,
           firstName: this.firstName,
@@ -146,11 +147,10 @@ export default {
           year: this.year,
         }).then((successRes) => {
           this.isChangeSuccess = true;
-          this.$store.commit('addCreditCard', successRes.data.creditcard)
+          this.$store.commit('addCreditCard', successRes.data)
         }, (failRes) => {
           this.isChangeFail = true;
         });
-        */
       }
     },
   },

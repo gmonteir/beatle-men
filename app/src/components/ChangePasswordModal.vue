@@ -47,6 +47,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 /* true if invalid, false if valid */
 function validatePassword(password) {
   if (password === null) {
@@ -69,12 +71,11 @@ export default {
   methods: {
     submit() {
       this.isNewPasswordInvalid = validatePassword(this.newPassword);
-      this.isCurrentPasswordMissing = !this.currentPassword || this.currentPassword.length() < 1;
+      this.isCurrentPasswordMissing = !this.currentPassword || this.currentPassword.length < 1;
 
       if (!this.isNewPasswordInvalid && !this.isCurrentPasswordMissing) {
-        // axios api call here
-        /* axios.post('/api/changepassword', {
-          email: this.$store.state.email,
+        axios.post('/api/useraccounts/changepassword', {
+          currentEmail: this.$store.state.email,
           newPassword: this.newPassword,
           currentPassword: this.currentPassword,
         }).then((successRes) => {
@@ -82,7 +83,6 @@ export default {
         }, (failRes) => {
           this.isChangeFail = true;
         });
-        */
       }
     },
   },

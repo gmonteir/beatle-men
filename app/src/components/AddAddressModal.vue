@@ -92,6 +92,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'changeNameModal',
@@ -114,8 +115,7 @@ export default {
       !this.password) {
         this.isFormMissing = true;
       } else {
-        // axios api call here
-        /* axios.post('/api/addaddress', {
+        axios.post('/api/useraccounts/addaddress', {
           email: this.$store.state.email,
           password: this.password,
           street1: this.street1,
@@ -125,11 +125,10 @@ export default {
           zip: this.zip,
         }).then((successRes) => {
           this.isChangeSuccess = true;
-          this.$store.commit('addAddress', successRes.data.email)
+          this.$store.commit('addAddress', successRes.data)
         }, (failRes) => {
           this.isChangeFail = true;
         });
-        */
       }
     },
   },

@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 function validateName(name) {
   if (name === null) {
     return true;
@@ -79,23 +81,20 @@ export default {
     submit() {
       this.isFirstNameInvalid = validateName(this.firstName);
       this.isLastNameInvalid = validateName(this.lastName);
-      this.isPasswordMissing = !this.password || this.password.length() < 1;
+      this.isPasswordMissing = !this.password || this.password.length < 1;
 
       if (!this.isFirstNameInvalid && !this.isLastNameInvalid && !this.isPasswordMissing) {
-        // axios api call here
-        /* axios.post('/api/changename', {
+        axios.post('/api/useraccounts/changename', {
           currentEmail: this.$store.state.email,
           newFirstName: this.firstName,
-          newLastName: this.lastname,
-          password: this.password,
+          newLastName: this.lastName,
+          currentPassword: this.password,
         }).then((successRes) => {
           this.isChangeSuccess = true;
-          successRes.data should contain 'firstName and lastName'
-          this.$store.commit('changeName', {successRes.data})
+          this.$store.commit('changeName', successRes.data);
         }, (failRes) => {
           this.isChangeFail = true;
         });
-        */
       }
     },
   },
