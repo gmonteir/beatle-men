@@ -33,7 +33,7 @@ router.route('/changeemail').post((req, res) => {
         res.json({ email: newEmail });
       })
     } else {
-      res.status(400);
+      res.status(400).json({ error: 'error' });
     }
   })
 });
@@ -48,7 +48,7 @@ router.route('/changename').post((req, res) => {
         res.json({ firstName: newFirstName, lastName: newLastName });
       })
     } else {
-      res.status(400);
+      res.status(400).json({ error: 'error' });
     }
   })
 });
@@ -62,7 +62,7 @@ router.route('/changepassword').post((req, res) => {
         res.json({ password: newPassword });
       })
     } else {
-      res.status(400);
+      res.status(400).json({ error: 'error' });
     }
   })
 });
@@ -97,7 +97,7 @@ router.route('/removeaddress').post((req, res) => {
       if (address) {
         address.destroy().then(() => true);
       } else {
-        res.status(400);
+        res.status(400).json({ error: 'error' });
       }
     })
   })
@@ -109,7 +109,7 @@ router.route('/addcard').post((req, res) => {
     const fullName = firstName + lastName;
     PaymentInfo.findOne({where: { UserAccountId: user.id, name: fullName, number: number, expMonth: month, expYear: year, cvv: cvv } }).then(card => {
       if (card) {
-        res.status(400);
+        res.status(400).json({ error: 'error' });
       } else {
         const newCard = PaymentInfo.build({
           UserAccountId: user.id,
@@ -134,7 +134,7 @@ router.route('/removecard').post((req, res) => {
       if (card) {
         card.destroy().then(() => true);
       } else {
-        res.status(400);
+        res.status(400).json({ error: 'error' });
       }
     })
   })
