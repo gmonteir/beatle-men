@@ -31,9 +31,16 @@
           <span>Manage Users</span>
         </button>
       </router-link>
-      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin' || 'employee'">
+      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
         <button class="button is-outlined" id="edit-btn">
           <span>Add New Item</span>
+        </button>
+      </router-link>
+      <router-link to="/add-announcement" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
+        <button class="button is-outlined" id="edit-btn">
+          <span>Add New Announcement</span>
         </button>
       </router-link>
     </section>
@@ -77,6 +84,18 @@
           v-on:click="openChangePasswordModal">
           Change Password
         </button>
+      </div>
+    </section>
+    <section class="section">
+      <div id="address-info">
+        <div id = "address-header">
+          <span id="left-heading">
+            <h2 class="title is-4">Orders</h2>
+          </span>
+          <router-link to="/orders">
+            <button class="button is-outlined" id="edit-btn">View</button>
+          </router-link>
+        </div>
       </div>
     </section>
     <section class="section">

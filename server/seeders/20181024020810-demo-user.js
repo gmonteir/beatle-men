@@ -9,7 +9,7 @@ module.exports = {
         lastName: 'Doe',
         email: 'troll@demo.com',
         password: 'secure',
-        accountType: 'User',
+        accountType: 'admin',
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02'
       }], {});

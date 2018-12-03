@@ -5,49 +5,38 @@ const { UserAccount } = require('../../models');
 
 const rootPath = '/useraccounts';
 
-describe('/useraccounts', () => {
+describe('/useraccounts', async () => {
 
-  beforeEach(() => {
-    return truncate();
+  beforeEach((done) => {
+    truncate().then(() => done());
   });
 
   afterAll(() => {
-    return UserAccount.sequelize.close();
+    //return UserAccount.sequelize.close();
   });
 
   describe('POST /', () => {
-    it('should create one todo item', () => {
-      return request(app)
-        .post(rootPath)
-        .send({
+    it('should create one useraccount', (done) => {
+      request(app).post(rootPath).send({
           email: 'test',
         })
-        .expect(200)
+        .expect(200);
+        done();
     });
-    it('should create one todo item then fail because it has same email', () => {
-      return request(app)
-        .post(rootPath)
+    it('should create one useraccount then fail because it has same email', () => {
+      request(app).post(rootPath)
         .send({
           email: 'test',
         })
-        .expect(200)
-        .then(() => {
-            return request(app)
-              .post(rootPath)
+        .expect(200).then(() => {
+            request(app).post(rootPath)
               .send({
                 email: 'test'
               })
-              .expect(401)
+              .expect(401);
+              done();
         });
     });
 
-    // it('should throw error', () => {
-    //   return request(app)
-    //     .post(rootPath)
-    //     .send({
-    //       email: 'test',
-    //     })
-    //     .expect(404);
-    // });
   });
 });

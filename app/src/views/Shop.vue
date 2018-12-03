@@ -8,81 +8,45 @@
     <div class="columns">
       <div class="column is-one-quarter">
         <aside class="menu">
-          <h1 class="title is-3">Filter By:</h1>
+          <div id="filtered">
+            <h1 class="title is-3">Filter By:</h1>
+            <ul>
+              <li v-for="category in chosenCategories" v-bind:key="category.id">
+                <div class="block">
+                  <span class="tag subtitle is-6">
+                    {{category.label}}
+                    <button class="delete is-small" v-on:click="removeChosenCategory(category)"/>
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </div>
           <div v-for="category in categories" v-bind:key="category.id">
             <div v-for="subcategory in category" v-bind:key="subcategory.id">
               <div v-if="subcategory.parentID === -1">
-                <p class="title is-4" id="category"><a>{{subcategory.label}}</a></p>
+                <p class="title is-4" id="category" v-on:click="filterCategory(subcategory)"><a>{{subcategory.label}}</a></p>
               </div>
               <div v-else>
                 <ul class="menu-list">
-                  <li class="subtitle is-5"><a>{{subcategory.label}}</a></li>
+                  <li class="subtitle is-5" v-on:click="filterCategory(subcategory)"><a>{{subcategory.label}}</a></li>
                 </ul>
               </div>
             </div>
           </div>
-
-          <!-- <div v-show="getShopTitle() === 'Store'">
-            <p class="menu-label">Bikes</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/bikes/road">Road</router-link></li>
-              <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
-              <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
-            </ul>
-            <p class="menu-label">Parts & Accessories</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/parts">Parts</router-link></li>
-              <li><router-link to="/shop/accessories">Accessories</router-link></li>
-            </ul>
-          </div>
-          <div v-show="getShopTitle() === 'Bikes'">
-            <p class="menu-label">Bikes</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/bikes/road">Road</router-link></li>
-              <li><router-link to="/shop/bikes/mountain">Mountain</router-link></li>
-              <li><router-link to="/shop/bikes/electric">Electric</router-link></li>
-            </ul>
-          </div>
-          <div v-show="getShopTitle() !== 'Store'">
-            <p class="menu-label">Brands</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/parts">Parts</router-link></li>
-            </ul>
-            <p class="menu-label">Price</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/parts">Parts</router-link></li>
-            </ul>
-            <p class="menu-label">Size</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/parts">Parts</router-link></li>
-            </ul>
-            <p class="menu-label">Gender</p>
-            <ul class="menu-list">
-              <li><router-link to="/shop/parts">Parts</router-link></li>
-            </ul>
-          </div> -->
-
         </aside>
       </div>
       <div class="column">
         <div>
           <ul>
-            <li class="subtitle is-4 is-active bread-crumb"><router-link to="/shop">Shop</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('bikes')">> <router-link to="/shop/bikes">Bikes</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('road')">> <router-link to="/shop/bikes/road">Road</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('mountain')">> <router-link to="/shop/bikes/mountain">Mountain</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('electric')">> <router-link to="/shop/bikes/electric">Electric</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('parts')">> <router-link to="/shop/bikes/parts">Parts</router-link></li>
-            <li class="subtitle is-4 bread-crumb" v-show="isInPath('accessories')">> <router-link to="/shop/bikes/accessories">Accessories</router-link></li>
+            <li class="subtitle is-4 is-active bread-crumb">Shop</li>
+            <li class="subtitle is-4 is-active bread-crumb" v-for="category in chosenCategories" :key="category.id">> {{category.label}}</li>
           </ul>
           <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
         </div>
-        <ul class="item-grid">
-          <ShopItem class="item"
-            v-for="item in items"
-            v-bind:key="item.id"
-            v-bind:item="item"
-          />
+        <ul class="item-grid" v-if="items.length">
+          <li v-for="item in filteredItems" :key="item ? item.id : ''" style="display:inline">
+            <ShopItem class="item" v-bind:item="item"/>
+          </li>
         </ul>
       </div>
     </div>
@@ -100,8 +64,10 @@ export default {
   },
   data() {
     return {
-      items: null,
-      categories: null,
+      items: [],
+      filteredItems: [],
+      categories: [],
+      chosenCategories: [],
     };
   },
   mounted() {
@@ -126,6 +92,7 @@ export default {
     axios.get('/api/items')
       .then((response) => {
         this.items = response.data.items;
+        this.filteredItems = response.data.items;
       });
   },
   methods: {
@@ -137,6 +104,62 @@ export default {
     },
     getShopTitle() {
       return this.$route.name;
+    },
+    filterCategory(category) {
+      const itemsIdList = [];
+      this.setChosenCategories(category);
+      axios.get('/api/productcategories')
+        .then((res) => {
+          for (let i = 0; i < res.data.productCategories.length; i += 1) {
+            if (category.id === res.data.productCategories[i].categoryId) {
+              itemsIdList.push(res.data.productCategories[i].itemId);
+            }
+          }
+          this.doFilter(itemsIdList);
+        });
+    },
+    doFilter(itemIds) {
+      const items = [];
+      for (let i = 0; i < itemIds.length; i += 1) {
+        for (let j = 0; j < this.items.length; j += 1) {
+          if (itemIds[i] === this.items[j].id) {
+            items.push(this.items[j]);
+          }
+        }
+      }
+      this.filteredItems = items;
+    },
+    setChosenCategories(category) {
+      if (category.parentID === -1) {
+        if (this.chosenCategories) {
+          this.chosenCategories.splice(0, this.chosenCategories.length);
+        }
+        this.chosenCategories.push(category);
+      } else {
+        for (let i = 0; i < this.categories.length; i += 1) {
+          if (this.categories[i][0].id === category.parentID) {
+            if (this.chosenCategories) {
+              this.chosenCategories.splice(0, this.chosenCategories.length);
+            }
+            this.chosenCategories.push(this.categories[i][0]);
+            this.chosenCategories.push(category);
+          }
+        }
+      }
+    },
+    removeChosenCategory(category) {
+      for (let i = 0; i < this.chosenCategories.length; i += 1) {
+        if (this.chosenCategories[i].label === category.label) {
+          if (category.parentID === -1) {
+            this.chosenCategories.splice(i, 2);
+            this.filteredItems = this.items;
+          } else {
+            this.chosenCategories.splice(i, 1);
+            this.filterCategory(this.chosenCategories[0]);
+          }
+          break;
+        }
+      }
     },
   },
   watch: {
@@ -165,6 +188,7 @@ export default {
   .bread-crumb {
     display: inline-block;
     margin-left: 5px;
+    margin-bottom: 25px;
   }
 
   .shop-title {
@@ -182,6 +206,11 @@ export default {
 
   #category {
     margin-top: 30px;
+  }
+
+  #filtered {
+    padding-bottom: 10px;
+    border-bottom: 1px solid gainsboro;
   }
 
 </style>

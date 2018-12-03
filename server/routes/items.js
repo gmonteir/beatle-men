@@ -1,30 +1,8 @@
 const express = require('express');
-const multer = require('multer');
+const authenticated = require('./authenticated');
 
 const { Item } = require('../models');
 const { Category } = require('../models');
-
-const stor = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'images/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + file.originalname);
-  },
-});
-
-const filter = (req, file, cb) => {
-  if (file.mimetype === 'image/*') {
-    cb(null, true);
-  } else {
-    cb(null, false);
-  }
-};
-
-const upload = multer({
-  storage: stor,
-  fileFilter: filter,
-});
 
 const router = express.Router();
 
@@ -72,6 +50,44 @@ router
         });
       }
       res.json(newItem);
+    });
+  });
+
+router
+  .route('/:id')
+  // get a specific item
+  .get((req, res) => {
+    const givenId = req.params.id;
+    Item.findById(givenId).then((item) => {
+      res.json(item);
+    });
+  })
+
+  // update a given item
+  .put((req, res) => {
+    const { name, price, quantity, description, specifications } = req.body;
+    //const image = req.file.path;
+    Item.findById(req.params.id).then((item) => {
+      const itemToUpdate = item;
+      itemToUpdate.name = name;
+      itemToUpdate.price = price;
+      itemToUpdate.quantity = quantity;
+      itemToUpdate.description = description;
+      itemToUpdate.specifications = specifications;
+      //itemToUpdate.image = image;
+      itemToUpdate.save().then((updatedItem) => {
+        res.json(updatedItem);
+      });
+    });
+  })
+  
+  // delete a given item
+  .delete((req, res) => {
+    const idToDelete = req.params.id;
+    Item.findById(idToDelete).then((item) => {
+      item.destroy().then(() => {
+        res.json({ delete: true });
+      });
     });
   });
 

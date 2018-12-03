@@ -4,7 +4,11 @@
     <div class="home-columns">
       <store-hours class="store-hours"/>
       <table class="announcements">
-        <h1 class="title is-3">Announcements</h1>
+        <ul>
+          <li>
+            <announcements v-for="announcement in announcements" v-bind:key="announcement.id"/>
+          </li>
+        </ul>
       </table>
       <table class="sponsors">
         <h1 class="title is-3">Sponsors</h1>
@@ -25,12 +29,25 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+<script>
 import Slider from '@/components/Slider.vue';
+import Announcement from '@/components/Announcement.vue';
 
-@Component({ components: { Slider }})
-export default class Home extends Vue {
+export default {
+  name: 'home',
+  data() {
+    return {
+      announcements: [],
+    };
+  },
+  mounted() {
+    /*
+    axios.get('/api/announcements')
+      .then((res) => {
+        this.announcements = res.data.announcements;
+      });
+    */
+  },
 }
 </script>
 

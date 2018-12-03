@@ -39,8 +39,8 @@
           v-if="isLoginFail">Login Fail (Network Error)
         </div>
         <div class="buttons is-right">
-          <button class="button" v-on:click="close">Close</button>
-          <button class="button is-link" v-on:click="submit">Submit</button>
+          <button class="button" id="close-btn" v-on:click="close">Close</button>
+          <button class="button is-link" id="submit-btn" v-on:click="submit">Submit</button>
         </div>
       </div>
     </div>
