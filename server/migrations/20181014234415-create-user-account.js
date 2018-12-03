@@ -23,6 +23,9 @@ module.exports = {
       accountType: {
         type: Sequelize.STRING
       },
+      employeeImage: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
