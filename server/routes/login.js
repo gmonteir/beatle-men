@@ -9,11 +9,12 @@ router.route('/').post((req, res) => {
   Auth.login(email, password).then(
     () => {
       UserAccount.findOne({ where: { email } }).then(user => {
-        res.json({ 
+        res.json({
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          accountType: user.accountType
+          accountType: user.accountType,
+          userId: user.id,
         });
       });
     },
