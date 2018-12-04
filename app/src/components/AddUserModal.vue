@@ -188,7 +188,7 @@ export default {
         };
 
         document.body.style.cursor='wait';
-        axios.post('/api/useraccounts/createuser', form, config)
+        axios.post('/api/useraccounts', form, config)
           .then((successRes) => {
             this.isSignupSuccess = true;
             document.body.style.cursor = 'default';

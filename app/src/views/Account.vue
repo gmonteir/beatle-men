@@ -125,7 +125,7 @@
         </div>
         <address-item
           v-if="isAddressesShown"
-          v-for="address in this.$store.state.addresses"
+          v-for="address in addresses"
           v-bind:key="address.id"
           v-bind:address="address"
         />
@@ -152,7 +152,7 @@
         </div>
         <credit-card-item
           v-if="isCreditCardsShown"
-          v-for="card in this.$store.state.creditcards"
+          v-for="card in cards"
           v-bind:key="card.id"
           v-bind:card="card"
         />
@@ -162,6 +162,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ChangeNameModal from './../components/ChangeNameModal.vue';
 import ChangeEmailModal from './../components/ChangeEmailModal.vue';
 import ChangePasswordModal from './../components/ChangePasswordModal.vue';
@@ -225,7 +226,21 @@ export default {
     email() {
       return this.$store.state.email;
     },
+    addresses() {
+      return this.$store.state.addresses;
+    },
+    cards() {
+      return this.$store.state.cards;
+    },
   },
+  mounted() {
+    axios.get('/api/addresses').then(success => {
+      this.$store.commit('addAddresses', success.data.addresses);
+    });
+    axios.get('/api/paymentinfo').then(success => {
+      this.$store.commit('addCards', success.data.cards);
+    });
+  }
 };
 </script>
 

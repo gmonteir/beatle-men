@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-image">
         <figure class="image is-3by3">
-            <img src="./../assets/default-contact.png">
+            <img v-bind:src="'api/' + employee.image">
         </figure>
       </div>
       <div class="card-content">

@@ -25,7 +25,7 @@ router.route('/')
           email,
           password,
           accountType,
-          image: (req.file !== null) ? req.file.path : null,
+          image: (req.file != null) ? req.file.path : null,
         });
         
         newUserAccount.save().then(() => {
