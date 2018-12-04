@@ -1,5 +1,6 @@
 <template>
 <body>
+  <login-warning-modal v-if="showLoginWarning" v-on:close="showLoginWarning = false"/>
   <section class="hero is-info is-bold">
     <div class="hero-body">
       <h1 class="title is-1">Shopping Cart</h1>
@@ -25,9 +26,10 @@
           </div>
         </div>
         <div class="level-item">
-          <router-link to="/checkout">
+          <router-link to="/checkout" v-if="this.$store.state.isLoggedIn">
             <button class="button is-primary is-medium">Checkout</button>
           </router-link>
+          <button class="button is-primary is-medium" v-else v-on:click="showLoginWarning = true">Checkout</button>
         </div>
       </div>
     </div>
@@ -60,11 +62,18 @@
 
 <script>
 import CartItem from './../components/CartItem.vue';
+import LoginWarningModal from './../components/LoginWarningModal.vue';
 
 export default {
   name: 'cart',
   components: {
     CartItem,
+    LoginWarningModal,
+  },
+  data() {
+    return {
+      showLoginWarning: false,
+    };
   },
 };
 </script>
