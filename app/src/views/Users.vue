@@ -29,7 +29,7 @@
   </section>
   <section class="section">
     <user-item
-      v-for="user in this.$store.state.users"
+      v-for="user in users"
       v-bind:key="user.id"
       v-bind:user="user"
     />
@@ -45,12 +45,25 @@ export default {
   name: 'users',
   data() {
     return {
+      users: [],
       isAddUserModalOpen: false,
     };
   },
   components: {
     UserItem,
     AddUserModal,
+  },
+  mounted() {
+    /*
+    axios.get('/api/useraccounts')
+      .then((res) => {
+        for (let i = 0; i < res.data.users; i += 1) {
+          if (!res.data.users[i].accountType) {
+            this.users.push(res.data.users[i]);
+          }
+        }
+      });
+    */
   },
   methods: {
     openAddUserModal() {

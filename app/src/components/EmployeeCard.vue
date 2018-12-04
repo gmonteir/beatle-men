@@ -9,9 +9,8 @@
       <div class="card-content">
         <div class="content">
             <p class="title is-4">{{employee.name}}</p>
-            <p class="subtitle is-6">{{employee.role}}<br>{{employee.email}}</p>
+            <p class="subtitle is-6">{{employee.accountType}}<br>{{employee.email}}</p>
         </div>
-        <div class="content">{{employee.blurb}}</div>
       </div>
     </div>
   </div>

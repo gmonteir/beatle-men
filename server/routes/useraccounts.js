@@ -4,24 +4,31 @@ const { UserAccount, Address, PaymentInfo } = require('../models');
 const router = express.Router();
 
 router.route('/createuser').post((req, res) => {
-  const { firstName,lastName,email,password,accountType } = req.body;
-  UserAccount.findOne({where: { email } }).then(user => {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    accountType,
+  } = req.body;
+
+  UserAccount.findOne({ where: { email } }).then((user) => {
     if (user) {
-      res.status(401).json({error: 'email in use'});
-    }
-    else {
+      res.status(401).json({ error: 'email in use' });
+    } else {
       const newUserAccount = UserAccount.build({
         firstName,
         lastName,
         email,
         password,
-        accountType
+        accountType,
+        image: (req.file !== null) ? req.file.path : null,
       });
       newUserAccount.save().then(() => {
         res.json(newUserAccount);
       });
     }
-  })
+  });
 });
 
 router.route('/changeemail').post((req, res) => {

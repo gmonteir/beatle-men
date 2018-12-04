@@ -5,14 +5,9 @@
         <h1 class="title is-1">Inventory</h1>
       </div>
     </section>
-    <router-link to="/add-item">
-      <button class="button is-outlined" id="edit-btn">
-        <span>Add New Item</span>
-      </button>
-    </router-link>
     <section class="section">
       <div class="columns">
-        <div class="column is-3" id="column">
+        <div class="column is-2" id="column">
           <h1 class="title is-4">Product</h1>
         </div>
         <div class="column is-2" id="column-centered">
@@ -24,16 +19,21 @@
         <div class="column is-2" id="column-centered">
           <h1 class="title is-4">Price</h1>
         </div>
-        <div class="column is-1" id="column-centered">
+        <div class="column is-2" id="column-centered">
           <h1 class="title is-4">Quantity</h1>
         </div>
         <div class="column is-2" id="column-centered">
+          <router-link to="/add-item">
+            <button class="button is-outlined" id="edit-btn">
+              <span>Add New Item</span>
+            </button>
+          </router-link>
         </div>
       </div>
       <ul>
         <li v-for="item in items" v-bind:key="item.id">
           <div class="columns itemColumns">
-            <div class="column is-3">
+            <div class="column is-2">
               <p v-if="item.name.length < 30">{{item.name}}</p>
               <p v-else>{{getShorterString(item.name)}}</p>
             </div>
@@ -48,7 +48,7 @@
             <div class="column is-2" id="center">
               <p>{{item.price}}</p>
             </div>
-            <div class="column is-1" id="center">
+            <div class="column is-2" id="center">
               <p>{{item.quantity}}</p>
             </div>
             <div class="column is-1" id="center">
@@ -107,7 +107,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+
 @import "../../node_modules/bulma/bulma.sass";
 
 .hero {

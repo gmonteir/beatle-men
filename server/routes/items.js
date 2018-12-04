@@ -1,5 +1,4 @@
 const express = require('express');
-const authenticated = require('./authenticated');
 
 const { Item } = require('../models');
 const { Category } = require('../models');
