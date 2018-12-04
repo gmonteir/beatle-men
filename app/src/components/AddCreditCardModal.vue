@@ -78,11 +78,11 @@
         <div class="control">
           <div class="content has-text-success is-pulled-left"
             v-if="addCreditCardSuccess">
-            Change Successful!
+            Add Credit Card Successful!
           </div>
           <div class="content has-text-danger is-pulled-left"
-            v-if="addAddressFail">
-            Change Fail
+            v-if="addCreditCardFail">
+            Add Credit Card Fail
           </div>
           <div class="content has-text-danger is-pulled-left"
             v-if="isFormMissing">
@@ -132,7 +132,7 @@ export default {
     submit() {
       this.isFirstNameInvalid = validateName(this.firstName);
       this.isLastNameInvalid = validateName(this.lastName);
-      if (!this.isFirstNameInvalid || !this.isLastNameInvalid || !this.number
+      if (this.isFirstNameInvalid || this.isLastNameInvalid || !this.number
         || !this.month || !this.year || !this.cvv|| !this.password) {
         this.isFormMissing = true;
       } else {
@@ -146,10 +146,10 @@ export default {
           month: this.month,
           year: this.year,
         }).then((successRes) => {
-          this.isChangeSuccess = true;
+          this.addCreditCardSuccess = true;
           this.$store.commit('addCreditCard', successRes.data)
         }, (failRes) => {
-          this.isChangeFail = true;
+          this.addCreditCardFail = true;
         });
       }
     },
