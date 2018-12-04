@@ -146,7 +146,7 @@
     </div>
     <div class="column is-half left topMargin bigFont">
       <router-link to="/confirmation">
-        <a class="button is-success">Place My Order</a>
+        <a class="button is-success" v-on:click="createOrder">Place My Order</a>
       </router-link>
     </div>
     </div>
@@ -155,6 +155,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -166,6 +167,25 @@ export default {
       return this.$store.state.cart.subtotal + this.shippingCost;
     },
   },
+  methods: {
+    createOrder() {
+      let itemIDs = [];
+      let userQuantities = [];
+      this.$store.state.cart.items.forEach(item => {
+        itemIDs.push(item.id);
+        userQuantities.push(item.userQuantity);
+      });
+      axios.post('/api/orders', {
+          userId: this.$store.state.userId,
+          info: {
+            items: itemIDs,
+            quantities: userQuantities,
+          },
+      }).then((successRes) => {
+        this.$store.commit('clearCart');
+      });
+    }
+  }
 };
 </script>
 

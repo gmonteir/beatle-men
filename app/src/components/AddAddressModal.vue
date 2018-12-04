@@ -99,7 +99,7 @@ export default {
   data() {
     return {
       street1: null,
-      street2: null,
+      street2: '',
       city: null,
       state: null,
       zip: null,
@@ -111,7 +111,7 @@ export default {
   },
   methods: {
     submit() {
-      if (!this.street1 || !this.street2 || !this.city || !this.state || !this.zip ||
+      if (!this.street1 || !this.city || !this.state || !this.zip ||
       !this.password) {
         this.isFormMissing = true;
       } else {
