@@ -66,51 +66,20 @@ export default {
   },
   data() {
     return {
-      employees: [
-        {
-          id: 1,
-          name: 'Kristofer Fox',
-          role: 'Owner',
-          email: 'fox@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-        {
-          id: 2,
-          name: 'Jane Smith',
-          role: 'Service Manager',
-          email: 'jsmith@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-        {
-          id: 3,
-          name: 'Elon Musk',
-          role: 'Service Employee',
-          email: 'emusk@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-        {
-          id: 4,
-          name: 'Kobe Bryant',
-          role: 'Service Employee',
-          email: 'kbryant@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-        {
-          id: 5,
-          name: 'Donald Trump',
-          role: 'Retail Employee',
-          email: 'dtrump@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-        {
-          id: 6,
-          name: 'Frank Ocean',
-          role: 'Retail Employee',
-          email: 'frocean@foxcycle.com',
-          blurb: 'Enter small blurb here',
-        },
-      ],
+      employees: [],
     };
+  },
+  mounted() {
+    /*
+    axios.get('/api/useraccounts')
+      .then((res) => {
+        for (let i = 0; i < res.data.users; i += 1) {
+          if (!res.data.users[i].accountType) {
+            this.employees.push(res.data.users[i]);
+          }
+        }
+      });
+    */
   },
 };
 </script>

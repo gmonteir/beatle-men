@@ -23,7 +23,7 @@ module.exports = {
       accountType: {
         type: Sequelize.STRING
       },
-      employeeImage: {
+      image: {
         type: Sequelize.STRING
       },
       createdAt: {

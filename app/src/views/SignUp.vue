@@ -137,6 +137,7 @@ export default {
           email: this.email,
           password: this.password,
           accountType: 'customer',
+          image: null,
         }).then((successRes) => {
           this.isSignupSuccess = true;
           document.body.style.cursor = 'default';

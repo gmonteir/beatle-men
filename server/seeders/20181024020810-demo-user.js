@@ -10,7 +10,7 @@ module.exports = {
         email: 'troll@demo.com',
         password: 'secure',
         accountType: 'admin',
-        employeeImage: 'images\\home-slideshow-3.jpg',
+        image: 'images\\home-slideshow-3.jpg',
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02'
       }], {});

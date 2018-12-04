@@ -65,9 +65,29 @@
           <input type="radio" v-model="accountType" value="admin">
           Admin
         </label>
-        <label class="radio">
-          <input type="radio" v-model="accountType" value="customer">
-          Customer
+      </div>
+    </div>
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="file" v-bind:class="{'is-danger': isImageInvalid === true, 'is-success': isSignupSuccess}">
+        <label class="file-label">
+          <input class="file-input"
+            id="input"
+            type="file"
+            name="image"
+            @change="onFileChange"
+          />
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+          <span v-if="image" class="file-name">
+            {{image.name}}
+          </span>
         </label>
       </div>
     </div>
@@ -116,6 +136,13 @@ function validatePassword(password) {
   }
   return password.length < 6;
 }
+/* true if invalid, false if valid */
+function validateImage(image) {
+  if (image === null) {
+    return true;
+  }
+  return false;
+}
 export default {
   name: 'signup',
   data() {
@@ -125,10 +152,13 @@ export default {
       email: null,
       password: null,
       accountType: 'employee',
+      image: null,
+
       isEmailInvalid: null,
       isPasswordInvalid: null,
       isFirstNameInvalid: null,
       isLastNameInvalid: null,
+      isImageInvalid: null,
       isSignupSuccess: null,
       isSignupFail: null,
     };
@@ -143,20 +173,29 @@ export default {
       this.isSignupSuccess = false;
       this.isSignupFail = false;
       if (this.isFormValid()) {
+        const form = new FormData();
+        form.append('firstName', this.firstName);
+        form.append('lastName', this.lastName);
+        form.append('email', this.email);
+        form.append('password', this.password);
+        form.append('accountType', this.accountType);
+        form.append('image', this.image, this.image.name);
+
+        const config = {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        };
+
         document.body.style.cursor='wait';
-        axios.post('/api/useraccounts/', {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password,
-          accountType: this.accountType,
-        }).then((successRes) => {
-          this.isSignupSuccess = true;
-          document.body.style.cursor = 'default';
-        }, (failRes) => {
-          this.isSignupFail = true;
-          document.body.style.cursor = 'default';
-        });
+        axios.post('/api/useraccounts/createuser', form, config)
+          .then((successRes) => {
+            this.isSignupSuccess = true;
+            document.body.style.cursor = 'default';
+          }, (failRes) => {
+            this.isSignupFail = true;
+            document.body.style.cursor = 'default';
+          });
       }
     },
     isFormValid() {
@@ -164,14 +203,24 @@ export default {
       this.isPasswordInvalid = validatePassword(this.password);
       this.isFirstNameInvalid = validateName(this.firstName);
       this.isLastNameInvalid = validateName(this.lastName);
+      this.isImageInvalid = validateImage(this.image);
       return !this.isFirstNameInvalid &&
         !this.isLastNameInvalid &&
         !this.isEmailInvalid &&
         !this.isPasswordInvalid &&
+        !this.isImageInvalid &&
         (this.firstName != null) &&
         (this.lastName != null) &&
         (this.email != null) &&
-        (this.password != null);
+        (this.password != null) &&
+        (this.image != null);
+    },
+    onFileChange(event) {
+      const files = event.target.files || event.dataTransfer.files;
+      if (!files.length) {
+        return;
+      }
+      this.image = files[0];
     },
   },
 };
