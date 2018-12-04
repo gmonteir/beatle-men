@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import UserItem from './../components/UserItem.vue';
 import AddUserModal from './../components/AddUserModal.vue';
 
@@ -45,7 +46,6 @@ export default {
   name: 'users',
   data() {
     return {
-      users: [],
       isAddUserModalOpen: false,
     };
   },
@@ -54,22 +54,20 @@ export default {
     AddUserModal,
   },
   mounted() {
-    /*
-    axios.get('/api/useraccounts')
-      .then((res) => {
-        for (let i = 0; i < res.data.users; i += 1) {
-          if (!res.data.users[i].accountType) {
-            this.users.push(res.data.users[i]);
-          }
-        }
-      });
-    */
+    axios.get('/api/useraccounts').then((res) => {
+      this.$store.commit('addUsers', res.data.users);
+    });
   },
   methods: {
     openAddUserModal() {
       this.isAddUserModalOpen = true;
     },
   },
+  computed: {
+    users() {
+      return this.$store.state.users;
+    }
+  }
 };
 </script>
 

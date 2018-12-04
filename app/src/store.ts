@@ -13,63 +13,14 @@ export default new Vuex.Store({
     lastName: null,
     email: null,
     accountType: 'customer',
-    addresses: [
-      {
-        id: 1,
-        street1: '123 easy street',
-        street2: 'Apt. #12345',
-        city: 'San Luis Obispo',
-        state: 'California',
-        zip: '93405',
-      },
-      {
-        id: 2,
-        street1: '143 hello world',
-        street2: 'Apt. #Mars',
-        city: 'Lemon Twigs',
-        state: 'Astroworld',
-        zip: '11345',
-      }
-    ],
-    creditcards: [
-      {
-        id: 1,
-        firstName: 'Andy',
-        lastName: 'Khov',
-        number: '123456789',
-        month: '07',
-        year: '2018',
-        cvv: '12345'
-      }
-    ],
+    addresses: [],
     cart: {
       items: [],
       subtotal: 0,
       totalQuantity: 0,
     },
-    users: [
-      {
-        id: 1,
-        firstName: 'Kristofer',
-        lastName: 'Fox',
-        email: 'fox@foxcycle.com',
-        accountType: 'admin',
-      },
-      {
-        id: 2,
-        firstName: 'Hello',
-        lastName: 'World',
-        email: 'hello@foxcycle.com',
-        accountType: 'employee',
-      },
-      {
-        id: 3,
-        firstName: 'Regular',
-        lastName: 'User',
-        email: 'user@gmail.com',
-        accountType: 'customer',
-      },
-    ],
+    users: [],
+    cards: [],
   },
   mutations: {
     changeAccount(state, payload) {
@@ -87,6 +38,9 @@ export default new Vuex.Store({
     changeEmail(state, payload) {
       state.email = payload.email;
     },
+    addAddresses(state, payload) {
+      state.addresses = payload;
+    },
     addAddress(state, payload) {
       state.addresses.push(payload);
     },
@@ -96,14 +50,17 @@ export default new Vuex.Store({
       });
       state.addresses = newAddresses;
     },
-    addCreditCard(state, payload) {
-      state.creditcards.push(payload);
+    addCards(state, payload) {
+      state.cards = payload;
     },
-    removeCreditCard(state, payload) {
-      let newCreditCards = state.creditcards.filter((card) => {
+    addCard(state, payload) {
+      state.cards.push(payload);
+    },
+    removeCard(state, payload) {
+      let newCreditCards = state.cards.filter((card) => {
         return card.id != payload.id;
       });
-      state.creditcards = newCreditCards;
+      state.cards = newCreditCards;
     },
     removeItem(state, payload) {
       let quantity = 0;
@@ -151,8 +108,10 @@ export default new Vuex.Store({
       state.cart.items = [];
       state.cart.totalQuantity = 0;
       state.cart.subtotal = 0;
-      console.log(state.cart.items);
-    }
+    },
+    addUsers(state, payload) {
+      state.users = payload;
+    },
   },
   actions: {
 

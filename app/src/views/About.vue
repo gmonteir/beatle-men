@@ -58,6 +58,7 @@
 
 <script>
 import EmployeeCard from './../components/EmployeeCard.vue';
+import axios from 'axios';
 
 export default {
   name: 'about',
@@ -70,16 +71,14 @@ export default {
     };
   },
   mounted() {
-    /*
     axios.get('/api/useraccounts')
       .then((res) => {
-        for (let i = 0; i < res.data.users; i += 1) {
-          if (!res.data.users[i].accountType) {
+        for (let i = 0; i < res.data.users.length; i += 1) {
+          if (res.data.users[i].accountType !== 'customer') {
             this.employees.push(res.data.users[i]);
           }
         }
       });
-    */
   },
 };
 </script>

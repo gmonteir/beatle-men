@@ -124,10 +124,11 @@ export default {
           state: this.state,
           zip: this.zip,
         }).then((successRes) => {
-          this.isChangeSuccess = true;
+          this.addAddressSuccess = true;
+          console.log(successRes);
           this.$store.commit('addAddress', successRes.data)
         }, (failRes) => {
-          this.isChangeFail = true;
+          this.addAddressFail = true;
         });
       }
     },
