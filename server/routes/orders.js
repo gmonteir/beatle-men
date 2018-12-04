@@ -20,7 +20,7 @@ router
     // userId is the id of the user placing the order
     // info contains the items and quantities in an array
     const { userId, info} = req.body;
-    const infoArr = JSON.parse(info);
+    const infoArr = info;
 
     //create a new order
     const order = Order.build({

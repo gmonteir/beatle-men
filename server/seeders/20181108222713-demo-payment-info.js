@@ -8,7 +8,7 @@ module.exports = {
       number: '4945466776688911',
       expMonth: 7,
       expYear: 22,
-      ccv: 432,
+      cvv: 432,
       createdAt: '2016-08-09 04:05:02',
       updatedAt: '2016-08-09 04:05:02'
     }], {}); 

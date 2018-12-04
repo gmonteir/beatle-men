@@ -10,7 +10,6 @@ module.exports = {
       },
       UserAccountId: {
         type: Sequelize.INTEGER,
-        unique: true,
         references: {
           model: 'UserAccounts',
           key: 'id',
@@ -28,7 +27,7 @@ module.exports = {
       expYear: {
         type: Sequelize.INTEGER
       },
-      ccv: {
+      cvv: {
         type: Sequelize.INTEGER
       },
       createdAt: {

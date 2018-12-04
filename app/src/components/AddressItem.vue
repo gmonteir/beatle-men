@@ -27,17 +27,14 @@ export default {
   },
   methods: {
     removeAddress() {
-      /* axios api call here
-        axios.post('/api/changename', {
+        axios.post('/api/addresses/${this.address.id}', {
           email: this.$store.state.email,
-          password: this.password,
-          addressId: this.address.id
+          password: this.password
         }).then((successRes) => {
           this.$store.commit('removeAddress', { id: this.address.id });
         }, (failRes) => {
-          console.log('fail to delete address);
+          console.log('fail to delete address');
         });
-      */
     },
   },
 };

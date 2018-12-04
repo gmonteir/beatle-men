@@ -74,7 +74,7 @@ export default {
       this.isCurrentPasswordMissing = !this.currentPassword || this.currentPassword.length < 1;
 
       if (!this.isNewPasswordInvalid && !this.isCurrentPasswordMissing) {
-        axios.post('/api/useraccounts/changepassword', {
+        axios.put('/api/useraccounts/changepassword', {
           currentEmail: this.$store.state.email,
           newPassword: this.newPassword,
           currentPassword: this.currentPassword,
