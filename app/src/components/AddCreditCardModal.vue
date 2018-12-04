@@ -136,7 +136,7 @@ export default {
         || !this.month || !this.year || !this.cvv|| !this.password) {
         this.isFormMissing = true;
       } else {
-        axios.post('/api/useraccounts/addcard', {
+        axios.post('/api/paymentinfo', {
           email: this.$store.state.email,
           password: this.password,
           firstName: this.firstName,

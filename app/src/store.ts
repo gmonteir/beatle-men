@@ -8,6 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     isLoggedIn: false,
+    userId: null,
     firstName: null,
     lastName: null,
     email: null,
@@ -68,11 +69,12 @@ export default new Vuex.Store({
         email: 'user@gmail.com',
         accountType: 'customer',
       },
-    ]
+    ],
   },
   mutations: {
     changeAccount(state, payload) {
       state.isLoggedIn = payload.isLoggedIn;
+      state.userId = payload.userId;
       state.firstName = payload.firstName;
       state.lastName = payload.lastName;
       state.email = payload.email;
@@ -135,9 +137,21 @@ export default new Vuex.Store({
       }
     },
     addToCart(state, payload) {
-      state.cart.items.push(payload);
-      state.cart.totalQuantity += 1;
-      state.cart.subtotal += payload.price;
+      const foundItem = state.cart.items.find((item) => {
+        return item.id == payload.id;
+      });
+
+      if (!foundItem) {
+        state.cart.items.push(payload);
+        state.cart.totalQuantity += 1;
+        state.cart.subtotal += payload.price;
+      }
+    },
+    clearCart(state) {
+      state.cart.items = [];
+      state.cart.totalQuantity = 0;
+      state.cart.subtotal = 0;
+      console.log(state.cart.items);
     }
   },
   actions: {

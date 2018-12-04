@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
   Address.associate = function(models) {
     // associations can be defined here
     Address.belongsTo(models.UserAccount);
+    Address.hasMany(models.Order);
   };
   return Address;
 };

@@ -84,7 +84,7 @@ export default {
       this.isPasswordMissing = !this.password || this.password.length < 1;
 
       if (!this.isFirstNameInvalid && !this.isLastNameInvalid && !this.isPasswordMissing) {
-        axios.post('/api/useraccounts/changename', {
+        axios.put('/api/useraccounts/changename', {
           currentEmail: this.$store.state.email,
           newFirstName: this.firstName,
           newLastName: this.lastName,

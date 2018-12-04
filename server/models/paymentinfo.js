@@ -5,11 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     number: DataTypes.STRING,
     expMonth: DataTypes.INTEGER,
     expYear: DataTypes.INTEGER,
-    ccv: DataTypes.INTEGER
+    cvv: DataTypes.INTEGER
   }, {});
   PaymentInfo.associate = function(models) {
     // associations can be defined here
     PaymentInfo.belongsTo(models.UserAccount);
+    PaymentInfo.hasMany(models.Order);
   };
   return PaymentInfo;
 };
