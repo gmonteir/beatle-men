@@ -71,11 +71,11 @@
         <div class="control">
           <div class="content has-text-success is-pulled-left"
             v-if="addAddressSuccess">
-            Change Successful!
+            Add Address Successful!
           </div>
           <div class="content has-text-danger is-pulled-left"
             v-if="addAddressFail">
-            Change Fail
+            Fail to Add Address
           </div>
           <div class="content has-text-danger is-pulled-left"
             v-if="isFormMissing">

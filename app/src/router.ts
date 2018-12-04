@@ -117,5 +117,10 @@ export default new Router({
       name: 'orders',
       component: () => import('@/views/Orders.vue'),
     },
+    {
+      path: '/inventory',
+      name: 'inventory',
+      component: () => import('@/views/Inventory.vue'),
+    },
   ],
 });

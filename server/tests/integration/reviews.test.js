@@ -35,7 +35,7 @@ describe('/reviews', () => {
       });
     });
 
-    it.only('should return the created reviews', (done) => {
+    it('should return the created reviews', (done) => {
       Item.create({
         name: 'product',
       }).then((item) => {

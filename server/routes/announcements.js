@@ -1,6 +1,7 @@
 const express = require('express');
 const app = require('../app');
 const { Announcements } = require('../models');
+
 const router = express.Router();
 
 router
@@ -29,36 +30,36 @@ router
 
 
 router
-.route('/:id')
-// get a specific announcement
-.get((req, res) => {
-  const givenId = req.params.id;
-  Announcements.findById(givenId).then((announcement) => {
-    res.json(announcement);
-  });
-})
+  .route('/:id')
+  // get a specific announcement
+  .get((req, res) => {
+    const givenId = req.params.id;
+    Announcements.findById(givenId).then((announcement) => {
+      res.json(announcement);
+    });
+  })
 
-// update a given announcement
-.put((req, res) => {
-  const { title, message } = req.body;
-  Announcements.findById(req.params.id).then((announcement) => {
-    const announcementToUpdate = announcement;
-    announcementToUpdate.title = title;
-    announcementToUpdate.message = message;
-    announcementToUpdate.save().then((updatedAnnouncement) => {
-      res.json(updatedAnnouncement);
+  // update a given announcement
+  .put((req, res) => {
+    const { title, message } = req.body;
+    Announcements.findById(req.params.id).then((announcement) => {
+      const announcementToUpdate = announcement;
+      announcementToUpdate.title = title;
+      announcementToUpdate.message = message;
+      announcementToUpdate.save().then((updatedAnnouncement) => {
+        res.json(updatedAnnouncement);
+      });
+    });
+  })
+
+  // delete a given announcement
+  .delete((req, res) => {
+    const idToDelete = req.params.id;
+    Announcements.findById(idToDelete).then((announcement) => {
+      announcement.destroy().then(() => {
+        res.json({ delete: true });
+      });
     });
   });
-})
-
-// delete a given announcement
-.delete((req, res) => {
-  const idToDelete = req.params.id;
-  Announcements.findById(idToDelete).then((announcement) => {
-    announcement.destroy().then(() => {
-      res.json({ delete: true });
-    });
-  });
-});
 
 module.exports = router;
