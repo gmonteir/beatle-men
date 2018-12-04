@@ -25,7 +25,21 @@ module.exports = {
           model: 'UserAccounts',
           key: 'id'
         }
-      }
+      },
+      PaymentInfoId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'PaymentInfos',
+          key: 'id'
+        }
+      },
+      AddressId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Addresses',
+          key: 'id'
+        }
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

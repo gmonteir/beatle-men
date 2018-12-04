@@ -69,7 +69,7 @@ export default new Vuex.Store({
         email: 'user@gmail.com',
         accountType: 'customer',
       },
-    ]
+    ],
   },
   mutations: {
     changeAccount(state, payload) {
@@ -137,9 +137,15 @@ export default new Vuex.Store({
       }
     },
     addToCart(state, payload) {
-      state.cart.items.push(payload);
-      state.cart.totalQuantity += 1;
-      state.cart.subtotal += payload.price;
+      const foundItem = state.cart.items.find((item) => {
+        return item.id == payload.id;
+      });
+
+      if (!foundItem) {
+        state.cart.items.push(payload);
+        state.cart.totalQuantity += 1;
+        state.cart.subtotal += payload.price;
+      }
     },
     clearCart(state) {
       state.cart.items = [];

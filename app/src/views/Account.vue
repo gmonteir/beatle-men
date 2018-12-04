@@ -43,6 +43,12 @@
           <span>Change Announcements</span>
         </button>
       </router-link>
+      <router-link to="/orders" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
+        <button class="button is-outlined" id="edit-btn">
+          <span>Manage Orders</span>
+        </button>
+      </router-link>
     </section>
     <section class="section">
       <div id="account-info">

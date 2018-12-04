@@ -29,7 +29,6 @@
             <button class="button is-primary is-medium">Checkout</button>
           </router-link>
         </div>
-
       </div>
     </div>
   </section>

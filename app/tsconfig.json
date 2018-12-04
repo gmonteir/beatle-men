@@ -33,7 +33,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", "../server/seeders/20181108222713-demo-payment-info.js", "../server/seeders/20181108222715-demo-payment-info.js", "../server/migrations/20181015025228-create-payment-info.js"
   ],
   "exclude": [
     "node_modules"
