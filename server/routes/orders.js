@@ -84,6 +84,16 @@ router
     });
   });
 
+  router
+  .route('/:id/customer')
+  .get((req, res) => {
+    Order.findAll({where: { UserAccountId: req.params.id }}).then((orders) => {
+      res.json({
+        orders: orders || [],
+      });
+    });
+  });
+
 
 module.exports = router;
 
