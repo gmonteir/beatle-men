@@ -26,10 +26,9 @@ export default {
   },
   methods: {
     removeCreditCard() {
-      axios.post('/api/useraccounts/removecard', {
+      axios.post('/api/useraccounts/removecard/${this.card.id}', {
         email: this.$store.state.email,
-        password: this.password,
-        cardId: this.card.id
+        password: this.password
       }).then((successRes) => {
         this.$store.commit('removeCreditCard', { id: this.card.id });
       }, (failRes) => {

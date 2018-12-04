@@ -24,7 +24,7 @@ router.route('/createuser').post((req, res) => {
   })
 });
 
-router.route('/changeemail').post((req, res) => {
+router.route('/changeemail').put((req, res) => {
   const { currentEmail, newEmail, currentPassword } = req.body;
   UserAccount.findOne({where: { email: currentEmail, password: currentPassword } }).then(user => {
     if (user) {
@@ -38,7 +38,7 @@ router.route('/changeemail').post((req, res) => {
   })
 });
 
-router.route('/changename').post((req, res) => {
+router.route('/changename').put((req, res) => {
   const { currentEmail, newFirstName, newLastName, currentPassword } = req.body;
   UserAccount.findOne({where: { email: currentEmail, password: currentPassword } }).then(user => {
     if (user) {
@@ -53,7 +53,7 @@ router.route('/changename').post((req, res) => {
   })
 });
 
-router.route('/changepassword').post((req, res) => {
+router.route('/changepassword').put((req, res) => {
   const { currentEmail, newPassword, currentPassword } = req.body;
   UserAccount.findOne({where: { email: currentEmail, password: currentPassword } }).then(user => {
     if (user) {
@@ -72,7 +72,7 @@ router.route('/addaddress').post((req, res) => {
   UserAccount.findOne({where: { email: email, password: password } }).then(user => {
     Address.findOne({where: { UserAccountId: user.id, street1: street1, street2: street2, city: city, state: state, zip: zip } }).then(address => {
       if (address) {
-        res.status(400);
+        res.status(400).json({ error: 'error' });
       } else {
         const newAddress = Address.build({
           UserAccountId: user.id,
@@ -83,30 +83,29 @@ router.route('/addaddress').post((req, res) => {
           zip: zip
         })
         newAddress.save().then(() => {
-          res.json(newAddress.toJSON());
+          res.json(newAddress);
         })
       }
     })
   })
 });
 
-router.route('/removeaddress').post((req, res) => {
-  const { email, password, addressId } = req.body;
+router.delete('/removeaddress/:id').post((req, res) => {
+  const { email, password } = req.body;
+  const idToDelete = req.params.id;
   UserAccount.findOne({where: { email: email, password: password } }).then(() => {
-    Address.findById(addressId).then(address => {
-      if (address) {
-        address.destroy().then(() => true);
-      } else {
-        res.status(400).json({ error: 'error' });
-      }
-    })
+    Address.findById(idToDelete).then(address => {
+      address.destroy().then(() => {
+        res.json({ delete: true });
+      });
+    });
   })
 });
 
 router.route('/addcard').post((req, res) => {
   const { email, password, firstName, lastName, number, cvv, month, year } = req.body;
   UserAccount.findOne({where: { email: email, password: password } }).then(user => {
-    const fullName = firstName + lastName;
+    const fullName = firstName + ' ' + lastName;
     PaymentInfo.findOne({where: { UserAccountId: user.id, name: fullName, number: number, expMonth: month, expYear: year, cvv: cvv } }).then(card => {
       if (card) {
         res.status(400).json({ error: 'error' });
@@ -120,23 +119,22 @@ router.route('/addcard').post((req, res) => {
           cvv: cvv
         })
         newCard.save().then(() => {
-          res.json(newCard.toJSON());
+          res.json(newCard);
         })
       }
     })
   })
 });
 
-router.route('/removecard').post((req, res) => {
-  const { email, password, cardId } = req.body;
+router.route('/removecard/:id').delete((req, res) => {
+  const { email, password } = req.body;
+  const idToDelete = req.params.id;
   UserAccount.findOne({where: { email: email, password: password } }).then(() => {
-    PaymentInfo.findById(cardId).then(card => {
-      if (card) {
-        card.destroy().then(() => true);
-      } else {
-        res.status(400).json({ error: 'error' });
-      }
-    })
+    PaymentInfo.findById(idToDelete).then(card => {
+      card.destroy().then(() => {
+        res.json({ delete: true });
+      });
+    });
   })
 });
 
