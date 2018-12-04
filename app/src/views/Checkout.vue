@@ -44,7 +44,7 @@
         </div>
         <div class="field sectionSmall">
           <div class="control">
-            <input class="input is-primary" type="text" placeholder="CCV (xxx): '789' ">
+            <input class="input is-primary" type="text" placeholder="CVV (xxx): '789' ">
           </div>
         </div>
         <a href="#" class="button is-success">Save</a>

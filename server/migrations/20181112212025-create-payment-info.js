@@ -27,7 +27,7 @@ module.exports = {
       expYear: {
         type: Sequelize.INTEGER
       },
-      ccv: {
+      cvv: {
         type: Sequelize.INTEGER
       },
       createdAt: {
