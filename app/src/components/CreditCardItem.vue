@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     removeCreditCard() {
-      axios.post('/api/useraccounts/removecard/${this.card.id}', {
+      axios.post('/api/paymentinfo/${this.card.id}', {
         email: this.$store.state.email,
         password: this.password
       }).then((successRes) => {

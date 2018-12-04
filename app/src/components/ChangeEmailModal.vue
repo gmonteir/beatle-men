@@ -76,7 +76,7 @@ export default {
       this.isChangeFail = false;
 
       if (!this.isEmailInvalid && !this.isPasswordMissing) {
-        axios.post('/api/useraccounts/changeemail', {
+        axios.put('/api/useraccounts/changeemail', {
           currentEmail: this.$store.state.email,
           newEmail: this.email,
           currentPassword: this.password,

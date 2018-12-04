@@ -115,7 +115,7 @@ export default {
       !this.password) {
         this.isFormMissing = true;
       } else {
-        axios.post('/api/useraccounts/addaddress', {
+        axios.post('/api/addresses', {
           email: this.$store.state.email,
           password: this.password,
           street1: this.street1,

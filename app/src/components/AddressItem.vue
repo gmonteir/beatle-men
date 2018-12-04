@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     removeAddress() {
-        axios.post('/api/useraccounts/removeaddress/${this.address.id}', {
+        axios.post('/api/addresses/${this.address.id}', {
           email: this.$store.state.email,
           password: this.password
         }).then((successRes) => {
