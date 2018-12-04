@@ -31,10 +31,10 @@
           <span>Manage Users</span>
         </button>
       </router-link>
-      <router-link to="/add-item" v-if="this.$store.state.accountType == 'admin'
+      <router-link to="/inventory" v-if="this.$store.state.accountType == 'admin'
         || this.$store.state.accountType == 'employee'">
         <button class="button is-outlined" id="edit-btn">
-          <span>Add New Item</span>
+          <span>Inventory</span>
         </button>
       </router-link>
       <router-link to="/add-announcement" v-if="this.$store.state.accountType == 'admin'
