@@ -1,27 +1,48 @@
 const express = require('express');
-const { UserAccount, Address, PaymentInfo } = require('../models');
+const { UserAccount } = require('../models');
 
 const router = express.Router();
 
-router.route('/createuser').post((req, res) => {
-  const { firstName,lastName,email,password,accountType } = req.body;
-  UserAccount.findOne({where: { email } }).then(user => {
-    if (user) {
-      res.status(401).json({error: 'email in use'});
-    }
-    else {
-      const newUserAccount = UserAccount.build({
-        firstName,
-        lastName,
-        email,
-        password,
-        accountType
+router.route('/')
+  .get((req, res) => {
+    UserAccount.findAll().then((users) => {
+      res.json({
+        users: users || [],
       });
-      newUserAccount.save().then(() => {
-        res.json(newUserAccount);
-      });
-    }
+    });
   })
+
+  .post((req, res) => {
+    const { firstName,lastName,email,password,accountType } = req.body;
+    UserAccount.findOne({where: { email } }).then(user => {
+      if (user) {
+        res.status(401).json({error: 'email in use'});
+      }
+      else {
+        const newUserAccount = UserAccount.build({
+          firstName,
+          lastName,
+          email,
+          password,
+          accountType
+        });
+        
+        newUserAccount.save().then(() => {
+          res.json(newUserAccount);
+        });
+      }
+    })
+});
+
+router.route('/:id')
+  // delete a given item
+  .delete((req, res) => {
+    const idToDelete = req.params.id;
+    UserAccount.findById(idToDelete).then((user) => {
+      user.destroy().then(() => {
+        res.json({ delete: true });
+      });
+    });
 });
 
 router.route('/changeemail').put((req, res) => {
