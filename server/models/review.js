@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.INTEGER,
     description: DataTypes.STRING,
   }, {});
-  Review.associate = function(models) {
+  Review.associate = (models) => {
     // associations can be defined here
     Review.belongsTo(models.Item);
   };

@@ -21,6 +21,27 @@ export default new Vuex.Store({
     },
     users: [],
     cards: [],
+    storeInfo: {
+      title: 'Foxcycle San Luis Obispo',
+      addressLine1: '123 Higuera St',
+      addressLine2: 'San Luis Obispo, CA 93405',
+      phone: '(805) 123-4567',
+      email: 'customers@foxcycle.com',
+      mondayOpen: '10:00AM',
+      mondayClose: '8:00PM',
+      tuesdayOpen: '10:00AM',
+      tuesdayClose: '8:00PM',
+      wednesdayOpen: '10:00AM',
+      wednesdayClose: '8:00PM',
+      thursdayOpen: '10:00AM',
+      thursdayClose: '8:00PM',
+      fridayOpen: '10:00AM',
+      fridayClose: '8:00PM',
+      saturdayOpen: '10:00AM',
+      saturdayClose: '6:00PM',
+      sundayOpen: '10:00AM',
+      sundayClose: '6:00PM',
+    },
   },
   mutations: {
     changeAccount(state, payload) {
@@ -112,6 +133,27 @@ export default new Vuex.Store({
     addUsers(state, payload) {
       state.users = payload;
     },
+    changeStoreInfo(state, payload) {
+      state.storeInfo.title = payload.title;
+      state.storeInfo.addressLine1 = payload.addressLine1;
+      state.storeInfo.addressLine2 = payload.addressLine2;
+      state.storeInfo.phone = payload.phone;
+      state.storeInfo.email = payload.email;
+      state.storeInfo.mondayOpen = payload.mondayOpen;
+      state.storeInfo.mondayClose = payload.mondayClose;
+      state.storeInfo.tuesdayOpen = payload.tuesdayOpen;
+      state.storeInfo.tuesdayClose = payload.tuesdayClose;
+      state.storeInfo.wednesdayOpen = payload.wednesdayOpen;
+      state.storeInfo.wednesdayClose = payload.wednesdayClose;
+      state.storeInfo.thursdayOpen = payload.thursdayOpen;
+      state.storeInfo.thursdayClose = payload.thursdayClose;
+      state.storeInfo.fridayOpen = payload.fridayOpen;
+      state.storeInfo.fridayClose = payload.fridayClose;
+      state.storeInfo.saturdayOpen = payload.saturdayOpen;
+      state.storeInfo.saturdayClose = payload.saturdayClose;
+      state.storeInfo.sundayOpen = payload.sundayOpen;
+      state.storeInfo.sundayClose = payload.sundayClose;
+    }
   },
   actions: {
 

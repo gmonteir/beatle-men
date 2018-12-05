@@ -2,18 +2,20 @@ const express = require('express');
 
 const { Review } = require('../models');
 const { Item } = require('../models');
+
 const router = express.Router();
 
 router
   .route('/')
   // get all reviews
   .get((req, res) => {
-    const { ItemId } = req.body;
-    Review.findAll({where: { ItemId }}).then((reviews) => {
-      res.json({
-        reviews: reviews || [],
+    const { ItemId } = req.query.ItemId;
+    Review.findAll({ where: { ItemId } })
+      .then((reviews) => {
+        res.json({
+          reviews: reviews || [],
+        });
       });
-    });
   })
 
   // create a review

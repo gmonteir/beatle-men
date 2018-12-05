@@ -122,5 +122,10 @@ export default new Router({
       name: 'inventory',
       component: () => import('@/views/Inventory.vue'),
     },
+    {
+      path: '/change-store-info',
+      name: 'change-store-info',
+      component: () => import('@/views/ChangeStoreInfo.vue'),
+    },
   ],
 });

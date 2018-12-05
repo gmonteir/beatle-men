@@ -27,6 +27,12 @@
             v-if="isAddedToCart">
             Added to Cart Successfully!
           </p>
+          <p>
+            Rating: {{reviews.rating}}
+            <span class="icon">
+              <i class="fas fa-star"></i>
+            </span>
+          </p>
         </div>
         <div id="close-div">
           <a class="button is-rounded right" id="close-btn" v-on:click="$emit('close')">Close</a>
@@ -39,6 +45,8 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     item: {
@@ -47,8 +55,20 @@ export default {
   },
   data() {
     return {
+      reviews: [],
       isAddedToCart: false,
     };
+  },
+  mounted() {
+    console.log(this.item.id);
+    axios.get('/api/reviews', {
+        params: {
+          ItemId: this.item.id,
+        }
+      }).then((res) => {
+        this.reviews = res.data.reviews;
+        console.log(res.data.reviews);
+      });
   },
   methods: {
     addToCart() {
