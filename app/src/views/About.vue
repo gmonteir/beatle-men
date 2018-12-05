@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import EmployeeCard from './../components/EmployeeCard.vue';
 import axios from 'axios';
+import EmployeeCard from './../components/EmployeeCard.vue';
 
 export default {
   name: 'about',

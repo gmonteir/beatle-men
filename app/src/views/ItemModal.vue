@@ -27,11 +27,16 @@
               <span class="icon" id="stars" v-for="stars in overallRating" v-bind:key="stars.id">
                 <i class="fas fa-star"></i>
               </span>
-              <span class="icon" id="stars" v-for="stars in (5 - overallRating)" v-bind:key="stars.id">
+              <span class="icon" id="stars"
+                v-for="stars in (5 - overallRating)"
+                v-bind:key="stars.id">
                 <i class="far fa-star"></i>
               </span>
             </p>
-            <a class="button is-primary is-rounded right" id="add-btn" v-on:click="addToCart">Add To Cart</a>
+            <a class="button is-primary is-rounded right" id="add-btn"
+              v-on:click="addToCart">
+              Add To Cart
+            </a>
             <p class="help is-success" v-if="isAddedToCart">Added to Cart Successfully!</p>
             <p class="help is-danger" v-if="isOutOfStock">Sorry, this item is out of stock</p>
           </div>
@@ -43,10 +48,14 @@
                   <div class="message-header">
                     <p>
                       {{review.firstName}}
-                      <span class="icon" id="stars" v-for="stars in review.rating" v-bind:key="stars.id">
+                      <span class="icon" id="stars"
+                        v-for="stars in review.rating"
+                        v-bind:key="stars.id">
                         <i class="fas fa-star"></i>
                       </span>
-                      <span class="icon" id="stars" v-for="stars in (5 - review.rating)" v-bind:key="stars.id">
+                      <span class="icon" id="stars"
+                        v-for="stars in (5 - review.rating)"
+                        v-bind:key="stars.id">
                         <i class="far fa-star"></i>
                       </span>
                     </p>
@@ -86,17 +95,16 @@ export default {
     };
   },
   mounted() {
-    console.log(this.item.id);
     axios.get('/api/reviews', {
-        params: {
-          ItemId: this.item.id,
-        }
-      }).then((res) => {
-        this.reviews = res.data.reviews;
-        if (res.data.reviews != null && res.data.reviews.length > 0) {
-          this.getOverallRating(res.data.reviews);
-        }
-      });
+      params: {
+        ItemId: this.item.id,
+      },
+    }).then((res) => {
+      this.reviews = res.data.reviews;
+      if (res.data.reviews != null && res.data.reviews.length > 0) {
+        this.getOverallRating(res.data.reviews);
+      }
+    });
   },
   methods: {
     addToCart() {

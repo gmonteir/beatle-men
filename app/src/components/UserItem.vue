@@ -17,6 +17,7 @@
 
 <script>
 import axios from 'axios';
+
 export default {
   props: {
     user: {
@@ -26,7 +27,7 @@ export default {
   },
   methods: {
     deleteUser() {
-      axios.delete('/api/useraccounts/' + this.user.id).then(success => {
+      axios.delete('/api/useraccounts/' + this.user.id).then((success) => { // eslint-disable-line prefer-template
         axios.get('/api/useraccounts').then((res) => {
           this.$store.commit('addUsers', res.data.users);
         });

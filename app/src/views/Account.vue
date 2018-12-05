@@ -240,13 +240,13 @@ export default {
     },
   },
   mounted() {
-    axios.get('/api/addresses').then(success => {
+    axios.get('/api/addresses').then((success) => {
       this.$store.commit('addAddresses', success.data.addresses);
     });
-    axios.get('/api/paymentinfo').then(success => {
+    axios.get('/api/paymentinfo').then((success) => {
       this.$store.commit('addCards', success.data.cards);
     });
-  }
+  },
 };
 </script>
 

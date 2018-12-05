@@ -8,7 +8,7 @@
       </div>
       <div class="card-content">
         <div class="content">
-            <p class="title is-4">{{employee.name}}</p>
+            <p class="title is-4">{{employee.firstName}}  {{employee.lastName}}</p>
             <p class="subtitle is-6">{{employee.accountType}}<br>{{employee.email}}</p>
         </div>
       </div>
