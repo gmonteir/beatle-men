@@ -69,7 +69,10 @@
     </div>
     <div class="field">
       <label class="label">Image</label>
-      <div class="file" v-bind:class="{'is-danger': isImageInvalid === true, 'is-success': isSignupSuccess}">
+      <div
+        class="file"
+        v-bind:class="{'is-danger': isImageInvalid === true, 'is-success': isSignupSuccess}"
+        >
         <label class="file-label">
           <input class="file-input"
             id="input"
@@ -222,7 +225,8 @@ export default {
       if (!files.length) {
         return;
       }
-      this.image = files[0];
+      const { image } = files;
+      this.image = image;
     },
   },
 };

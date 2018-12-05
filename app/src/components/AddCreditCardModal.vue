@@ -149,7 +149,7 @@ export default {
           year: this.year,
         }).then((successRes) => {
           this.addCreditCardSuccess = true;
-          this.$store.commit('addCard', successRes.data)
+          this.$store.commit('addCard', successRes.data);
         }, (failRes) => {
           this.addCreditCardFail = true;
         });

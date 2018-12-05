@@ -13,7 +13,8 @@
             id="input"
             type="text"
             v-model="storeInfo.title"
-            v-bind:class="{'is-danger': isTitleInvalid === true, 'is-normal': isTitleInvalid === false}"
+            v-bind:class="{'is-danger': isTitleInvalid === true,
+              'is-normal': isTitleInvalid === false}"
           />
         </div>
       </div>
@@ -24,7 +25,8 @@
             id="input"
             type="text"
             v-model="storeInfo.addressLine1"
-            v-bind:class="{'is-danger': isAddressLine1Invalid === true, 'is-normal': isAddressLine1Invalid === false}"
+            v-bind:class="{'is-danger': isAddressLine1Invalid === true,
+              'is-normal': isAddressLine1Invalid === false}"
           />
         </div>
       </div>
@@ -35,7 +37,8 @@
             id="input"
             type="text"
             v-model="storeInfo.addressLine2"
-            v-bind:class="{'is-danger': isAddressLine2Invalid === true, 'is-normal': isAddressLine2Invalid === false}"
+            v-bind:class="{'is-danger': isAddressLine2Invalid === true,
+              'is-normal': isAddressLine2Invalid === false}"
           />
         </div>
       </div>
@@ -46,7 +49,8 @@
             id="input"
             type="text"
             v-model="storeInfo.phone"
-            v-bind:class="{'is-danger': isPhoneInvalid === true, 'is-normal': isPhoneInvalid === false}"
+            v-bind:class="{'is-danger': isPhoneInvalid === true,
+              'is-normal': isPhoneInvalid === false}"
           />
         </div>
       </div>
@@ -57,7 +61,8 @@
             id="input"
             type="text"
             v-model="storeInfo.email"
-            v-bind:class="{'is-danger': isEmailInvalid === true, 'is-normal': isEmailInvalid === false}"
+            v-bind:class="{'is-danger': isEmailInvalid === true,
+              'is-normal': isEmailInvalid === false}"
           />
         </div>
       </div>
@@ -70,7 +75,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.mondayOpen"
-                v-bind:class="{'is-danger': isMondayOpenInvalid === true, 'is-normal': isMondayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isMondayOpenInvalid === true,
+                  'is-normal': isMondayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -81,7 +87,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.tuesdayOpen"
-                v-bind:class="{'is-danger': isTuesdayOpenInvalid === true, 'is-normal': isTuesdayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isTuesdayOpenInvalid === true,
+                  'is-normal': isTuesdayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -92,7 +99,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.wednesdayOpen"
-                v-bind:class="{'is-danger': isWednesdayOpenInvalid === true, 'is-normal': isWednesdayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isWednesdayOpenInvalid === true,
+                  'is-normal': isWednesdayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -103,7 +111,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.thursdayOpen"
-                v-bind:class="{'is-danger': isThursdayOpenInvalid === true, 'is-normal': isThursdayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isThursdayOpenInvalid === true,
+                  'is-normal': isThursdayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -114,7 +123,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.fridayOpen"
-                v-bind:class="{'is-danger': isFridayOpenInvalid === true, 'is-normal': isFridayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isFridayOpenInvalid === true,
+                  'is-normal': isFridayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -125,7 +135,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.saturdayOpen"
-                v-bind:class="{'is-danger': isSaturdayOpenInvalid === true, 'is-normal': isSaturdayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isSaturdayOpenInvalid === true,
+                  'is-normal': isSaturdayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -136,7 +147,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.sundayOpen"
-                v-bind:class="{'is-danger': isSundayOpenInvalid === true, 'is-normal': isSundayOpenInvalid === false}"
+                v-bind:class="{'is-danger': isSundayOpenInvalid === true,
+                  'is-normal': isSundayOpenInvalid === false}"
               />
             </div>
           </div>
@@ -149,7 +161,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.mondayClose"
-                v-bind:class="{'is-danger': isMondayCloseInvalid === true, 'is-normal': isMondayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isMondayCloseInvalid === true,
+                  'is-normal': isMondayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -160,7 +173,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.tuesdayClose"
-                v-bind:class="{'is-danger': isTuesdayCloseInvalid === true, 'is-normal': isTuesdayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isTuesdayCloseInvalid === true,
+                  'is-normal': isTuesdayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -171,7 +185,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.wednesdayClose"
-                v-bind:class="{'is-danger': isWednesdayCloseInvalid === true, 'is-normal': isWednesdayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isWednesdayCloseInvalid === true,
+                  'is-normal': isWednesdayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -182,7 +197,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.thursdayClose"
-                v-bind:class="{'is-danger': isThursdayCloseInvalid === true, 'is-normal': isThursdayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isThursdayCloseInvalid === true,
+                  'is-normal': isThursdayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -193,7 +209,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.fridayClose"
-                v-bind:class="{'is-danger': isFridayCloseInvalid === true, 'is-normal': isFridayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isFridayCloseInvalid === true,
+                  'is-normal': isFridayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -204,7 +221,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.saturdayClose"
-                v-bind:class="{'is-danger': isSaturdayCloseInvalid === true, 'is-normal': isSaturdayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isSaturdayCloseInvalid === true,
+                  'is-normal': isSaturdayCloseInvalid === false}"
               />
             </div>
           </div>
@@ -215,7 +233,8 @@
                 id="input"
                 type="text"
                 v-model="storeInfo.sundayClose"
-                v-bind:class="{'is-danger': isSundayCloseInvalid === true, 'is-normal': isSundayCloseInvalid === false}"
+                v-bind:class="{'is-danger': isSundayCloseInvalid === true,
+                  'is-normal': isSundayCloseInvalid === false}"
               />
             </div>
           </div>

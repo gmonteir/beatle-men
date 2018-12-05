@@ -14,6 +14,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import axios from 'axios';
 
 export default {
@@ -26,9 +27,9 @@ export default {
   },
   methods: {
     removeCreditCard() {
-      axios.delete('/api/paymentinfo/' + this.card.id, {
+      axios.delete('/api/paymentinfo/' + this.card.id, {// eslint-disable-line prefer-template
         email: this.$store.state.email,
-        password: this.password
+        password: this.password,
       }).then((successRes) => {
         this.$store.commit('removeCard', { id: this.card.id });
       }, (failRes) => {
@@ -43,7 +44,7 @@ export default {
     lastName() {
       return this.card.name.split(' ')[1];
     },
-  }
+  },
 };
 </script>
 

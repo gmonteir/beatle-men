@@ -46,7 +46,8 @@
             id="input"
             type="number"
             v-model="quantity"
-            v-bind:class="{'is-danger': quantityInvalid === true, 'is-normal': quantityInvalid === false}"
+            v-bind:class="{'is-danger': quantityInvalid === true,
+              'is-normal': quantityInvalid === false}"
           />
         </div>
       </div>
@@ -55,45 +56,75 @@
         <div class="columns" style="width:50%">
           <div class="column">
             <div id="dropdown" class="control">
-              <div class="select" v-bind:class="{'is-danger': categoryInvalid === true, 'is-normal': categoryInvalid === false}">
+              <div class="select"
+                v-bind:class="{'is-danger': categoryInvalid === true,
+                  'is-normal': categoryInvalid === false}">
                 <select v-model="chosenCategory">
                   <option disabled>Select</option>
-                  <option v-for="category in categoryList" v-bind:key="category.id">{{category.label}}</option>
+                  <option
+                    v-for="category in categoryList"
+                    v-bind:key="category.id">
+                    {{category.label}}
+                  </option>
                 </select>
               </div>
             </div>
-            <a id="dropdown" class="button is-small" v-on:click="categoryButton = true">Add a Category</a>
+            <a id="dropdown"
+              class="button is-small"
+              v-on:click="categoryButton = true">
+              Add a Category
+            </a>
             <input class="input"
               id="dropdown"
               type="text"
               v-show="categoryButton"
               v-model="categoryButtonInput"
             />
-            <a class="button is-small is-success" v-show="categoryButton" v-on:click="submitCategory()">Submit Category</a>
+            <a
+              class="button is-small is-success"
+              v-show="categoryButton" v-on:click="submitCategory()">
+              Submit Category
+            </a>
           </div>
           <div class="column">
-            <div id="dropdown" class="control" v-show="subcategoryList && subcategoryList.length > 0">
-              <div class="select" v-bind:class="{'is-danger': subcategoryInvalid === true, 'is-normal': subcategoryInvalid === false}">
+            <div id="dropdown"
+              class="control"
+              v-show="subcategoryList && subcategoryList.length > 0">
+              <div class="select"
+                v-bind:class="{'is-danger': subcategoryInvalid === true,
+                  'is-normal': subcategoryInvalid === false}">
                 <select v-model="chosenSubcategory">
                   <option disabled>Select</option>
-                  <option v-for="subcategory in subcategoryList" v-bind:key="subcategory.id">{{subcategory.label}}</option>
+                  <option
+                    v-for="subcategory in subcategoryList"
+                    v-bind:key="subcategory.id">{{subcategory.label}}
+                  </option>
                 </select>
               </div>
             </div>
-            <a id="dropdown" class="button is-small" v-show="chosenCategory !== 'Select'" v-on:click="subcategoryButton = true">Add a Subcategory</a>
+            <a id="dropdown"
+              class="button is-small"
+              v-show="chosenCategory !== 'Select'" v-on:click="subcategoryButton = true">
+              Add a Subcategory
+            </a>
             <input class="input"
               id="dropdown"
               type="text"
               v-show="subcategoryButton"
               v-model="subcategoryButtonInput"
             />
-            <a class="button is-small is-success" v-show="subcategoryButton" v-on:click="submitSubcategory()">Submit Subcategory</a>
+            <a class="button is-small is-success"
+              v-show="subcategoryButton"
+              v-on:click="submitSubcategory()">
+              Submit Subcategory
+            </a>
           </div>
         </div>
       </div>
       <div class="field">
         <label class="label">Image</label>
-        <div class="file is-fullwidth" v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
+        <div class="file is-fullwidth" v-bind:class="{'is-danger': imageInvalid === true,
+          'is-normal': imageInvalid === false}">
           <label class="file-label">
             <input class="file-input"
               id="input"
@@ -121,7 +152,8 @@
             id = "input"
             maxlength="255"
             v-model="description"
-            v-bind:class="{'is-danger': descriptionInvalid === true, 'is-normal': descriptionInvalid === false}"
+            v-bind:class="{'is-danger': descriptionInvalid === true,
+              'is-normal': descriptionInvalid === false}"
           />
         </div>
       </div>
@@ -132,7 +164,8 @@
             id = "input"
             maxlength="255"
             v-model="specifications"
-            v-bind:class="{'is-danger': specificationsInvalid === true, 'is-normal': specificationsInvalid === false}"
+            v-bind:class="{'is-danger': specificationsInvalid === true,
+              'is-normal': specificationsInvalid === false}"
           />
         </div>
       </div>
@@ -216,7 +249,8 @@ export default {
       if (!files.length) {
         return;
       }
-      this.image = files[0];
+      const { image } = files;
+      this.image = image;
     },
     submitCategory() {
       if (this.categoryButton) {
@@ -252,7 +286,7 @@ export default {
         form.append('specifications', this.specifications);
 
         if (this.subcategoryList != null && this.subcategoryList.length > 0) {
-          const temp = this.chosenCategory + ',' + this.chosenSubcategory;
+          const temp = this.chosenCategory + ',' + this.chosenSubcategory; // eslint-disable-line prefer-template
           form.append('labels', temp);
         } else {
           form.append('labels', this.chosenCategory);

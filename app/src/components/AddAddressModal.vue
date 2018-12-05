@@ -127,8 +127,7 @@ export default {
           zip: this.zip,
         }).then((successRes) => {
           this.addAddressSuccess = true;
-          console.log(successRes);
-          this.$store.commit('addAddress', successRes.data)
+          this.$store.commit('addAddress', successRes.data);
         }, (failRes) => {
           this.addAddressFail = true;
         });
