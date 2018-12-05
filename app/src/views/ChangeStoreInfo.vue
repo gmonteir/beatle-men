@@ -290,6 +290,13 @@ export default {
   methods: {
     submit() {
       if (this.isFormValid()) {
+        /*
+        axios.post('/api/storeinfo', {
+
+        }).then((res) => {
+
+        });
+        */
         this.$store.commit('changeStoreInfo', this.storeInfo);
         this.findInvalidForm();
         this.storeInfo.title = null;

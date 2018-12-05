@@ -9,8 +9,7 @@ router
   .route('/')
   // get all reviews
   .get((req, res) => {
-    const { ItemId } = req.query.ItemId;
-    Review.findAll({ where: { ItemId } })
+    Review.findAll({ where: { ItemId: req.query.ItemId } })
       .then((reviews) => {
         res.json({
           reviews: reviews || [],

@@ -1,6 +1,6 @@
 <template>
 <div id="login-modal" class="modal is-active">
-  <div class="modal-background"></div>
+  <div class="modal-background" v-on:click="$emit('close')"></div>
   <div class="modal-card" id="modal-container">
     <p id="header-title">Please Sign up or Log in!</p>
     <div class="field">
@@ -10,6 +10,9 @@
         </div>
       </div>
     </div>
+  </div>
+  <div>
+    <button class="modal-close is-large" aria-label="close" v-on:click="$emit('close')"></button>
   </div>
 </div>
 </template>
