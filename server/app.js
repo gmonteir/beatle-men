@@ -16,7 +16,7 @@ const announcmentRouter = require('./routes/announcements');
 const reviewRouter = require('./routes/reviews');
 const orderItemRouter = require('./routes/orderitems');
 const addressRouter = require('./routes/addresses');
-const paymentInfoRouter = require('./routes/paymentInfo');
+const paymentInfoRouter = require('./routes/paymentinfo');
 
 const app = express();
 
