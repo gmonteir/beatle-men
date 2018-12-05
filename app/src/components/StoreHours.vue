@@ -1,48 +1,50 @@
 <template>
   <div id="location-hours">
     <div id="hours-header">
-      <h1 class="title is-3">Foxcycle San Luis Obispo</h1>
+      <h1 class="title is-3">{{this.$store.state.storeInfo.title}}</h1>
       <p class="subtitle is-5">
-        123 Higuera St<br>San Luis Obispo, CA 93405<br>(805) 123-4567<br>
-        customers@foxcycle.com
+        {{this.$store.state.storeInfo.addressLine1}}<br>
+        {{this.$store.state.storeInfo.addressLine2}}<br>
+        {{this.$store.state.storeInfo.phone}}<br>
+        {{this.$store.state.storeInfo.email}}
       </p>
       <h3 class="title is-4" id="store-hours-text">Store Hours</h3>
     </div>
     <table id="hours">
       <tr>
         <td>Monday</td>
-        <td>10:00 AM</td>
-        <td>8:00 PM</td>
+        <td>{{this.$store.state.storeInfo.mondayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.mondayClose}}</td>
       </tr>
       <tr>
         <td>Tuesday</td>
-        <td>10:00 AM</td>
-        <td>8:00 PM</td>
+        <td>{{this.$store.state.storeInfo.tuesdayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.tuesdayClose}}</td>
       </tr>
       <tr>
         <td>Wednesday</td>
-        <td>10:00 AM</td>
-        <td>8:00 PM</td>
+        <td>{{this.$store.state.storeInfo.wednesdayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.wednesdayClose}}</td>
       </tr>
       <tr>
         <td>Thursday</td>
-        <td>10:00 AM</td>
-        <td>8:00 PM</td>
+        <td>{{this.$store.state.storeInfo.thursdayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.thursdayClose}}</td>
       </tr>
       <tr>
         <td>Friday</td>
-        <td>10:00 AM</td>
-        <td>8:00 PM</td>
+        <td>{{this.$store.state.storeInfo.fridayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.fridayClose}}</td>
       </tr>
       <tr>
         <td>Saturday</td>
-        <td>10:00 AM</td>
-        <td>6:00 PM</td>
+        <td>{{this.$store.state.storeInfo.saturdayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.saturdayClose}}</td>
       </tr>
       <tr>
         <td>Sunday</td>
-        <td>10:00 AM</td>
-        <td>6:00 PM</td>
+        <td>{{this.$store.state.storeInfo.sundayOpen}}</td>
+        <td>{{this.$store.state.storeInfo.sundayClose}}</td>
       </tr>
     </table>
   </div>

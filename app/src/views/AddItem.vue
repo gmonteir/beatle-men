@@ -119,6 +119,7 @@
         <div id="description" class="control">
           <textarea class="textarea"
             id = "input"
+            maxlength="255"
             v-model="description"
             v-bind:class="{'is-danger': descriptionInvalid === true, 'is-normal': descriptionInvalid === false}"
           />
@@ -129,6 +130,7 @@
         <div id="specifications" class="control">
           <textarea class="textarea"
             id = "input"
+            maxlength="255"
             v-model="specifications"
             v-bind:class="{'is-danger': specificationsInvalid === true, 'is-normal': specificationsInvalid === false}"
           />

@@ -1,44 +1,76 @@
 <template>
 <div id="login-modal" class="modal is-active">
-  <div class="modal-background"></div>
+  <div class="modal-background" v-on:click="$emit('close')"></div>
   <div class="modal-card" id="modal-container">
-  <body>
-    <div class="columns">
-      <div class="column">
-        <section class="section">
-          <div class="title">
-            <h1 class="title is-2">{{item.name}}</h1>
-            <div class="image">
-              <img :src="'api/' + item.image"/>
+    <body>
+      <div class="columns">
+        <div class="column">
+          <section class="section">
+            <div class="title">
+              <h1 class="title is-2">{{item.name}}</h1>
+              <div class="image">
+                <img :src="'api/' + item.image"/>
+              </div>
+              <h1 class="title is-4 spacing">Quantity Available: {{item.quantity}}</h1>
             </div>
-            <h1 class="title is-4 spacing">Quantity Available: {{item.quantity}}</h1>
+          </section>
+        </div>
+        <div class="column" id="item-content">
+          <div>
+            <h1 class="title is-8" id="heading">Description</h1>
+            <h2 class="subtitle">{{item.description}}</h2>
+            <h1 class="title is-8" id="heading">Specifications</h1>
+            <h2 class="subtitle">{{item.specifications}}</h2>
+            <h1 class="title is-8" id="heading">Price: ${{item.price}}</h1>
+            <p class="subtitle" v-show="reviews != null && reviews.length > 0">
+              Rating:
+              <span class="icon" id="stars" v-for="stars in overallRating" v-bind:key="stars.id">
+                <i class="fas fa-star"></i>
+              </span>
+              <span class="icon" id="stars" v-for="stars in (5 - overallRating)" v-bind:key="stars.id">
+                <i class="far fa-star"></i>
+              </span>
+            </p>
+            <a class="button is-primary is-rounded right" id="add-btn" v-on:click="addToCart">Add To Cart</a>
+            <p class="help is-success" v-if="isAddedToCart">Added to Cart Successfully!</p>
+            <p class="help is-danger" v-if="isOutOfStock">Sorry, this item is out of stock</p>
           </div>
-        </section>
-      </div>
-      <div class="column" id="item-content">
-        <div>
-          <h1 class="title is-8" id="heading">Description</h1>
-          <h2 class="subtitle">{{item.description}}</h2>
-          <h1 class="title is-8" id="heading">Specifications</h1>
-          <h2 class="subtitle">{{item.specifications}}</h2>
-          <h1 class="title is-8" id="heading">Price: ${{item.price}}</h1>
-          <a class="button is-primary is-rounded right" id="add-btn" v-on:click="addToCart">Add To Cart</a>
-          <p class="help is-success"
-            v-if="isAddedToCart">
-            Added to Cart Successfully!
-          </p>
+          <div class="review-section">
+            <label class="label" v-show="reviews != null && reviews.length > 0">Reviews</label>
+            <ul>
+              <li v-for="review in reviews" v-bind:key="review.id">
+                <article class="message">
+                  <div class="message-header">
+                    <p>
+                      {{review.firstName}}
+                      <span class="icon" id="stars" v-for="stars in review.rating" v-bind:key="stars.id">
+                        <i class="fas fa-star"></i>
+                      </span>
+                      <span class="icon" id="stars" v-for="stars in (5 - review.rating)" v-bind:key="stars.id">
+                        <i class="far fa-star"></i>
+                      </span>
+                    </p>
+                  </div>
+                  <div class="message-body">
+                    {{review.description}}
+                  </div>
+                </article>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="close-div">
-          <a class="button is-rounded right" id="close-btn" v-on:click="$emit('close')">Close</a>
-        </div>
       </div>
-    </div>
-  </body>
+    </body>
+  </div>
+  <div>
+    <button class="modal-close is-large" aria-label="close" v-on:click="$emit('close')"></button>
   </div>
 </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     item: {
@@ -47,8 +79,24 @@ export default {
   },
   data() {
     return {
+      reviews: [],
       isAddedToCart: false,
+      isOutOfStock: false,
+      overallRating: null,
     };
+  },
+  mounted() {
+    console.log(this.item.id);
+    axios.get('/api/reviews', {
+        params: {
+          ItemId: this.item.id,
+        }
+      }).then((res) => {
+        this.reviews = res.data.reviews;
+        if (res.data.reviews != null && res.data.reviews.length > 0) {
+          this.getOverallRating(res.data.reviews);
+        }
+      });
   },
   methods: {
     addToCart() {
@@ -63,10 +111,19 @@ export default {
         userQuantity: 1,
         quantity: this.item.quantity,
       };
-      if (!this.isAddedToCart) {
+      if (!this.isAddedToCart && this.item.quantity > 0) {
         this.$store.commit('addToCart', newItem);
         this.isAddedToCart = true;
+      } else if (this.item.quantity <= 0) {
+        this.isOutOfStock = true;
       }
+    },
+    getOverallRating(reviews) {
+      let total = 0;
+      for (let i = 0; i < reviews.length; i += 1) {
+        total += reviews[i].rating;
+      }
+      this.overallRating = Math.floor(total / reviews.length);
     },
   },
 };
@@ -90,24 +147,34 @@ $modal-content-width: 1500px;
 .spacing {
   margin-top: 40px;
 }
+.review-section {
+  height: 200px;
+  overflow: auto;
+}
 #modal-container {
   background-color: white;
   padding: 15px;
   border-radius: 5px;
 }
 #heading {
-  margin-top: 30px;
+  margin-bottom: 30px;
 }
 #close-btn {
   margin-right: 10px;
 }
 #item-content {
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  margin-right: 5%;
+  text-align: left;
 }
 #close-div {
   display: flex;
   flex-direction: row-reverse;
+}
+#stars {
+  color: gold;
 }
 </style>

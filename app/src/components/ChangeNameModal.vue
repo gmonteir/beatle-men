@@ -1,6 +1,6 @@
 <template>
   <div class="modal is-active">
-    <div class="modal-background"></div>
+    <div class="modal-background" v-on:click="$emit('close')"></div>
     <div class="modal-card" id="modal-container">
       <div class="field">
         <label class="label">Enter New Name</label>
@@ -43,12 +43,14 @@
             v-if="isChangeFail">Change Fail
           </div>
           <div class="buttons is-right">
-            <button class="button" v-on:click="$emit('close')">Close</button>
             <button class="button is-link" v-on:click="submit">Submit</button>
           </div>
         </div>
       </div>
     </div>
+    <div>
+    <button class="modal-close is-large" aria-label="close" v-on:click="$emit('close')"></button>
+  </div>
   </div>
 </template>
 

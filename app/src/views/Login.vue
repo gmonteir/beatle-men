@@ -1,6 +1,6 @@
 <template>
 <div id="login-modal" class="modal is-active">
-  <div class="modal-background"></div>
+  <div class="modal-background" v-on:click="close"></div>
   <div class="modal-card" id="modal-container">
     <p id="header-title">Login</p>
     <div class="field">
@@ -39,11 +39,13 @@
           v-if="isLoginFail">Login Fail (Network Error)
         </div>
         <div class="buttons is-right">
-          <button class="button" id="close-btn" v-on:click="close">Close</button>
           <button class="button is-link" id="submit-btn" v-on:click="submit">Submit</button>
         </div>
       </div>
     </div>
+  </div>
+  <div>
+    <button class="modal-close is-large" aria-label="close" v-on:click="close"></button>
   </div>
 </div>
 </template>

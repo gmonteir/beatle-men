@@ -27,26 +27,32 @@
     </section>
     <section class="section">
       <router-link to="/users" v-if="this.$store.state.accountType == 'admin'">
-        <button class="button is-outlined" id="edit-btn">
+        <button class="button is-outlined" id="top-btn">
           <span>Manage Users</span>
         </button>
       </router-link>
       <router-link to="/inventory" v-if="this.$store.state.accountType == 'admin'
         || this.$store.state.accountType == 'employee'">
-        <button class="button is-outlined" id="edit-btn">
+        <button class="button is-outlined" id="top-btn">
           <span>Inventory</span>
         </button>
       </router-link>
       <router-link to="/add-announcement" v-if="this.$store.state.accountType == 'admin'
         || this.$store.state.accountType == 'employee'">
-        <button class="button is-outlined" id="edit-btn">
+        <button class="button is-outlined" id="top-btn">
           <span>Change Announcements</span>
         </button>
       </router-link>
       <router-link to="/orders" v-if="this.$store.state.accountType == 'admin'
         || this.$store.state.accountType == 'employee'">
-        <button class="button is-outlined" id="edit-btn">
+        <button class="button is-outlined" id="top-btn">
           <span>Manage Orders</span>
+        </button>
+      </router-link>
+      <router-link to="/change-store-info" v-if="this.$store.state.accountType == 'admin'
+        || this.$store.state.accountType == 'employee'">
+        <button class="button is-outlined" id="top-btn">
+          <span>Change Store Info</span>
         </button>
       </router-link>
     </section>
@@ -279,5 +285,9 @@ $section-padding:  2rem 25rem;
 }
 #edit-btn {
   margin-right: 1rem;
+}
+#top-btn {
+  margin-right: 1rem;
+  margin-bottom: 1rem;
 }
 </style>
