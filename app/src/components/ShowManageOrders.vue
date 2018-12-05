@@ -11,6 +11,12 @@
         <div class="column is-one-fifth columnOne">
           <h1 class="title is-4">Date: 11-28-2018</h1>
         </div>
+        <div class="column is-one-fifth columnOne">
+          <h1 class="title is-4">User Email: troll@demo.com</h1>
+        </div>
+        <div class="column is-one-fifth columnOne">
+          <h1 class="title is-4">Fulfilled: Yes</h1>
+        </div>
       </div>
     </section>
     <section class="section smallMargin" id="address-info">

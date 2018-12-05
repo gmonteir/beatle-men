@@ -113,9 +113,14 @@ export default new Router({
       component: () => import('@/views/AddAnnouncement.vue'),
     },
     {
-      path: '/orders',
-      name: 'orders',
-      component: () => import('@/views/Orders.vue'),
+      path: '/manageorders',
+      name: 'manageorders',
+      component: () => import('@/views/ManageOrders.vue'),
+    },
+    {
+      path: '/userorders',
+      name: 'userorders',
+      component: () => import('@/views/UserOrders.vue'),
     },
     {
       path: '/inventory',

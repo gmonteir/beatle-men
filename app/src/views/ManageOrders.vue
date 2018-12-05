@@ -5,16 +5,16 @@
         <h1 class="title is-1">My Orders</h1>
       </div>
     </section>
-    <show-orders />
+    <order-item-manager />
   </div>
 </template>
 
 <script>
 
-import ShowOrders from './../components/ShowOrders.vue';
+import ShowOrders from './../components/ShowManageOrders.vue';
 
 export default {
-  name: 'showOrder',
+  name: 'showManageOrder',
   components: {
     ShowOrders,
   },
