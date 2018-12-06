@@ -138,20 +138,28 @@ describe('/orders', () => {
   });
   describe('POST /', () => {
     it('should create an order with item and quantity', (done) => {
-      UserAccount.create({
-        email: 'test',
-      }).then((userAccount) => {
-        Item.create({
-          name: 'product',
-          quantity: 100,
-          price: 99.99,
-        }).then((item) => {
-          var userId = userAccount.id;
-          var infoArr = {"items": [item.id], "quantities": [3]};
-          const info = JSON.stringify(infoArr);
-          request(app).post(rootPath).send({userId: userId, info: info}).expect(200).then((response) => {
-            expect(response.body.status).toEqual('open');
-            done();
+      Address.create({
+        state: 'ca',
+      }).then((address) => {
+        PaymentInfo.create({
+          name: 'test'
+        }).then((payment) => {
+          UserAccount.create({
+            email: 'test',
+          }).then((userAccount) => {
+            Item.create({
+              name: 'product',
+              quantity: 100,
+              price: 99.99,
+            }).then((item) => {
+              var userId = userAccount.id;
+              var infoArr = {"items": [item.id], "quantities": [3]};
+              //const info = JSON.stringify(infoArr);
+              request(app).post(rootPath).send({userId: userId, info: infoArr, PaymentInfoId: payment.id, AddressId: address.id}).expect(200).then((response) => {
+                expect(response.body.status).toEqual('open');
+                done();
+              });
+            });
           });
         });
       });
