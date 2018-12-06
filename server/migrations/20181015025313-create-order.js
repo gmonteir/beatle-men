@@ -24,21 +24,24 @@ module.exports = {
         references: {
           model: 'UserAccounts',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       PaymentInfoId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'PaymentInfos',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
       AddressId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Addresses',
           key: 'id'
-        }
+        },
+        onDelete: 'CASCADE'
       },
     });
   },
