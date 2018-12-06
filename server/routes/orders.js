@@ -2,6 +2,8 @@ const express = require('express');
 const { Order } = require('../models');
 const { Item } = require('../models');
 const { UserAccount } = require('../models');
+const { Address } = require('../models');
+const { PaymentInfo } = require('../models');
 const { OrderItem } = require('../models');
 const router = express.Router();
 
@@ -19,7 +21,7 @@ router
   .post((req, res) => {
     // userId is the id of the user placing the order
     // info contains the items and quantities in an array
-    const { userId, info} = req.body;
+    const { userId, info, PaymentInfoId, AddressId} = req.body;
     const infoArr = info;
 
     //create a new order
@@ -29,19 +31,25 @@ router
     
     order.save().then(() => {
       UserAccount.findById(userId).then((user) => {
-        order.setUserAccount(user);
-        order.save().then(() => {
-          // create each order item based on the items and quantities given
-          for(let i = 0; i < infoArr["items"].length; i++){
-            Item.findById(infoArr["items"][i]).then((item) =>{
-              item.addOrder(order, { through: { price: item.price, quantity: infoArr["quantities"][i] } });
-              item.save();
-              // decrement the quantity for the item ordered
-              const itemToUpdate = item;
-              itemToUpdate.quantity = itemToUpdate.quantity - infoArr["quantities"][i];
-              itemToUpdate.save();
+        Address.findById(AddressId).then((address) => {
+          PaymentInfo.findById(PaymentInfoId).then((payment) => {
+            order.setUserAccount(user);
+            order.setAddress(address);
+            order.setPaymentInfo(payment);
+            order.save().then(() => {
+              // create each order item based on the items and quantities given
+              for(let i = 0; i < infoArr["items"].length; i++){
+                Item.findById(infoArr["items"][i]).then((item) =>{
+                  item.addOrder(order, { through: { price: item.price, quantity: infoArr["quantities"][i] } });
+                  item.save();
+                  // decrement the quantity for the item ordered
+                  const itemToUpdate = item;
+                  itemToUpdate.quantity = itemToUpdate.quantity - infoArr["quantities"][i];
+                  itemToUpdate.save();
+                });
+              }
             });
-          }
+          });
         });
       });
       res.json(order);

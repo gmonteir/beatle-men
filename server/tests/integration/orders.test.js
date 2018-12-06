@@ -4,7 +4,9 @@ const truncate = require('../truncate');
 const { Order } = require('../../models');
 const { UserAccount } = require('../../models');
 const { Item } = require('../../models');
-const { OrderItem } = require('../../models')
+const { OrderItem } = require('../../models');
+const { Address } = require('../../models');
+const { PaymentInfo } = require('../../models');
 const rootPath = '/orders';
 
 describe('/orders', () => {
@@ -136,45 +138,61 @@ describe('/orders', () => {
   });
   describe('POST /', () => {
     it('should create an order with item and quantity', (done) => {
-      UserAccount.create({
-        email: 'test',
-      }).then((userAccount) => {
-        Item.create({
-          name: 'product',
-          quantity: 100,
-          price: 99.99,
-        }).then((item) => {
-          var userId = userAccount.id;
-          var infoArr = {"items": [item.id], "quantities": [3]};
-          const info = JSON.stringify(infoArr);
-          request(app).post(rootPath).send({userId: userId, info: info}).expect(200).then((response) => {
-            expect(response.body.status).toEqual('open');
-            done();
+      Address.create({
+        state: 'ca',
+      }).then((address) => {
+        PaymentInfo.create({
+          name: 'test'
+        }).then((payment) => {
+          UserAccount.create({
+            email: 'test',
+          }).then((userAccount) => {
+            Item.create({
+              name: 'product',
+              quantity: 100,
+              price: 99.99,
+            }).then((item) => {
+              var userId = userAccount.id;
+              var infoArr = {"items": [item.id], "quantities": [3]};
+              //const info = JSON.stringify(infoArr);
+              request(app).post(rootPath).send({userId: userId, info: infoArr, PaymentInfoId: payment.id, AddressId: address.id}).expect(200).then((response) => {
+                expect(response.body.status).toEqual('open');
+                done();
+              });
+            });
           });
         });
       });
     });
 
-    it('should create an order with items and quantities', (done) => {
-      UserAccount.create({
-        email: 'test',
-      }).then((userAccount) => {
-        Item.create({
-          name: 'product',
-          quantity: 83,
-          price: 99.99,
-        }).then((item_one) => {
-          Item.create({
-            name: 'product2',
-            quantity: 50,
-            price: 24.99,
-          }).then((item_two) => {
-            var userId = userAccount.id;
-            var infoArr = {"items": [item_one.id, item_two.id], "quantities": [3, 5]};
-            const info = JSON.stringify(infoArr);
-            request(app).post(rootPath).send({userId: userId, info: info}).expect(200).then((response) => {
-              expect(response.body.status).toEqual('open');
-              done();
+    it.only('should create an order with items and quantities', (done) => {
+      Address.create({
+        state: 'ca',
+      }).then((address) => {
+        PaymentInfo.create({
+          name: 'test'
+        }).then((payment) => {
+          UserAccount.create({
+            email: 'test',
+          }).then((userAccount) => {
+            Item.create({
+              name: 'product',
+              quantity: 83,
+              price: 99.99,
+            }).then((item_one) => {
+              Item.create({
+                name: 'product2',
+                quantity: 50,
+                price: 24.99,
+              }).then((item_two) => {
+                var userId = userAccount.id;
+                var infoArr = {"items": [item_one.id, item_two.id], "quantities": [3, 5]};
+                //const info = JSON.stringify(infoArr);
+                request(app).post(rootPath).send({userId: userId, info: infoArr, PaymentInfoId: payment.id, AddressId: address.id}).expect(200).then((response) => {
+                  expect(response.body.status).toEqual('open');
+                  done();
+                });
+              });
             });
           });
         });
