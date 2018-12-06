@@ -52,7 +52,9 @@
               <p>{{item.quantity}}</p>
             </div>
             <div class="column is-1" id="center">
-              <button class="button is-warning" v-on:click="editItem(item)">Edit</button>
+              <router-link to="/add-item">
+                <button class="button is-warning" v-on:click="editItem(item)">Edit</button>
+              </router-link>
             </div>
             <div class="column is-1" id="center">
               <button class="delete" v-on:click="removeItem(item)"></button>
@@ -85,13 +87,12 @@ export default {
       return str.substring(0, 30) + '...';
     },
     editItem(item) {
-      /*
-      axios.put(`/api/items/${item.id}`, {
-
-      }).then((res) => {
-
-        });
-      */
+      this.$store.state.editItem.id = item.id;
+      this.$store.state.editItem.name = item.name;
+      this.$store.state.editItem.price = item.price;
+      this.$store.state.editItem.quantity = item.quantity;
+      this.$store.state.editItem.description = item.description;
+      this.$store.state.editItem.specifications = item.specifications;
     },
     removeItem(item) {
       axios.delete(`/api/items/${item.id}`)

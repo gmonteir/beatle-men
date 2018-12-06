@@ -21,6 +21,14 @@ export default new Vuex.Store({
     },
     users: [],
     cards: [],
+    editItem: {
+      id: null,
+      name: null,
+      price: null,
+      quantity: null,
+      description: null,
+      specifications: null,
+    },
     storeInfo: {
       title: 'Foxcycle San Luis Obispo',
       addressLine1: '123 Higuera St',
