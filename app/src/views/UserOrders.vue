@@ -5,7 +5,7 @@
         <h1 class="title is-1">My Orders</h1>
       </div>
     </section>
-    <order-item-user />
+    <show-orders/>
   </div>
 </template>
 

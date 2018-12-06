@@ -40,11 +40,11 @@
             <p class="help is-success" v-if="isAddedToCart">Added to Cart Successfully!</p>
             <p class="help is-danger" v-if="isOutOfStock">Sorry, this item is out of stock</p>
           </div>
-          <div class="review-section">
+          <div>
             <label class="label" v-show="reviews != null && reviews.length > 0">Reviews</label>
-            <ul>
+            <ul class="review-section">
               <li v-for="review in reviews" v-bind:key="review.id">
-                <article class="message">
+                <article class="message" id="review">
                   <div class="message-header">
                     <p>
                       {{review.firstName}}
@@ -60,7 +60,7 @@
                       </span>
                     </p>
                   </div>
-                  <div class="message-body">
+                  <div class="message-body" id="review-message">
                     {{review.description}}
                   </div>
                 </article>
@@ -184,5 +184,11 @@ $modal-content-width: 1500px;
 }
 #stars {
   color: gold;
+}
+#review {
+  margin-bottom: 10px;
+}
+#review-message {
+  border: 1px solid black;
 }
 </style>
