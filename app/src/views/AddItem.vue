@@ -249,8 +249,7 @@ export default {
       if (!files.length) {
         return;
       }
-      const { image } = files;
-      this.image = image;
+      this.image = files[0];
     },
     submitCategory() {
       if (this.categoryButton) {

@@ -12,6 +12,7 @@
                 <img :src="'api/' + item.image"/>
               </div>
               <h1 class="title is-4 spacing">Quantity Available: {{item.quantity}}</h1>
+              <p class="subtitle is-6" v-if="showBikeMessage">*Purchased bikes may only be picked up in store</p>
             </div>
           </section>
         </div>
@@ -41,7 +42,8 @@
             <p class="help is-danger" v-if="isOutOfStock">Sorry, this item is out of stock</p>
           </div>
           <div>
-            <label class="label" v-show="reviews != null && reviews.length > 0">Reviews</label>
+            <label class="label" v-if="reviews != null && reviews.length > 0">Reviews</label>
+            <label class="label" v-else>There are no reviews for this product</label>
             <ul class="review-section">
               <li v-for="review in reviews" v-bind:key="review.id">
                 <article class="message" id="review">
@@ -89,6 +91,8 @@ export default {
   data() {
     return {
       reviews: [],
+      categoryId: null,
+      showBikeMessage: false,
       isAddedToCart: false,
       isOutOfStock: false,
       overallRating: null,
@@ -105,6 +109,19 @@ export default {
         this.getOverallRating(res.data.reviews);
       }
     });
+
+    axios.get('/api/categories')
+      .then((res) => {
+        for (let i = 0; i < res.data.categories.length; i += 1) {
+          if (res.data.categories[i].label.toLowerCase() === 'bike' ||
+            res.data.categories[i].label.toLowerCase() === 'bikes' ||
+            res.data.categories[i].label.toLowerCase() === 'bicycle' ||
+            res.data.categories[i].label.toLowerCase() === 'bicycles') {
+              this.categoryId = res.data.categories[i].id;
+              this.itemIsBike();
+            }
+        }
+      });
   },
   methods: {
     addToCart() {
@@ -132,6 +149,17 @@ export default {
         total += reviews[i].rating;
       }
       this.overallRating = Math.floor(total / reviews.length);
+    },
+    itemIsBike() {
+      axios.get('/api/productcategories')
+        .then((res) => {
+          for (let i = 0; i < res.data.productCategories.length; i += 1) {
+            if (res.data.productCategories[i].itemId === this.item.id &&
+              res.data.productCategories[i].categoryId === this.categoryId) {
+                this.showBikeMessage = true;
+              }
+          }
+        });
     },
   },
 };
