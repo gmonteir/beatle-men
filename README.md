@@ -38,5 +38,3 @@ To run:
  - start server: `npm run start`
 To test:
 
-=======
->>>>>>> 07ca5f29b11649a4a5a7ddf3ee88d018c20e101b
