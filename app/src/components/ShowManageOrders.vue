@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="show-manage-orders">
     <section class="smallMargin">
       <div class="columns">
         <div class="column is-one-fifth columnOne">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </section>
-    </section>    
+    </section>
   </div>
 </template>
 
@@ -44,7 +44,9 @@
 export default {
   name: 'show-manage-orders',
   data() {
+    return {
 
+    };
   },
   mounted() {
     /*
@@ -54,11 +56,11 @@ export default {
       });
     */
   },
-}
+};
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 @import "../../node_modules/bulma/bulma.sass";
 
 .hero {

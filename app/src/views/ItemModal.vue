@@ -101,11 +101,13 @@ export default {
     };
   },
   mounted() {
+    console.log('here');
     axios.get('/api/reviews', {
       params: {
         ItemId: this.item.id,
       },
     }).then((res) => {
+      console.log('in then', res.data.reviews);
       this.reviews = res.data.reviews;
       if (res.data.reviews != null && res.data.reviews.length > 0) {
         this.getOverallRating(res.data.reviews);

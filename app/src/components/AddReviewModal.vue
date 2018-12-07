@@ -63,7 +63,7 @@ export default {
   },
   props: {
     itemId: {
-      type: Object,
+      type: Number,
     },
   },
   methods: {
