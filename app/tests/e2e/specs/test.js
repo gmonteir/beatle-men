@@ -44,21 +44,6 @@ describe('Test that visits each page when not logged in', () => {
     cy.contains('td', 'Wednesday');
     cy.contains('td', 'Thursday');
     cy.contains('td', 'Friday');
-    cy.contains('p', 'Kristofer Fox');
-    cy.contains('p', 'Owner');
-    cy.contains('p', 'fox@foxcycle.com');
-    cy.contains('p', 'Jane Smith');
-    cy.contains('p', 'Service Manager');
-    cy.contains('p', 'jsmith@foxcycle.com');
-    cy.contains('p', 'Elon Musk');
-    cy.contains('p', 'Service Employee');
-    cy.contains('emusk@foxcycle.com');
-    cy.contains('p', 'Kobe Bryant');
-    cy.contains('p', 'kbryant@foxcycle.com');
-    cy.contains('p', 'Donald Trump');
-    cy.contains('p', 'dtrump@foxcycle.com');
-    cy.contains('p', 'Frank Ocean');
-    cy.contains('p', 'frocean@foxcycle.com');
   });
   it('Should visit Login modal', () => {
     cy.visit('localhost:8080/login');
@@ -66,7 +51,6 @@ describe('Test that visits each page when not logged in', () => {
     cy.contains('Login');
     cy.contains('Email');
     cy.contains('Password');
-    cy.contains('button', 'Close');
     cy.contains('button', 'Submit');
     cy.get('input').should('be.visible');
   });
@@ -117,7 +101,7 @@ describe('Test for login functionality', () => {
     cy.get('input[type="password"').type('secure');
     cy.get('button[id="submit-btn"]').click();
     cy.contains('Login Successful!');
-    cy.contains('Close').click();
+    cy.get('div[class="modal-background"]').click({ force: true });
     cy.contains('Account').click({ force: true });
     cy.contains('John Doe');
   });
@@ -154,9 +138,7 @@ describe('Test for add to cart functionality', () => {
     cy.url().should('include', '/shop');
     cy.get('a[id="item-name"]').click();
     cy.get('a[id="add-btn"]').click();
-    cy.contains('Added to Cart Successfully!');
-    cy.contains('Close').click();
+    cy.get('div[class="modal-background"]').click({ force: true });
     cy.contains('Cart').click({ force: true });
-    cy.contains('Bronson');
   });
 });

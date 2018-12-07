@@ -44,7 +44,13 @@ router.route('/:id')
         res.json({ delete: true });
       });
     });
-});
+  })
+  .get((req, res) => {
+    const userId = req.params.id;
+    UserAccount.findById(userId).then((user) => {
+      res.json(user);
+    });
+  });
 
 router.route('/changeemail').put((req, res) => {
   const { currentEmail, newEmail, currentPassword } = req.body;
