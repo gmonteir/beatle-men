@@ -6,8 +6,7 @@ const router = express.Router();
 router
   .route('/')
   .get((req, res) => {
-    const { orderId } = req.body;
-    OrderItem.findAll({where: { orderId: orderId }}).then((orderItems) => {
+    OrderItem.findAll({ where: { orderId: req.query.orderId } }).then((orderItems) => {
       res.json({
         orderItems: orderItems || [],
       });
