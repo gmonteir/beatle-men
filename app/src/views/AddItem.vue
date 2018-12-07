@@ -18,17 +18,6 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Brand</label>
-        <div id="brand" class="control">
-          <input class="input"
-            id="input"
-            type="text"
-            v-model="brand"
-            v-bind:class="{'is-danger': brandInvalid === true, 'is-normal': brandInvalid === false}"
-          />
-        </div>
-      </div>
-      <div class="field">
         <label class="label">Price</label>
         <div id="price" class="control">
           <input class="input"
@@ -52,8 +41,9 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Category</label>
-        <div class="columns" style="width:50%">
+        <label class="label" v-if="!editItem">Category</label>
+        <label class="label" v-else>Category (Disabled)</label>
+        <div class="columns" style="width:50%" v-if="!editItem">
           <div class="column">
             <div id="dropdown" class="control">
               <div class="select"
@@ -122,8 +112,9 @@
         </div>
       </div>
       <div class="field">
-        <label class="label">Image</label>
-        <div class="file is-fullwidth" v-bind:class="{'is-danger': imageInvalid === true,
+        <label class="label" v-if="!editItem">Image</label>
+        <label class="label" v-else>Image (Disabled)</label>
+        <div class="file is-fullwidth" v-if="!editItem" v-bind:class="{'is-danger': imageInvalid === true,
           'is-normal': imageInvalid === false}">
           <label class="file-label">
             <input class="file-input"
@@ -171,6 +162,9 @@
       </div>
       <div class="buttons" id="buttons">
         <button class="button is-success" v-on:click="submit">Submit</button>
+        <router-link to="/inventory">
+          <button class="button">Return to Inventory</button>
+        </router-link>
       </div>
     </div>
   </div>
@@ -184,7 +178,6 @@ export default {
   data() {
     return {
       name: null,
-      brand: null,
       price: null,
       quantity: null,
       chosenCategory: 'Select',
@@ -200,8 +193,8 @@ export default {
       specifications: null,
       description: null,
 
+      editItem: false,
       nameInvalid: null,
-      brandInvalid: null,
       priceInvalid: null,
       quantityInvalid: null,
       categoryInvalid: null,
@@ -213,6 +206,14 @@ export default {
   },
   mounted() {
     this.categoryList = this.getCategories(this.categoryParentID);
+    if (this.$store.state.editItem.id) {
+      this.name = this.$store.state.editItem.name;
+      this.price = this.$store.state.editItem.price;
+      this.quantity = this.$store.state.editItem.quantity;
+      this.description = this.$store.state.editItem.description;
+      this.specifications = this.$store.state.editItem.specifications;
+      this.editItem = true;
+    }
   },
   watch: {
     chosenCategory() {
@@ -249,8 +250,7 @@ export default {
       if (!files.length) {
         return;
       }
-      const { image } = files;
-      this.image = image;
+      this.image = files[0];
     },
     submitCategory() {
       if (this.categoryButton) {
@@ -277,66 +277,82 @@ export default {
     },
     submit() {
       if (this.isFormValid()) {
-        const form = new FormData();
-        form.append('image', this.image, this.image.name);
-        form.append('name', this.name);
-        form.append('price', this.price);
-        form.append('quantity', this.quantity);
-        form.append('description', this.description);
-        form.append('specifications', this.specifications);
-
-        if (this.subcategoryList != null && this.subcategoryList.length > 0) {
-          const temp = this.chosenCategory + ',' + this.chosenSubcategory; // eslint-disable-line prefer-template
-          form.append('labels', temp);
-        } else {
-          form.append('labels', this.chosenCategory);
-        }
-
-        const config = {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        };
-        axios.post('/api/items', form, config)
-          .then((res) => {
+        if (this.editItem) {
+          axios.put(`/api/items/${this.$store.state.editItem.id}`, {
+            name: this.name,
+            price: this.price,
+            quantity: this.quantity,
+            description: this.description,
+            specifications: this.specifications,
+          }).then((res) => {
             this.name = null;
-            this.brand = null;
             this.price = null;
             this.quantity = null;
-            this.chosenCategory = 'Select';
-            this.chosenSubcategory = 'Select';
-            this.categoryParentID = -1;
-            this.categoryList = this.getCategories(this.categoryParentID);
-            this.subcategoryList = null;
-            this.categoryButton = false;
-            this.subcategoryButton = false;
-            this.image = null;
-            this.specifications = null;
             this.description = null;
+            this.specifications = null;
+            this.$store.state.editItem.id = null;
+            this.$store.state.editItem.name = null;
+            this.$store.state.editItem.price = null;
+            this.$store.state.editItem.quantity = null;
+            this.$store.state.editItem.description = null;
+            this.$store.state.editItem.specifications = null;
           });
+        } else {
+          const form = new FormData();
+          form.append('image', this.image, this.image.name);
+          form.append('name', this.name);
+          form.append('price', this.price);
+          form.append('quantity', this.quantity);
+          form.append('description', this.description);
+          form.append('specifications', this.specifications);
+
+          if (this.subcategoryList != null && this.subcategoryList.length > 0) {
+            const temp = this.chosenCategory + ',' + this.chosenSubcategory; // eslint-disable-line prefer-template
+            form.append('labels', temp);
+          } else {
+            form.append('labels', this.chosenCategory);
+          }
+
+          const config = {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          };
+          axios.post('/api/items', form, config)
+            .then((res) => {
+              this.name = null;
+              this.price = null;
+              this.quantity = null;
+              this.chosenCategory = 'Select';
+              this.chosenSubcategory = 'Select';
+              this.categoryParentID = -1;
+              this.categoryList = this.getCategories(this.categoryParentID);
+              this.subcategoryList = null;
+              this.categoryButton = false;
+              this.subcategoryButton = false;
+              this.image = null;
+              this.specifications = null;
+              this.description = null;
+            });
+        }
       }
       this.findInvalidField();
     },
     isFormValid() {
       return (this.name != null && this.name !== '') &&
-        (this.brand != null && this.brand !== '') &&
         (this.price != null && this.price !== '') &&
         (this.quantity != null && this.quantity !== '') &&
-        (this.chosenCategory !== 'Select') &&
-        (this.chosenSubcategory !== 'Select' || this.subcategoryList == null || this.subcategoryList.length === 0) &&
-        (this.image != null && this.image !== '') &&
-        (this.description != null && this.description !== '');
+        (this.chosenCategory !== 'Select' || this.editItem) &&
+        (this.chosenSubcategory !== 'Select' || this.subcategoryList == null || this.subcategoryList.length === 0 || this.editItem) &&
+        ((this.image != null && this.image !== '') || this.editItem) &&
+        (this.description != null && this.description !== '') &&
+        (this.specifications != null && this.specifications !== '');
     },
     findInvalidField() {
       if (this.name == null || this.name === '') {
         this.nameInvalid = true;
       } else {
         this.nameInvalid = false;
-      }
-      if (this.brand == null || this.brand === '') {
-        this.brandInvalid = true;
-      } else {
-        this.brandInvalid = false;
       }
       if (this.price == null || this.price === '') {
         this.priceInvalid = true;
@@ -349,17 +365,29 @@ export default {
         this.quantityInvalid = false;
       }
       if (this.chosenCategory === 'Select') {
-        this.categoryInvalid = true;
+        if (this.editItem) {
+          this.categoryInvalid = false;
+        } else {
+          this.categoryInvalid = true;
+        }
       } else {
         this.categoryInvalid = false;
       }
       if (this.chosenSubcategory === 'Select' && this.subcategoryList != null && this.subcategoryList.length > 0) {
-        this.subcategoryInvalid = true;
+        if (this.editItem) {
+          this.subCategoryInvalid = false;
+        } else {
+          this.subCategoryInvalid = true;
+        }
       } else {
         this.subcategoryInvalid = false;
       }
       if (this.image == null || this.image === '') {
-        this.imageInvalid = true;
+        if (this.editItem) {
+          this.imageInvalid = false;
+        } else {
+          this.imageInvalid = true;
+        }
       } else {
         this.imageInvalid = false;
       }

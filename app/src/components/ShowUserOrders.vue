@@ -1,5 +1,9 @@
 <template>
   <div>
+    <add-review-modal v-bind:itemId="1"
+      v-if="isAddReviewModalOpen"
+      v-on:close="isAddReviewModalOpen = false"
+    />
     <section class="smallMargin">
       <div class="columns">
         <div class="column is-one-fifth columnOne">
@@ -10,6 +14,14 @@
         </div>
         <div class="column is-one-fifth columnOne">
           <h1 class="title is-4">Date: 11-28-2018</h1>
+        </div>
+        <div class="column is-one-fifth columnOne">
+          <button
+            class="button is-outlined"
+            id="edit-btn"
+            v-on:click="openAddReviewModal">
+            Add Review
+          </button>
         </div>
       </div>
     </section>
@@ -36,6 +48,33 @@
     </section>    
   </div>
 </template>
+
+<script>
+import AddReviewModal from './AddReviewModal.vue';
+
+export default {
+  name: 'show-user-orders',
+  props: {
+    item: {
+      type: Object,
+    }
+  },
+  components: {
+    AddReviewModal,
+  },
+  data() {
+    return {
+      isAddReviewModalOpen: null,
+    };
+  },
+  methods: {
+    openAddReviewModal() {
+      this.isAddReviewModalOpen = true;
+    }
+  }
+}
+</script>
+
 
 <style>
 @import "../../node_modules/bulma/bulma.sass";

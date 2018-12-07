@@ -28,12 +28,10 @@ router
 
 router
   .route('/:id')
-  .all(authenticated)
   .all((req, res, next) => {
     Category.findOne({
       where: {
         id: req.params.id,
-        userId: req.authenticatedUser.id,
       },
     }).then((categories) => {
       if (categories) {

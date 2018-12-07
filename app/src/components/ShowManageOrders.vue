@@ -40,6 +40,24 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'show-manage-orders',
+  data() {
+
+  },
+  mounted() {
+    /*
+    axios.get('/api/orders')
+      .then((res) => {
+
+      });
+    */
+  },
+}
+</script>
+
+
 <style>
 @import "../../node_modules/bulma/bulma.sass";
 
