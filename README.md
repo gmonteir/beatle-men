@@ -30,11 +30,13 @@ To run e2e tests:
  - click `test.js` in the cypress GUI
 ### Back-End (Server Directory):
 To run:
- - start your mysql server
+
+start your mysql server
  - run `sequelize db:create`
  - run `sequelize db:migrate`
  - run `sequelize db:seed:all`
  - start server: `npm run start`
+
 To test:
  - run `sequelize db:create --env=test`
  - run `sequelize db:migrate --env=test`
