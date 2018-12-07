@@ -243,7 +243,7 @@ export default {
     axios.get('/api/addresses/' + this.$store.state.userId + '/customer').then((success) => {
       this.$store.commit('addAddresses', success.data.addresses);
     });
-    axios.get('/api/paymentinfo/' + this.$store.state.userId + 'customer').then((success) => {
+    axios.get('/api/paymentinfo/' + this.$store.state.userId + '/customer').then((success) => {
       this.$store.commit('addCards', success.data.cards);
     });
   },
