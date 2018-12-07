@@ -7,6 +7,8 @@ const { PaymentInfo } = require('../models');
 const { OrderItem } = require('../models');
 const router = express.Router();
 
+const orderItemsGlobal = [];
+
 router
 
   .route('/')
@@ -23,36 +25,33 @@ router
     // info contains the items and quantities in an array
     const { userId, info, PaymentInfoId, AddressId} = req.body;
     const infoArr = info;
-
     //create a new order
     const order = Order.build({
       status: 'open',
     });
-    
-    order.save().then(() => {
+    order.save().then(() =>{
       UserAccount.findById(userId).then((user) => {
         Address.findById(AddressId).then((address) => {
           PaymentInfo.findById(PaymentInfoId).then((payment) => {
-            order.setUserAccount(user);
-            order.setAddress(address);
-            order.setPaymentInfo(payment);
-            order.save().then(() => {
-              // create each order item based on the items and quantities given
-              for(let i = 0; i < infoArr["items"].length; i++){
-                Item.findById(infoArr["items"][i]).then((item) =>{
-                  item.addOrder(order, { through: { price: item.price, quantity: infoArr["quantities"][i] } });
-                  item.save();
-                  // decrement the quantity for the item ordered
-                  const itemToUpdate = item;
-                  itemToUpdate.quantity = itemToUpdate.quantity - infoArr["quantities"][i];
-                  itemToUpdate.save();
+            order.setUserAccount(user).then(() => {
+              order.setAddress(address).then(() => {
+                order.setPaymentInfo(payment).then(() => {
+                  Promise.all(infoArr["items"].map( function(itemId, i) {
+                    return Item.findById(itemId).then((item) => {
+                      return item.addOrder(order, { through: { price: item.price, quantity: infoArr["quantities"][i] } }).then(() => {
+                        const itemToUpdate = item;
+                        itemToUpdate.quantity = itemToUpdate.quantity - infoArr["quantities"][i];
+                        return itemToUpdate.save();
+                      });
+                    });
+                  }));
+                  res.json(order);
                 });
-              }
+              });
             });
           });
         });
       });
-      res.json(order);
     });
   });
 
@@ -96,11 +95,25 @@ router
   .route('/:id/customer')
   .get((req, res) => {
     Order.findAll({where: { UserAccountId: req.params.id }}).then((orders) => {
-      res.json({
-        orders: orders || [],
+
+      Promise.all(orders.map(function(order){
+        return OrderItem.findAll({ where: { orderId: order.id } }).then((orderItems) => {
+          return orderItems;
+        });
+      })).then((returnedOrderItems) => {
+        Promise.all(returnedOrderItems.map(function(orderItemsFromOrder){
+          return Promise.all(orderItemsFromOrder.map(function(orderItemFromArr){
+            return Item.findById(orderItemFromArr.ItemId).then((item) => {
+              return item;
+            });
+          }));
+        })).then((returnedItems) => {
+          res.json({orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems});
+        });
       });
     });
   });
+
 
 
 module.exports = router;
