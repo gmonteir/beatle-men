@@ -32,7 +32,7 @@ router
       Address.findOne({where: { UserAccountId: user.id, street1: street1, street2: street2, city: city, state: state, zip: zip } }).then(address => {
         // if address already exists in database, return error
         if (address) {
-          res.status(400).json({ error: 'error' });
+          res.status(401).json({ error: 'error' });
         } 
         else { // otherwise create new address in db
           const newAddress = Address.build({
@@ -41,7 +41,7 @@ router
             street2: street2,
             city: city,
             state: state,
-            zip: zip
+            zip: zip,
           })
 
           // save address to db and return it
@@ -89,5 +89,17 @@ router
       });
     });
   });
+
+router
+  .route('/:id/customer')
+  // get all addresses from user id
+  .get((req, res) => {
+    const givenId = req.params.id;
+    Address.findAll({where: { UserAccountId: givenId } }).then((addresses) => {
+      res.json({
+        addresses: addresses || [],
+      });
+    });
+})
 
 module.exports = router;
