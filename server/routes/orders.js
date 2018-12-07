@@ -12,8 +12,26 @@ router
   .route('/')
   .get((req, res) => {
     Order.findAll().then((orders) => {
-      res.json({
-        orders: orders || [],
+      Promise.all(orders.map((order) => {
+        return OrderItem.findAll({ where: { orderId: order.id } }).then((orderItems) => {
+          return orderItems;
+        });
+      })).then((returnedOrderItems) => {
+        Promise.all(returnedOrderItems.map((orderItemsFromOrder) => {
+          return Promise.all(orderItemsFromOrder.map((orderItemFromArr) => {
+            return Item.findById(orderItemFromArr.ItemId).then((item) => {
+              return item;
+            });
+          }));
+        })).then((returnedItems) => {
+          Promise.all(orders.map(function(orderToGetUser){
+            return UserAccount.findById(orderToGetUser.UserAccountId).then((user) =>{
+              return user;
+            });
+          })).then((users) =>{
+            res.json({ orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems , users});
+          });
+        });
       });
     });
   })

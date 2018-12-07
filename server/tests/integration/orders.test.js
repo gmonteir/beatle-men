@@ -199,7 +199,7 @@ describe('/orders', () => {
       });
     });
 
-    it.only('should create an order with items and quantities', (done) => {
+    it('should create an order with items and quantities', (done) => {
       Address.create({
         state: 'ca',
       }).then((address) => {
@@ -237,6 +237,60 @@ describe('/orders', () => {
                       expect(response.body.itemsArr[0].length).toEqual(2);
                       expect(response.body.itemsArr[1].length).toEqual(2);
                       done();
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
+
+    it.only('should return all of the orders', (done) => {
+      Address.create({
+        state: 'ca',
+      }).then((address) => {
+        PaymentInfo.create({
+          name: 'test'
+        }).then((payment) => {
+          UserAccount.create({
+            email: 'test',
+          }).then((userAccount) => {
+            Item.create({
+              name: 'product',
+              quantity: 83,
+              price: 99.99,
+            }).then((item_one) => {
+              Item.create({
+                name: 'product2',
+                quantity: 50,
+                price: 24.99,
+              }).then((item_two) => {
+                UserAccount.create({
+                  email: 'another'
+                }).then((userAccounttwo) => {
+                  var userId = userAccount.id;
+                  var infoArr = {"items": [item_one.id, item_two.id], "quantities": [3, 5]};
+                  var infoArrTwo = {"items": [item_one.id, item_two.id], "quantities": [1, 1]};
+                  //const info = JSON.stringify(infoArr);
+                  request(app).post(rootPath).send({userId: userId, info: infoArr, PaymentInfoId: payment.id, AddressId: address.id}).expect(200).then((orderone) => {
+                    request(app).post(rootPath).send({userId: userAccounttwo.id, info: infoArrTwo, PaymentInfoId: payment.id, AddressId: address.id}).expect(200).then((ordertwo) => {
+                      request(app).get(rootPath).expect(200).then((response) => {
+                        console.log(response.body.orders);
+                        console.log(response.body.orderItemsArr);
+                        console.log(response.body.itemsArr);
+                        console.log(response.body.users);
+                        expect(response.body.orders.length).toEqual(2);
+                        expect(response.body.orderItemsArr.length).toEqual(2);
+                        expect(response.body.orderItemsArr[0].length).toEqual(2);
+                        expect(response.body.orderItemsArr[1].length).toEqual(2);
+                        expect(response.body.itemsArr.length).toEqual(2);
+                        expect(response.body.itemsArr[0].length).toEqual(2);
+                        expect(response.body.itemsArr[1].length).toEqual(2);
+                        expect(response.body.users.length).toEqual(2);
+                        done();
+                      });
                     });
                   });
                 });
