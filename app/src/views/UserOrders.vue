@@ -5,12 +5,17 @@
         <h1 class="title is-1">My Orders</h1>
       </div>
     </section>
-    <show-orders/>
+    <show-orders
+      v-for="order in orders"
+      v-bind:key="order.id"
+      v-bind:order="order"
+      v-bind:items="items"
+    />
   </div>
 </template>
 
 <script>
-
+import axios from 'axios';
 import ShowOrders from './../components/ShowUserOrders.vue';
 
 export default {
@@ -18,6 +23,44 @@ export default {
   components: {
     ShowOrders,
   },
+  mounted() {
+    axios.get(`/api/orders/${this.$store.state.userId}/customer`)
+      .then((res) => {
+        console.log('orders:' + res.data.orders);
+        this.orders = res.data.orders;
+        this.getOrderContents(res.data.orders);
+      });
+  },
+  data() {
+    return {
+      orders: [],
+      items: [],
+    };
+  },
+  methods: {
+    getOrderContents(orders) {
+      for (let i = 0; i < orders.length; i += 1) {
+        console.log('orderid:' + orders[i].id);
+        axios.get('/api/orderitems', {
+          params: {
+            orderId: orders[i].id,
+          }
+        }).then((res) => {
+          this.items.push([]);
+          this.items[i].push(orders[i].id);
+          for (let j = 0; j < res.data.orderItems.length; j += 1) {
+            const item = {
+              id: res.data.orderItems[j].ItemId,
+              price: res.data.orderItems[j].price,
+              quantity: res.data.orderItems[j].quantity,
+            }
+            this.items[i].push(item);
+          }
+          console.log(this.items);
+        });
+      }
+    },
+  }
 };
 </script>
 

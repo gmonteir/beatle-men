@@ -114,8 +114,8 @@
       <div class="field">
         <label class="label" v-if="!editItem">Image</label>
         <label class="label" v-else>Image (Disabled)</label>
-        <div class="file is-fullwidth" v-if="!editItem" v-bind:class="{'is-danger': imageInvalid === true,
-          'is-normal': imageInvalid === false}">
+        <div class="file is-fullwidth" v-if="!editItem"
+          v-bind:class="{'is-danger': imageInvalid === true, 'is-normal': imageInvalid === false}">
           <label class="file-label">
             <input class="file-input"
               id="input"
