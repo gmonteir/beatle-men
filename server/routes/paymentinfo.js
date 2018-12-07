@@ -34,7 +34,7 @@ router
       PaymentInfo.findOne({where: { UserAccountId: user.id, name: fullName, number: number, expMonth: month, expYear: year, cvv: cvv } }).then(card => {
         // if card already exists in database, return error
         if (card) {
-          res.status(400).json({ error: 'error' });
+          res.status(401).json({ error: 'error' });
         } 
         else { // otherwise create new card in db
           const newCard = PaymentInfo.build({
@@ -43,7 +43,7 @@ router
             number: number,
             expMonth: month,
             expYear: year,
-            cvv: cvv
+            cvv: cvv,
           })
 
           // save card to db and return it
@@ -90,6 +90,18 @@ router
         res.json({ delete: true });
       });
     });
-  });
+});
+
+router
+  .route('/:id/customer')
+  // get all cards from user id
+  .get((req, res) => {
+    const givenId = req.params.id;
+    PaymentInfo.findAll({where: { UserAccountId: givenId } }).then((cards) => {
+      res.json({
+        cards: cards || [],
+      });
+    });
+})
 
 module.exports = router;
