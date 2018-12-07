@@ -1,6 +1,5 @@
 <template>
-  <div class="column">
-    <div class="card">
+    <div class="card" id="container">
       <div class="card-image">
         <figure class="image is-3by3">
             <img v-bind:src="'api/' + employee.image">
@@ -13,7 +12,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -29,6 +27,11 @@ export default {
 
 <style scoped lang="scss">
 @import "../../node_modules/bulma/bulma.sass";
+
+#container {
+  width: 400px;
+  margin: 10px;
+}
 
 #employees-header {
   text-align: center;

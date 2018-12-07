@@ -44,7 +44,7 @@
     </section>
     <section id="employees" class="section">
       <p class="title is-2" id="employees-header">Staff</p>
-      <div class="columns">
+      <div id="employees-container">
         <employee-card
           v-for="employee in employees"
           v-bind:key="employee.id"
@@ -103,6 +103,7 @@ export default {
 #employees-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 </style>
