@@ -160,6 +160,7 @@ export default new Vuex.Store({
         state.cart.items.push(payload);
         state.cart.totalQuantity += 1;
         state.cart.subtotal += payload.price;
+        state.cart.subtotal = +state.cart.subtotal.toFixed(2);
       }
     },
     clearCart(state) {
