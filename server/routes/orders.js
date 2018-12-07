@@ -7,8 +7,6 @@ const { PaymentInfo } = require('../models');
 const { OrderItem } = require('../models');
 const router = express.Router();
 
-const orderItemsGlobal = [];
-
 router
 
   .route('/')
