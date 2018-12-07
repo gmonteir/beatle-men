@@ -12,7 +12,9 @@
                 <img :src="'api/' + item.image"/>
               </div>
               <h1 class="title is-4 spacing">Quantity Available: {{item.quantity}}</h1>
-              <p class="subtitle is-6" v-if="showBikeMessage">*Purchased bikes may only be picked up in store</p>
+              <p class="subtitle is-6" v-if="showBikeMessage">
+                *Purchased bikes may only be picked up in store
+              </p>
             </div>
           </section>
         </div>
@@ -117,9 +119,9 @@ export default {
             res.data.categories[i].label.toLowerCase() === 'bikes' ||
             res.data.categories[i].label.toLowerCase() === 'bicycle' ||
             res.data.categories[i].label.toLowerCase() === 'bicycles') {
-              this.categoryId = res.data.categories[i].id;
-              this.itemIsBike();
-            }
+            this.categoryId = res.data.categories[i].id;
+            this.itemIsBike();
+          }
         }
       });
   },
@@ -156,8 +158,8 @@ export default {
           for (let i = 0; i < res.data.productCategories.length; i += 1) {
             if (res.data.productCategories[i].itemId === this.item.id &&
               res.data.productCategories[i].categoryId === this.categoryId) {
-                this.showBikeMessage = true;
-              }
+              this.showBikeMessage = true;
+            }
           }
         });
     },
