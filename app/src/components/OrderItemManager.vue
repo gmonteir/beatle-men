@@ -1,5 +1,6 @@
 <template>
-  <div class="columns">
+  <div class="order-item-manager">
+    <div class="columns">
       <div class="column is-2">
         <figure class="image is-128x128">
           <img v-bind:src="item.image">
@@ -20,10 +21,12 @@
         <h1 class="title is-5">${{item.total}}</h1>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
+  name: 'order-item-manager',
   props: {
     item: {
       type: Object,

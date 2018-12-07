@@ -89,31 +89,27 @@ router
     });
   });
 
-  router
+router
   .route('/:id/customer')
   .get((req, res) => {
-    Order.findAll({where: { UserAccountId: req.params.id }}).then((orders) => {
-
-      Promise.all(orders.map(function(order){
+    Order.findAll({ where: { UserAccountId: req.params.id } }).then((orders) => {
+      Promise.all(orders.map((order) => {
         return OrderItem.findAll({ where: { orderId: order.id } }).then((orderItems) => {
           return orderItems;
         });
       })).then((returnedOrderItems) => {
-        Promise.all(returnedOrderItems.map(function(orderItemsFromOrder){
-          return Promise.all(orderItemsFromOrder.map(function(orderItemFromArr){
+        Promise.all(returnedOrderItems.map((orderItemsFromOrder) => {
+          return Promise.all(orderItemsFromOrder.map((orderItemFromArr) => {
             return Item.findById(orderItemFromArr.ItemId).then((item) => {
               return item;
             });
           }));
         })).then((returnedItems) => {
-          res.json({orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems});
+          res.json({ orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems });
         });
       });
     });
   });
 
 
-
 module.exports = router;
-
-
