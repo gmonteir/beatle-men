@@ -35,7 +35,8 @@ start your mysql server
  - run `sequelize db:create`
  - run `sequelize db:migrate`
  - run `sequelize db:seed:all`
- - start server: `npm run start`
+
+start server: `npm run start`
 
 To test:
  - run `sequelize db:create --env=test`
