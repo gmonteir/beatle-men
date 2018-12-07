@@ -15,14 +15,14 @@ describe('/addresses', async () => {
     //return Address.sequelize.close();
   });
 
-  describe('POST /', () => {
+  describe('GET /', () => {
     it('should get the first address', (done) => {
       request(app).get(rootPath + '/1')
         .expect(200);
         done();
     });
     it('should get all addresses', (done) => {
-      request(app).post(rootPath)
+      request(app).get(rootPath)
         .expect(200);
         done();
     });
