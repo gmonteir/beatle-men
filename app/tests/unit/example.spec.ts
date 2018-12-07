@@ -22,8 +22,8 @@ describe('AddressItem.vue', () => {
       street2: 'Apt #000',
       city: 'San Luis Obispo',
       state: 'California',
-      zip: '93405'
-    }
+      zip: '93405',
+    };
     const wrapper = shallowMount(AddressItem, {
       propsData: { address },
     });
@@ -38,21 +38,19 @@ describe('AddressItem.vue', () => {
 describe('CreditCardItem.vue', () => {
   it('renders props.card when passed', () => {
     const card = {
-      firstName: '1234 hello world',
-      lastName: 'Apt #000',
+      name: 'kris fox',
       number: 'San Luis Obispo',
-      month: 'California',
-      year: '93405',
-      cvv: '12345'
-    }
+      expMonth: 'California',
+      expYear: '93405',
+      cvv: '12345',
+    };
     const wrapper = shallowMount(CreditCardItem, {
       propsData: { card },
     });
-    expect(wrapper.text()).to.include(card.firstName);
-    expect(wrapper.text()).to.include(card.lastName);
+    expect(wrapper.text()).to.include(card.name);
     expect(wrapper.text()).to.include(card.number);
-    expect(wrapper.text()).to.include(card.month);
-    expect(wrapper.text()).to.include(card.year);
+    expect(wrapper.text()).to.include(card.expMonth);
+    expect(wrapper.text()).to.include(card.expYear);
     expect(wrapper.text()).to.include(card.cvv);
   });
 });
@@ -65,7 +63,7 @@ describe('CartItem.vue', () => {
       price: '10.00',
       userQuantity: 5,
       total: '50.00',
-    }
+    };
     const wrapper = shallowMount(CartItem, {
       propsData: { item },
     });

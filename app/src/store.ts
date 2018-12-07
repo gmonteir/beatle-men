@@ -18,6 +18,35 @@ export default new Vuex.Store({
       items: [],
       subtotal: 0,
       totalQuantity: 0,
+      containsBike: false,
+      shippingAddress: {
+        id: null,
+        UserAccountId: null,
+        name: null,
+        street1: null,
+        street2: null,
+        city: null,
+        state: null,
+        zip: null,
+      },
+      billingAddress: {
+        id: null,
+        UserAccountId: null,
+        name: null,
+        street1: null,
+        street2: null,
+        city: null,
+        state: null,
+        zip: null,
+      },
+      creditCard: {
+        id: null,
+        name: null,
+        number: null,
+        expMonth: null,
+        expYear: null,
+        cvv: null,
+      },
     },
     users: [],
     cards: [],
@@ -153,6 +182,41 @@ export default new Vuex.Store({
       state.storeInfo.saturdayClose = payload.saturdayClose;
       state.storeInfo.sundayOpen = payload.sundayOpen;
       state.storeInfo.sundayClose = payload.sundayClose;
+    },
+    changeShippingAddress(state, payload) {
+      state.cart.shippingAddress.id = payload.id;
+      state.cart.shippingAddress.UserAccountId = payload.UserAccountId;
+      state.cart.shippingAddress.street1 = payload.street1;
+      state.cart.shippingAddress.street2 = payload.street2;
+      state.cart.shippingAddress.city = payload.city;
+      state.cart.shippingAddress.state = payload.state;
+      state.cart.shippingAddress.zip = payload.zip;
+    },
+    changeShippingAddressName(state, payload) {
+      state.cart.shippingAddress.name = payload.firstName + " " + payload.lastName;
+    },
+    changeBillingAddress(state, payload) {
+      state.cart.billingAddress.id = payload.id;
+      state.cart.billingAddress.UserAccountId = payload.UserAccountId;
+      state.cart.billingAddress.street1 = payload.street1;
+      state.cart.billingAddress.street2 = payload.street2;
+      state.cart.billingAddress.city = payload.city;
+      state.cart.billingAddress.state = payload.state;
+      state.cart.billingAddress.zip = payload.zip;
+    },
+    changeBillingAddressName(state, payload) {
+      state.cart.billingAddress.name = payload.firstName + " " + payload.lastName;
+    },
+    changeCardInCart(state, payload) {
+      state.cart.creditCard.id = payload.id;
+      state.cart.creditCard.name = payload.name;
+      state.cart.creditCard.number = payload.number;
+      state.cart.creditCard.expMonth = payload.expMonth;
+      state.cart.creditCard.expYear = payload.expYear;
+      state.cart.creditCard.cvv = payload.cvv;
+    },
+    changeCartBikeStatus(state, payload) {
+      state.cart.containsBike = payload;
     }
   },
   actions: {
