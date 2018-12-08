@@ -12,7 +12,7 @@
           <input class="input"
             id="input"
             type="text"
-            v-model="title"
+            v-model="storeInfo.title"
             v-bind:class="{'is-danger': isTitleInvalid === true,
               'is-normal': isTitleInvalid === false}"
           />
@@ -24,7 +24,7 @@
           <input class="input"
             id="input"
             type="text"
-            v-model="addressLine1"
+            v-model="storeInfo.addressLine1"
             v-bind:class="{'is-danger': isAddressLine1Invalid === true,
               'is-normal': isAddressLine1Invalid === false}"
           />
@@ -36,7 +36,7 @@
           <input class="input"
             id="input"
             type="text"
-            v-model="addressLine2"
+            v-model="storeInfo.addressLine2"
             v-bind:class="{'is-danger': isAddressLine2Invalid === true,
               'is-normal': isAddressLine2Invalid === false}"
           />
@@ -48,7 +48,7 @@
           <input class="input"
             id="input"
             type="text"
-            v-model="phone"
+            v-model="storeInfo.phone"
             v-bind:class="{'is-danger': isPhoneInvalid === true,
               'is-normal': isPhoneInvalid === false}"
           />
@@ -60,7 +60,7 @@
           <input class="input"
             id="input"
             type="text"
-            v-model="email"
+            v-model="storeInfo.email"
             v-bind:class="{'is-danger': isEmailInvalid === true,
               'is-normal': isEmailInvalid === false}"
           />
@@ -74,7 +74,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="mondayOpen"
+                v-model="storeInfo.mondayOpen"
                 v-bind:class="{'is-danger': isMondayOpenInvalid === true,
                   'is-normal': isMondayOpenInvalid === false}"
               />
@@ -86,7 +86,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="tuesdayOpen"
+                v-model="storeInfo.tuesdayOpen"
                 v-bind:class="{'is-danger': isTuesdayOpenInvalid === true,
                   'is-normal': isTuesdayOpenInvalid === false}"
               />
@@ -98,7 +98,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="wednesdayOpen"
+                v-model="storeInfo.wednesdayOpen"
                 v-bind:class="{'is-danger': isWednesdayOpenInvalid === true,
                   'is-normal': isWednesdayOpenInvalid === false}"
               />
@@ -110,7 +110,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="thursdayOpen"
+                v-model="storeInfo.thursdayOpen"
                 v-bind:class="{'is-danger': isThursdayOpenInvalid === true,
                   'is-normal': isThursdayOpenInvalid === false}"
               />
@@ -122,7 +122,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="fridayOpen"
+                v-model="storeInfo.fridayOpen"
                 v-bind:class="{'is-danger': isFridayOpenInvalid === true,
                   'is-normal': isFridayOpenInvalid === false}"
               />
@@ -134,7 +134,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="saturdayOpen"
+                v-model="storeInfo.saturdayOpen"
                 v-bind:class="{'is-danger': isSaturdayOpenInvalid === true,
                   'is-normal': isSaturdayOpenInvalid === false}"
               />
@@ -146,7 +146,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="sundayOpen"
+                v-model="storeInfo.sundayOpen"
                 v-bind:class="{'is-danger': isSundayOpenInvalid === true,
                   'is-normal': isSundayOpenInvalid === false}"
               />
@@ -160,7 +160,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="mondayClose"
+                v-model="storeInfo.mondayClose"
                 v-bind:class="{'is-danger': isMondayCloseInvalid === true,
                   'is-normal': isMondayCloseInvalid === false}"
               />
@@ -172,7 +172,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="tuesdayClose"
+                v-model="storeInfo.tuesdayClose"
                 v-bind:class="{'is-danger': isTuesdayCloseInvalid === true,
                   'is-normal': isTuesdayCloseInvalid === false}"
               />
@@ -184,7 +184,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="wednesdayClose"
+                v-model="storeInfo.wednesdayClose"
                 v-bind:class="{'is-danger': isWednesdayCloseInvalid === true,
                   'is-normal': isWednesdayCloseInvalid === false}"
               />
@@ -196,7 +196,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="thursdayClose"
+                v-model="storeInfo.thursdayClose"
                 v-bind:class="{'is-danger': isThursdayCloseInvalid === true,
                   'is-normal': isThursdayCloseInvalid === false}"
               />
@@ -208,7 +208,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="fridayClose"
+                v-model="storeInfo.fridayClose"
                 v-bind:class="{'is-danger': isFridayCloseInvalid === true,
                   'is-normal': isFridayCloseInvalid === false}"
               />
@@ -220,7 +220,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="saturdayClose"
+                v-model="storeInfo.saturdayClose"
                 v-bind:class="{'is-danger': isSaturdayCloseInvalid === true,
                   'is-normal': isSaturdayCloseInvalid === false}"
               />
@@ -232,7 +232,7 @@
               <input class="input"
                 id="input"
                 type="text"
-                v-model="sundayClose"
+                v-model="storeInfo.sundayClose"
                 v-bind:class="{'is-danger': isSundayCloseInvalid === true,
                   'is-normal': isSundayCloseInvalid === false}"
               />
@@ -248,7 +248,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 /* true if invalid, false if valid */
 function validateEmail(email) {
@@ -264,25 +263,27 @@ export default {
   name: 'change-store-info',
   data() {
     return {
-      title: null,
-      addressLine1: null,
-      addressLine2: null,
-      phone: null,
-      email: null,
-      mondayOpen: null,
-      mondayClose: null,
-      tuesdayOpen: null,
-      tuesdayClose: null,
-      wednesdayOpen: null,
-      wednesdayClose: null,
-      thursdayOpen: null,
-      thursdayClose: null,
-      fridayOpen: null,
-      fridayClose: null,
-      saturdayOpen: null,
-      saturdayClose: null,
-      sundayOpen: null,
-      sundayClose: null,
+      storeInfo: {
+        title: this.$store.state.storeInfo.title,
+        addressLine1: this.$store.state.storeInfo.addressLine1,
+        addressLine2: this.$store.state.storeInfo.addressLine2,
+        phone: this.$store.state.storeInfo.phone,
+        email: this.$store.state.storeInfo.email,
+        mondayOpen: this.$store.state.storeInfo.mondayOpen,
+        mondayClose: this.$store.state.storeInfo.mondayClose,
+        tuesdayOpen: this.$store.state.storeInfo.tuesdayOpen,
+        tuesdayClose: this.$store.state.storeInfo.tuesdayClose,
+        wednesdayOpen: this.$store.state.storeInfo.wednesdayOpen,
+        wednesdayClose: this.$store.state.storeInfo.wednesdayClose,
+        thursdayOpen: this.$store.state.storeInfo.thursdayOpen,
+        thursdayClose: this.$store.state.storeInfo.thursdayClose,
+        fridayOpen: this.$store.state.storeInfo.fridayOpen,
+        fridayClose: this.$store.state.storeInfo.fridayClose,
+        saturdayOpen: this.$store.state.storeInfo.saturdayOpen,
+        saturdayClose: this.$store.state.storeInfo.saturdayClose,
+        sundayOpen: this.$store.state.storeInfo.sundayOpen,
+        sundayClose: this.$store.state.storeInfo.sundayClose,
+      },
 
       isTitleInvalid: null,
       isAddressLine1Invalid: null,
@@ -305,198 +306,159 @@ export default {
       isSundayCloseInvalid: null,
     };
   },
-  mounted() {
-    axios.get('/api/hours')
-      .then((res) => {
-        console.log(res.data.hours);
-        this.title = res.data.hours[0].title;
-        this.addressLine1 = res.data.hours[0].addressLine1;
-        this.addressLine2 = res.data.hours[0].addressLine2;
-        this.phone = res.data.hours[0].phone;
-        this.email = res.data.hours[0].email;
-        this.mondayOpen = res.data.hours[0].mondayOpen;
-        this.mondayClose = res.data.hours[0].mondayClose;
-        this.tuesdayOpen = res.data.hours[0].tuesdayOpen;
-        this.tuesdayClose = res.data.hours[0].tuesdayClose;
-        this.wednesdayOpen = res.data.hours[0].wednesdayOpen;
-        this.wednesdayClose = res.data.hours[0].wednesdayClose;
-        this.thursdayOpen = res.data.hours[0].thursdayOpen;
-        this.thursdayClose = res.data.hours[0].thursdayClose;
-        this.fridayOpen = res.data.hours[0].fridayOpen;
-        this.fridayClose = res.data.hours[0].fridayClose;
-        this.saturdayOpen = res.data.hours[0].saturdayOpen;
-        this.saturdayClose = res.data.hours[0].saturdayClose;
-        this.sundayOpen = res.data.hours[0].sundayOpen;
-        this.sundayClose = res.data.hours[0].sundayClose;
-      });
-  },
   methods: {
     submit() {
       if (this.isFormValid()) {
-        axios.put('/api/hours/1', {
-          title: this.title,
-          addressLine1: this.addressLine1,
-          addressLine2: this.addressLine2,
-          phone: this.phone,
-          email: this.email,
-          mondayOpen: this.mondayOpen,
-          mondayClose: this.mondayClose,
-          tuesdayOpen: this.tuesdayOpen,
-          tuesdayClose: this.tuesdayClose,
-          wednesdayOpen: this.wednesdayOpen,
-          wednesdayClose: this.wednesdayClose,
-          thursdayOpen: this.thursdayOpen,
-          thursdayClose: this.thursdayClose,
-          fridayOpen: this.fridayOpen,
-          fridayClose: this.fridayClose,
-          saturdayOpen: this.saturdayOpen,
-          saturdayClose: this.saturdayClose,
-          sundayOpen: this.sundayOpen,
-          sundayClose: this.sundayClose,
-        }).then((res) => {
-          this.title = null;
-          this.addressLine1 = null;
-          this.addressLine2 = null;
-          this.phone = null;
-          this.email = null;
-          this.mondayOpen = null;
-          this.mondayClose = null;
-          this.tuesdayOpen = null;
-          this.tuesdayClose = null;
-          this.wednesdayOpen = null;
-          this.wednesdayClose = null;
-          this.thursdayOpen = null;
-          this.thursdayClose = null;
-          this.fridayOpen = null;
-          this.fridayClose = null;
-          this.saturdayOpen = null;
-          this.saturdayClose = null;
-          this.sundayOpen = null;
-          this.sundayClose = null;
+        /*
+        axios.put('/api/storeinfo', {
 
-          this.isEmailInvalid = null;
+        }).then(successRes => {
+
         });
+        */
+        this.$store.commit('changeStoreInfo', this.storeInfo);
         this.findInvalidForm();
+        this.storeInfo.title = null;
+        this.storeInfo.addressLine1 = null;
+        this.storeInfo.addressLine2 = null;
+        this.storeInfo.phone = null;
+        this.storeInfo.email = null;
+        this.storeInfo.mondayOpen = null;
+        this.storeInfo.mondayClose = null;
+        this.storeInfo.tuesdayOpen = null;
+        this.storeInfo.tuesdayClose = null;
+        this.storeInfo.wednesdayOpen = null;
+        this.storeInfo.wednesdayClose = null;
+        this.storeInfo.thursdayOpen = null;
+        this.storeInfo.thursdayClose = null;
+        this.storeInfo.fridayOpen = null;
+        this.storeInfo.fridayClose = null;
+        this.storeInfo.saturdayOpen = null;
+        this.storeInfo.saturdayClose = null;
+        this.storeInfo.sundayOpen = null;
+        this.storeInfo.sundayClose = null;
+
+        this.isEmailInvalid = null;
       } else {
         this.findInvalidForm();
       }
     },
     isFormValid() {
-      this.isEmailInvalid = validateEmail(this.email);
+      this.isEmailInvalid = validateEmail(this.storeInfo.email);
 
       return !this.isEmailInvalid &&
-        (this.title != null && this.title !== '') &&
-        (this.addressLine1 != null && this.addressLine1 !== '') &&
-        (this.addressLine2 != null && this.addressLine2 !== '') &&
-        (this.phone != null && this.phone !== '') &&
-        (this.email != null && this.email !== '') &&
-        (this.mondayOpen != null && this.mondayOpen !== '') &&
-        (this.mondayClose != null && this.mondayClose !== '') &&
-        (this.tuesdayOpen != null && this.tuesdayOpen !== '') &&
-        (this.tuesdayClose != null && this.tuesdayClose !== '') &&
-        (this.wednesdayOpen != null && this.wednesdayOpen !== '') &&
-        (this.wednesdayClose != null && this.wednesdayClose !== '') &&
-        (this.thursdayOpen != null && this.thursdayOpen !== '') &&
-        (this.thursdayClose != null && this.thursdayClose !== '') &&
-        (this.fridayOpen != null && this.fridayOpen !== '') &&
-        (this.fridayClose != null && this.fridayClose !== '') &&
-        (this.saturdayOpen != null && this.saturdayOpen !== '') &&
-        (this.saturdayClose != null && this.saturdayClose !== '') &&
-        (this.sundayOpen != null && this.sundayOpen !== '') &&
-        (this.sundayClose != null && this.sundayClose !== '');
+        (this.storeInfo.title != null && this.storeInfo.title !== '') &&
+        (this.storeInfo.addressLine1 != null && this.storeInfo.addressLine1 !== '') &&
+        (this.storeInfo.addressLine2 != null && this.storeInfo.addressLine2 !== '') &&
+        (this.storeInfo.phone != null && this.storeInfo.phone !== '') &&
+        (this.storeInfo.email != null && this.storeInfo.email !== '') &&
+        (this.storeInfo.mondayOpen != null && this.storeInfo.mondayOpen !== '') &&
+        (this.storeInfo.mondayClose != null && this.storeInfo.mondayClose !== '') &&
+        (this.storeInfo.tuesdayOpen != null && this.storeInfo.tuesdayOpen !== '') &&
+        (this.storeInfo.tuesdayClose != null && this.storeInfo.tuesdayClose !== '') &&
+        (this.storeInfo.wednesdayOpen != null && this.storeInfo.wednesdayOpen !== '') &&
+        (this.storeInfo.wednesdayClose != null && this.storeInfo.wednesdayClose !== '') &&
+        (this.storeInfo.thursdayOpen != null && this.storeInfo.thursdayOpen !== '') &&
+        (this.storeInfo.thursdayClose != null && this.storeInfo.thursdayClose !== '') &&
+        (this.storeInfo.fridayOpen != null && this.storeInfo.fridayOpen !== '') &&
+        (this.storeInfo.fridayClose != null && this.storeInfo.fridayClose !== '') &&
+        (this.storeInfo.saturdayOpen != null && this.storeInfo.saturdayOpen !== '') &&
+        (this.storeInfo.saturdayClose != null && this.storeInfo.saturdayClose !== '') &&
+        (this.storeInfo.sundayOpen != null && this.storeInfo.sundayOpen !== '') &&
+        (this.storeInfo.sundayClose != null && this.storeInfo.sundayClose !== '');
     },
     findInvalidForm() {
-      if (this.title == null || this.title === '') {
+      if (this.storeInfo.title == null || this.storeInfo.title === '') {
         this.isTitleInvalid = true;
       } else {
         this.isTitleInvalid = false;
       }
-      if (this.addressLine1 == null || this.addressLine1 === '') {
+      if (this.storeInfo.addressLine1 == null || this.storeInfo.addressLine1 === '') {
         this.isAddressLine1Invalid = true;
       } else {
         this.isAddressLine1Invalid = false;
       }
-      if (this.addressLine2 == null || this.addressLine2 === '') {
+      if (this.storeInfo.addressLine2 == null || this.storeInfo.addressLine2 === '') {
         this.isAddressLine2Invalid = true;
       } else {
         this.isAddressLine2Invalid = false;
       }
-      if (this.phone == null || this.phone === '') {
+      if (this.storeInfo.phone == null || this.storeInfo.phone === '') {
         this.isPhoneInvalid = true;
       } else {
         this.isPhoneInvalid = false;
       }
-      if (this.email == null || this.email === '') {
+      if (this.storeInfo.email == null || this.storeInfo.email === '') {
         this.isEmailInvalid = true;
       } else {
         this.isEmailInvalid = false;
       }
-      if (this.mondayOpen == null || this.mondayOpen === '') {
+      if (this.storeInfo.mondayOpen == null || this.storeInfo.mondayOpen === '') {
         this.isMondayOpenInvalid = true;
       } else {
         this.isMondayOpenInvalid = false;
       }
-      if (this.mondayClose == null || this.mondayClose === '') {
+      if (this.storeInfo.mondayClose == null || this.storeInfo.mondayClose === '') {
         this.isMondayCloseInvalid = true;
       } else {
         this.isMondayCloseInvalid = false;
       }
-      if (this.tuesdayOpen == null || this.tuesdayOpen === '') {
+      if (this.storeInfo.tuesdayOpen == null || this.storeInfo.tuesdayOpen === '') {
         this.isTuesdayOpenInvalid = true;
       } else {
         this.isTuesdayOpenInvalid = false;
       }
-      if (this.tuesdayClose == null || this.tuesdayClose === '') {
+      if (this.storeInfo.tuesdayClose == null || this.storeInfo.tuesdayClose === '') {
         this.isTuesdayCloseInvalid = true;
       } else {
         this.isTuesdayCloseInvalid = false;
       }
-      if (this.wednesdayOpen == null || this.wednesdayOpen === '') {
+      if (this.storeInfo.wednesdayOpen == null || this.storeInfo.wednesdayOpen === '') {
         this.isWednesdayOpenInvalid = true;
       } else {
         this.isWednesdayOpenInvalid = false;
       }
-      if (this.wednesdayClose == null || this.wednesdayClose === '') {
+      if (this.storeInfo.wednesdayClose == null || this.storeInfo.wednesdayClose === '') {
         this.isWednesdayCloseInvalid = true;
       } else {
         this.isWednesdayCloseInvalid = false;
       }
-      if (this.thursdayOpen == null || this.thursdayOpen === '') {
+      if (this.storeInfo.thursdayOpen == null || this.storeInfo.thursdayOpen === '') {
         this.isThursdayOpenInvalid = true;
       } else {
         this.isThursdayOpenInvalid = false;
       }
-      if (this.thursdayClose == null || this.thursdayClose === '') {
+      if (this.storeInfo.thursdayClose == null || this.storeInfo.thursdayClose === '') {
         this.isThursdayCloseInvalid = true;
       } else {
         this.isThursdayCloseInvalid = false;
       }
-      if (this.fridayOpen == null || this.fridayOpen === '') {
+      if (this.storeInfo.fridayOpen == null || this.storeInfo.fridayOpen === '') {
         this.isFridayOpenInvalid = true;
       } else {
         this.isFridayOpenInvalid = false;
       }
-      if (this.fridayClose == null || this.fridayClose === '') {
+      if (this.storeInfo.fridayClose == null || this.storeInfo.fridayClose === '') {
         this.isFridayCloseInvalid = true;
       } else {
         this.isFridayCloseInvalid = false;
       }
-      if (this.saturdayOpen == null || this.saturdayOpen === '') {
+      if (this.storeInfo.saturdayOpen == null || this.storeInfo.saturdayOpen === '') {
         this.isSaturdayOpenInvalid = true;
       } else {
         this.isSaturdayOpenInvalid = false;
       }
-      if (this.saturdayClose == null || this.saturdayClose === '') {
+      if (this.storeInfo.saturdayClose == null || this.storeInfo.saturdayClose === '') {
         this.isSaturdayCloseInvalid = true;
       } else {
         this.isSaturdayCloseInvalid = false;
       }
-      if (this.sundayOpen == null || this.sundayOpen === '') {
+      if (this.storeInfo.sundayOpen == null || this.storeInfo.sundayOpen === '') {
         this.isSundayOpenInvalid = true;
       } else {
         this.isSundayOpenInvalid = false;
       }
-      if (this.sundayClose == null || this.sundayClose === '') {
+      if (this.storeInfo.sundayClose == null || this.storeInfo.sundayClose === '') {
         this.isSundayCloseInvalid = true;
       } else {
         this.isSundayCloseInvalid = false;

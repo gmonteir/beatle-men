@@ -1,6 +1,7 @@
 const express = require('express');
 
 const { Item } = require('../models');
+const { OrderItem } = require('../models');
 const { Category } = require('../models');
 
 const router = express.Router();
@@ -84,8 +85,15 @@ router
   .delete((req, res) => {
     const idToDelete = req.params.id;
     Item.findById(idToDelete).then((item) => {
-      item.destroy().then(() => {
-        res.json({ delete: true });
+      OrderItem.findAll({where: {itemId: item.id}}).then((orderItems) => {
+        if(orderItems.length != 0){
+          res.json({ delete: false});
+        }
+        else{
+          item.destroy().then(() => {
+            res.json({ delete: true });
+          });
+        }
       });
     });
   });
