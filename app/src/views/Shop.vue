@@ -41,7 +41,7 @@
             <li class="subtitle is-4 is-active bread-crumb">Shop</li>
             <li class="subtitle is-4 is-active bread-crumb" v-for="category in chosenCategories" :key="category.id">> {{category.label}}</li>
           </ul>
-          <h1 class="title is-3 shop-title">{{getShopTitle()}}</h1>
+          <h1 class="title is-3 shop-title">Store</h1>
         </div>
         <ul class="item-grid" v-if="items.length">
           <li v-for="item in filteredItems" :key="item ? item.id : ''" style="display:inline">
@@ -96,15 +96,6 @@ export default {
       });
   },
   methods: {
-    isInPath(str) {
-      if (this.$route.path.includes(str)) {
-        return true;
-      }
-      return false;
-    },
-    getShopTitle() {
-      return this.$route.name;
-    },
     filterCategory(category) {
       const itemsIdList = [];
       this.setChosenCategories(category);

@@ -9,14 +9,14 @@ router
 
   // get store hours
   .get((req, res) => {
-    Hours.findOne().then(hours => {
+    Hours.findOne().then((hours) => {
       res.json(hours);
     });
   })
 
   // update store hours
   .put((req, res) => {
-    const { 
+    const {
       title,
       addressLine1,
       addressLine2,
@@ -35,10 +35,10 @@ router
       saturdayOpen,
       saturdayClose,
       sundayOpen,
-      sundayClose
+      sundayClose,
     } = req.body;
 
-    Hours.findOne().then(hours => {
+    Hours.findOne().then((hours) => {
       const hoursToUpdate = hours;
       hoursToUpdate.title = title;
       hoursToUpdate.addressLine1 = addressLine1;
@@ -59,10 +59,10 @@ router
       hoursToUpdate.saturdayClose = saturdayClose;
       hoursToUpdate.sundayOpen = sundayOpen;
       hoursToUpdate.sundayClose = sundayClose;
-      hoursToUpdate.save().then(updatedHours => {
+      hoursToUpdate.save().then((updatedHours) => {
         res.json(updatedHours);
       });
     });
-  })
+  });
 
 module.exports = router;

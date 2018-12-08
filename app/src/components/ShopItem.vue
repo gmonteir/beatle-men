@@ -50,7 +50,9 @@ export default {
 @import "../../node_modules/bulma/bulma.sass";
 
 .image {
-  //width: 300px;
+  max-width: 300px;
+  max-height: 200px;
+  overflow: hidden;
   margin: 0 auto;
 }
 

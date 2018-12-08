@@ -4,37 +4,37 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Categories',
       [{
-        label: 'bike',
+        label: 'Bike',
         parentID: -1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',
       },
       {
-        label: 'parts',
+        label: 'Parts',
         parentID: -1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',
       },
       {
-        label: 'accessories',
+        label: 'Accessories',
         parentID: -1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',
       },
       {
-        label: 'road',
+        label: 'Road',
         parentID: 1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',
       },
       {
-        label: 'mountain',
+        label: 'Mountain',
         parentID: 1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',
       },
       {
-        label: 'electric',
+        label: 'Electric',
         parentID: 1,
         createdAt: '2016-08-09 04:05:02',
         updatedAt: '2016-08-09 04:05:02',

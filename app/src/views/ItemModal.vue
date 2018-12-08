@@ -139,6 +139,7 @@ export default {
         total: this.item.price,
         userQuantity: 1,
         quantity: this.item.quantity,
+        isBike: this.showBikeMessage,
       };
       if (!this.isAddedToCart && this.item.quantity > 0) {
         this.$store.commit('addToCart', newItem);
@@ -194,6 +195,8 @@ $modal-content-width: 1500px;
 
 .image {
   width: 600px;
+  max-height: 400px;
+  overflow: hidden;
   top: 10px;
   display: block;
   margin-left: auto;

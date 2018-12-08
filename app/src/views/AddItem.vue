@@ -253,7 +253,7 @@ export default {
       this.image = files[0];
     },
     submitCategory() {
-      if (this.categoryButton) {
+      if (this.categoryButton && this.checkCategory()) {
         axios.post('/api/categories', {
           label: this.categoryButtonInput,
           parentID: -1,
@@ -264,8 +264,16 @@ export default {
         });
       }
     },
+    checkCategory() {
+      for (let i = 0; i < this.categoryList.length; i += 1) {
+        if (this.categoryList[i].label.toLowerCase() === this.categoryButtonInput.toLowerCase()) {
+          return false;
+        }
+      }
+      return true;
+    },
     submitSubcategory() {
-      if (this.subcategoryButton) {
+      if (this.subcategoryButton && this.checkSubcategory()) {
         axios.post('/api/categories', {
           label: this.subcategoryButtonInput,
           parentID: this.categoryParentID,
@@ -274,6 +282,14 @@ export default {
           this.subcategoryButtonInput = null;
         });
       }
+    },
+    checkSubcategory() {
+      for (let i = 0; i < this.subcategoryList.length; i += 1) {
+        if (this.subcategoryList[i].label.toLowerCase() === this.subcategoryButtonInput.toLowerCase()) {
+          return false;
+        }
+      }
+      return true;
     },
     submit() {
       if (this.isFormValid()) {
