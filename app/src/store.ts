@@ -160,6 +160,9 @@ export default new Vuex.Store({
     addUsers(state, payload) {
       state.users = payload;
     },
+    addUser(state, payload) {
+      state.users.push(payload);
+    },
     changeShippingAddress(state, payload) {
       state.cart.shippingAddress.id = payload.id;
       state.cart.shippingAddress.UserAccountId = payload.UserAccountId;

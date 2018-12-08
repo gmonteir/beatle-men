@@ -195,6 +195,7 @@ export default {
         document.body.style.cursor='wait';
         axios.post('/api/useraccounts', form, config)
           .then((successRes) => {
+            this.$store.commit('addUser', successRes.data)
             this.isSignupSuccess = true;
             document.body.style.cursor = 'default';
           }, (failRes) => {
