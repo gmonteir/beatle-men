@@ -44,3 +44,7 @@ To test:
  - run `sequelize db:seed:all --env=test`
  - run `npm run test`
 
+Admin login:
+ - email: troll@demo.com
+ - password: secure
+
