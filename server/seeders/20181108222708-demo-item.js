@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Items', [{
       name: 'Bronson',
       price: 3999.99,
-      quantity: 1,
+      quantity: 4,
       description: 'Description',
       specifications: '24 inch wheels',
       image: 'images\\home-slideshow-3.jpg',

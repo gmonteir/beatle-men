@@ -19,9 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     saturdayOpen: DataTypes.STRING,
     saturdayClose: DataTypes.STRING,
     sundayOpen: DataTypes.STRING,
-    sundayClose: DataTypes.STRING
+    sundayClose: DataTypes.STRING,
   }, {});
-  Hours.associate = function(models) {
+  Hours.associate = (models) => {
     // associations can be defined here
   };
   return Hours;

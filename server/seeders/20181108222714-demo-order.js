@@ -8,7 +8,7 @@ module.exports = {
       updatedAt: '2016-08-09 04:05:02',
       UserAccountId: 1,
       AddressId: 1,
-      PaymentInfoId: 1
+      PaymentInfoId: 1,
     }], {});   
   },
 
