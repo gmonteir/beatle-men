@@ -310,9 +310,9 @@ export default {
     submit() {
       if (this.isFormValid()) {
         /*
-        axios.post('/api/storeinfo', {
+        axios.put('/api/storeinfo', {
 
-        }).then((res) => {
+        }).then(successRes => {
 
         });
         */
