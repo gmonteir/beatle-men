@@ -103,7 +103,7 @@
           v-if="isSignupFail">Registration Fail (Network Error)
         </div>
         <div class="buttons is-right">
-          <button class="button is-link" v-on:click="submit">Submit</button>
+          <button class="button is-link" v-on:click="submit()">Submit</button>
         </div>
       </div>
     </div>

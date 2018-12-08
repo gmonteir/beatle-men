@@ -84,7 +84,6 @@ export default {
   methods: {
     openAddReviewModal(item) {
       this.reviewItemId = item.id;
-      console.log(item.id);
       this.isAddReviewModalOpen = true;
     },
   },

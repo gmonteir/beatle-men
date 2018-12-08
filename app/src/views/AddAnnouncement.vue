@@ -26,6 +26,7 @@
         <div id="title" class="control">
           <input class="input"
             id="input"
+            maxlength="255"
             type="text"
             v-model="title"
             v-bind:class="{'is-danger': titleInvalid === true, 'is-normal': titleInvalid === false}"
@@ -37,6 +38,7 @@
         <div id="message" class="control">
           <textarea class="textarea"
             id = "input"
+            maxlength="255"
             v-model="message"
             v-bind:class="{'is-danger': messageInvalid === true, 'is-normal': messageInvalid === false}"
           />
@@ -139,7 +141,7 @@ export default {
         .then((res) => {
           this.announcements = res.data.announcements.reverse();
         });
-    }
+    },
   },
 }
 </script>

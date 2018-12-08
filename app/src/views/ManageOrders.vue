@@ -112,7 +112,7 @@ export default {
     },
     getUserEmail(order) {
       let email = null;
-      for (let i = 0; i < this.orders.length; i++) {
+      for (let i = 0; i < this.orders.length; i += 1) {
         if (order.UserAccountId === this.orders[i].UserAccountId) {
           email = this.users[i].email;
         }

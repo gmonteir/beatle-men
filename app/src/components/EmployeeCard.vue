@@ -1,7 +1,7 @@
 <template>
     <div class="card" id="container">
       <div class="card-image">
-        <figure class="image is-3by3">
+        <figure class="image is3by3" id="img">
             <img v-bind:src="'api/' + employee.image">
         </figure>
       </div>
@@ -40,5 +40,10 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+}
+#img {
+  width: 400px;
+  height: 300px;
+  overflow: hidden;
 }
 </style>

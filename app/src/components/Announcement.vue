@@ -1,7 +1,7 @@
 <template>
   <div class="announcement">
     <h1 class="subtitle is-4">{{announcement.title}}</h1>
-    <p>{{announcement.message}}</p>
+    <h2 class="subtitle is-6">{{announcement.message}}</h2>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ h1 {
   margin: 5px;
 }
 
-p {
+h2 {
   margin: 5px;
   margin-top: -20px;
 }
