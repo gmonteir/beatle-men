@@ -35,6 +35,9 @@ start your mysql server
  - run `sequelize db:create`
  - run `sequelize db:migrate`
  - run `sequelize db:seed:all`
+ 
+If Connection Refused (ECONNREFUSED):
+ - look in server/config file and change passwords 
 
 start server: `npm run start`
 
