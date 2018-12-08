@@ -1,60 +1,65 @@
 <template>
   <div class="show-manage-orders">
-    <section class="smallMargin">
-      <div class="columns">
-        <div class="column is-one-fifth columnOne">
-          <h1 class="title is-4">Order ID: 1</h1>
-        </div>
-        <div class="column is-one-fifth columnOne">
-          <h1 class="title is-4">Order Total: $190</h1>
-        </div>
-        <div class="column is-one-fifth columnOne">
-          <h1 class="title is-4">Date: 11-28-2018</h1>
-        </div>
-        <div class="column is-one-fifth columnOne">
-          <h1 class="title is-4">User Email: troll@demo.com</h1>
-        </div>
-        <div class="column is-one-fifth columnOne">
-          <h1 class="title is-4">Fulfilled: Yes</h1>
-        </div>
-      </div>
-    </section>
-    <section class="section smallMargin" id="address-info">
-      <section class="bottomMargin">
+    <ul>
+      <li v-for="item in displayedItems" v-bind:key="item.id">
         <div class="columns">
-          <div class="column is-6" id="column">
-            <h1 class="title is-4">Product</h1>
+          <div class="column is-4">
+            <h1 class="subtitle is-4">{{item.name}}</h1>
           </div>
-          <div class="column is-2" id="column-centered">
-            <h1 class="title is-4">Price</h1>
+          <div class="column is-3" style="text-align: center">
+            <h1 class="subtitle is-4">${{item.price}}</h1>
           </div>
-          <div class="column is-2" id="column-centered">
-            <h1 class="title is-4">Quantity</h1>
+          <div class="column is-3" style="text-align: center">
+            <h1 class="subtitle is-4">{{item.quantity}}</h1>
           </div>
-          <div class="column is-2" id="column-centered">
-            <h1 class="title is-4">Total</h1>
+          <div class="column is-2" style="text-align: center">
+            <h1 class="subtitle is-4">${{item.price * item.quantity}}</h1>
           </div>
         </div>
-      </section>
-    </section>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
 export default {
   name: 'show-manage-orders',
+  props: {
+    order: {
+      type: Object,
+    },
+    items: {
+      type: Array,
+    },
+    orderItems: {
+      type: Array,
+    },
+  },
   data() {
     return {
-
+      displayedItems: [],
     };
   },
   mounted() {
-    /*
-    axios.get('/api/orders')
-      .then((res) => {
-
-      });
-    */
+    for (let i = 0; i < this.orderItems.length; i += 1) {
+      if (this.orderItems[i][0].OrderId === this.order.id) {
+        for (let j = 0; j < this.orderItems[i].length; j += 1) {
+          const displayItem = {
+            id: null,
+            name: null,
+            price: null,
+            quantity: null,
+            total: null,
+          };
+          displayItem.id = this.items[i][j].id;
+          displayItem.name = this.items[i][j].name;
+          displayItem.price = this.orderItems[i][j].price;
+          displayItem.quantity = this.orderItems[i][j].quantity;
+          displayItem.total = this.orderItems[i][j].price * this.orderItems[i][j].quantity;
+          this.displayedItems.push(displayItem);
+        }
+      }
+    }
   },
 };
 </script>

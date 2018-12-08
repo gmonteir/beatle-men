@@ -5,6 +5,7 @@
         <h1 class="title is-1">Inventory</h1>
       </div>
     </section>
+    <p class="tag is-medium is-danger" v-if="isDeleteInvalid" style="margin-left: 10%">Some Items cannot be deleted</p>
     <section class="section">
       <div class="columns">
         <div class="column is-2" id="column">
@@ -74,6 +75,7 @@ export default {
   data() {
     return {
       items: [],
+      isDeleteInvalid: false,
     };
   },
   mounted() {
@@ -97,10 +99,15 @@ export default {
     removeItem(item) {
       axios.delete(`/api/items/${item.id}`)
         .then((res) => {
-          for (let i = 0; i < this.items.length; i += 1) {
-            if (this.items[i].id === item.id) {
-              this.items.splice(i, 1);
+          if (res.data.delete) {
+            this.isDeleteInvalid = false;
+            for (let i = 0; i < this.items.length; i += 1) {
+              if (this.items[i].id === item.id) {
+                this.items.splice(i, 1);
+              }
             }
+          } else {
+            this.isDeleteInvalid = true;
           }
         });
     },

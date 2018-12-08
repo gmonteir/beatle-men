@@ -328,7 +328,7 @@ export default {
     createOrder() {
       const itemIDs = [];
       const userQuantities = [];
-      let addressId = 1
+      let addressId = 1;
       if (!this.containsBike) {
         addressId = this.tempShippingAddress.id;
       }
@@ -425,11 +425,11 @@ export default {
     },
   },
   mounted() {
-    axios.get('/api/paymentinfo').then((success) => {
-      this.$store.commit('addCards', success.data.cards);
-    });
-    axios.get('/api/addresses').then((success) => {
+    axios.get('/api/addresses/' + this.$store.state.userId + '/customer').then((success) => {
       this.$store.commit('addAddresses', success.data.addresses);
+    });
+    axios.get('/api/paymentinfo/' + this.$store.state.userId + '/customer').then((success) => {
+      this.$store.commit('addCards', success.data.cards);
     });
   },
 };

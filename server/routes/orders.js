@@ -24,12 +24,12 @@ router
             });
           }));
         })).then((returnedItems) => {
-          Promise.all(orders.map(function(orderToGetUser){
+          Promise.all(orders.map((orderToGetUser) => {
             return UserAccount.findById(orderToGetUser.UserAccountId).then((user) =>{
               return user;
             });
-          })).then((users) =>{
-            res.json({ orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems , users});
+          })).then((users) => {
+            res.json({ orders, orderItemsArr: returnedOrderItems, itemsArr: returnedItems, users });
           });
         });
       });
@@ -52,11 +52,11 @@ router
             order.setUserAccount(user).then(() => {
               order.setAddress(address).then(() => {
                 order.setPaymentInfo(payment).then(() => {
-                  Promise.all(infoArr["items"].map( function(itemId, i) {
+                  Promise.all(infoArr["items"].map((itemId, i) => {
                     return Item.findById(itemId).then((item) => {
                       return item.addOrder(order, { through: { price: item.price, quantity: infoArr["quantities"][i] } }).then(() => {
                         const itemToUpdate = item;
-                        itemToUpdate.quantity = itemToUpdate.quantity - infoArr["quantities"][i];
+                        itemToUpdate.quantity -= infoArr["quantities"][i];
                         return itemToUpdate.save();
                       });
                     });

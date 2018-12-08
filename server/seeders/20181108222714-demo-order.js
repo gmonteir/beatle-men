@@ -3,7 +3,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('Orders', [{
-      status: 'unordered',
+      status: 'open',
       createdAt: '2016-08-09 04:05:02',
       updatedAt: '2016-08-09 04:05:02',
       UserAccountId: 1,

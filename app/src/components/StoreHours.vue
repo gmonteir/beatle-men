@@ -79,28 +79,27 @@ export default {
     };
   },
   mounted() {
-    axios.get('/api/hours')
+    axios.get('/api/storeinfo')
       .then((res) => {
-        console.log(res.data.hours);
-        this.title = res.data.hours[0].title;
-        this.addressLine1 = res.data.hours[0].addressLine1;
-        this.addressLine2 = res.data.hours[0].addressLine2;
-        this.phone = res.data.hours[0].phone;
-        this.email = res.data.hours[0].email;
-        this.mondayOpen = res.data.hours[0].mondayOpen;
-        this.mondayClose = res.data.hours[0].mondayClose;
-        this.tuesdayOpen = res.data.hours[0].tuesdayOpen;
-        this.tuesdayClose = res.data.hours[0].tuesdayClose;
-        this.wednesdayOpen = res.data.hours[0].wednesdayOpen;
-        this.wednesdayClose = res.data.hours[0].wednesdayClose;
-        this.thursdayOpen = res.data.hours[0].thursdayOpen;
-        this.thursdayClose = res.data.hours[0].thursdayClose;
-        this.fridayOpen = res.data.hours[0].fridayOpen;
-        this.fridayClose = res.data.hours[0].fridayClose;
-        this.saturdayOpen = res.data.hours[0].saturdayOpen;
-        this.saturdayClose = res.data.hours[0].saturdayClose;
-        this.sundayOpen = res.data.hours[0].sundayOpen;
-        this.sundayClose = res.data.hours[0].sundayClose;
+        this.title = res.data.title;
+        this.addressLine1 = res.data.addressLine1;
+        this.addressLine2 = res.data.addressLine2;
+        this.phone = res.data.phone;
+        this.email = res.data.email;
+        this.mondayOpen = res.data.mondayOpen;
+        this.mondayClose = res.data.mondayClose;
+        this.tuesdayOpen = res.data.tuesdayOpen;
+        this.tuesdayClose = res.data.tuesdayClose;
+        this.wednesdayOpen = res.data.wednesdayOpen;
+        this.wednesdayClose = res.data.wednesdayClose;
+        this.thursdayOpen = res.data.thursdayOpen;
+        this.thursdayClose = res.data.thursdayClose;
+        this.fridayOpen = res.data.fridayOpen;
+        this.fridayClose = res.data.fridayClose;
+        this.saturdayOpen = res.data.saturdayOpen;
+        this.saturdayClose = res.data.saturdayClose;
+        this.sundayOpen = res.data.sundayOpen;
+        this.sundayClose = res.data.sundayClose;
       });
   },
 }
