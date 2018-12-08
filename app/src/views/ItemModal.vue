@@ -101,13 +101,11 @@ export default {
     };
   },
   mounted() {
-    console.log('here');
     axios.get('/api/reviews', {
       params: {
         ItemId: this.item.id,
       },
     }).then((res) => {
-      console.log('in then', res.data.reviews);
       this.reviews = res.data.reviews;
       if (res.data.reviews != null && res.data.reviews.length > 0) {
         this.getOverallRating(res.data.reviews);
@@ -143,28 +141,11 @@ export default {
       };
       if (!this.isAddedToCart && this.item.quantity > 0) {
         this.$store.commit('addToCart', newItem);
+        this.$store.commit('changeCartBikeStatus', this.showBikeMessage);
         this.isAddedToCart = true;
       } else if (this.item.quantity <= 0) {
         this.isOutOfStock = true;
       }
-      axios.get('/api/categories').then((categories) => {
-        categories.data.categories.forEach((category) => {
-          if (category.label.toLowerCase() === 'bike' ||
-            category.label.toLowerCase() === 'bikes' ||
-            category.label.toLowerCase() === 'bicycle' ||
-            category.label.toLowerCase() === 'bicycles') {
-            const categoryId = category.label.id;
-            axios.get('/api/productcategories').then((productCategories) => {
-              productCategories.data.productCategories.forEach((productCategory) => {
-                if (productCategory.itemId === this.item.id &&
-                  productCategory.categoryId === categoryId) {
-                  this.$store.commit('changeCartBikeStatus', true);
-                }
-              });
-            });
-          }
-        });
-      });
     },
     getOverallRating(reviews) {
       let total = 0;

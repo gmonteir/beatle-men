@@ -78,7 +78,7 @@
         </div>
         <a href="#" class="button is-success" v-on:click="saveCreditCard">Save</a>
       </div>
-      <div class="column is-one-third centered" v-if="containsBike">
+      <div class="column is-one-third centered" v-if="!containsBike">
         <h1 class="topMargin bigFont">Shipping Address Information:</h1>
         <div class="field is-hoverable topMargin centered">
           <div class="control centered">
@@ -156,7 +156,7 @@
         </div>
         <a href="#" class="button is-success" v-on:click="saveShippingAddress">Save</a>
       </div>
-      <div class="column is-one-third centered" v-if="containsBike">
+      <div class="column is-one-third centered" v-if="!containsBike">
         <h1 class="topMargin bigFont">Billing Address Information:</h1>
         <div class="field is-hoverable topMargin centered">
           <div class="control centered">
@@ -241,13 +241,13 @@
       <div>
         Subtotal: ${{this.$store.state.cart.subtotal}}
       </div>
-      <div v-if="containsBike">
+      <div v-if="!containsBike">
         Shipping: ${{shippingCost}}
       </div>
       <div v-else>
         Shipping: $0 (pick-up at store)
       </div>
-      <div v-if="containsBike">
+      <div v-if="!containsBike">
         Total: ${{total}}
       </div>
       <div v-else>

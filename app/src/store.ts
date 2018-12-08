@@ -103,18 +103,14 @@ export default new Vuex.Store({
       let quantity = 0;
       let subtotal = 0;
       let newItems = state.cart.items.filter((item) => {
-        if (item.id == payload.itemId) {
+        if (item.id == payload.id) {
           quantity = item.userQuantity;
           subtotal = item.userQuantity * item.price;
         }
-        return item.id != payload.itemId;
+        return item.id != payload.id;
       });
-      state.cart.containsBike = false;
-      for (let i = 0; i < newItems.length; i++) {
-        if (newItems[i].isBike) {
-          state.cart.containsBike = true;
-          break;
-        }
+      if (payload.isBike) {
+        state.cart.containsBike = false;
       }
       state.cart.items = newItems;
       state.cart.subtotal = state.cart.subtotal - subtotal;
@@ -130,13 +126,16 @@ export default new Vuex.Store({
       state.cart.subtotal = +state.cart.subtotal.toFixed(2);
     },
     removeItemQuantity(state, payload) {
-      const index = state.cart.items.findIndex(item => item.id == payload.itemId);
+      const index = state.cart.items.findIndex(item => item.id == payload.id);
       state.cart.items[index].userQuantity -= 1;
       state.cart.items[index].total -= state.cart.items[index].price;
       state.cart.subtotal -= state.cart.items[index].price;
       state.cart.totalQuantity -= 1;
       if (state.cart.items[index].userQuantity == 0) {
         state.cart.items.splice(index, 1);
+        if (payload.isBike) {
+          state.cart.containsBike = false;
+        }
       }
       state.cart.subtotal = +state.cart.subtotal.toFixed(2);
     },

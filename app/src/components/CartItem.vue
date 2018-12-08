@@ -56,7 +56,7 @@ export default {
   },
   methods: {
     removeItem() {
-      this.$store.commit('removeItem', { itemId: this.item.id });
+      this.$store.commit('removeItem', this.item);
     },
     addQuantity() {
       if (this.item.userQuantity < this.item.quantity) {
@@ -66,7 +66,7 @@ export default {
       }
     },
     removeQuantity() {
-      this.$store.commit('removeItemQuantity', { itemId: this.item.id });
+      this.$store.commit('removeItemQuantity', this.item);
     },
   },
 };
